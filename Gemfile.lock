@@ -86,6 +86,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.4.4)
     erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.14.2)
@@ -168,6 +169,23 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.10.0)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-rails (4.0.1)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.9)
+      rspec-expectations (~> 3.9)
+      rspec-mocks (~> 3.9)
+      rspec-support (~> 3.9)
+    rspec-support (3.10.0)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     rubyzip (2.3.0)
@@ -184,6 +202,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    shoulda-matchers (4.4.1)
+      activesupport (>= 4.2.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -240,8 +260,10 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   react-rails
+  rspec-rails
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
