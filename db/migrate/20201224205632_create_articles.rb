@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
     create_table :articles do |t|
-      t.string :name, null: false, default: ""
-      t.string :sku,  null: false, default: ""
+      t.string :name, null: false, default: ''
+      t.string :sku,  null: false, default: ''
 
       t.string :description
       t.string :picture
@@ -13,11 +15,12 @@ class CreateArticles < ActiveRecord::Migration[6.0]
 
       t.decimal :sell_price, precision: 10, scale: 2, null: false
       t.decimal :buy_price,  precision: 10, scale: 2, null: false
+      t.float :open_qty
 
-      t.references :sell_account, index: true, foraign_key: { to_table: :accounts_categories}
-      t.references :buy_account,  index: true, foraign_key: { to_table: :accounts_categories}
-      t.references :inv_account,  index: true, foraign_key: { to_table: :accounts_categories}
-      
+      t.references :sell_account, index: true, foraign_key: { to_table: :accounts_categories }
+      t.references :buy_account,  index: true, foraign_key: { to_table: :accounts_categories }
+      t.references :inv_account,  index: true, foraign_key: { to_table: :accounts_categories }
+
       t.references :company, index: true, foraign_key: true
 
       t.timestamps

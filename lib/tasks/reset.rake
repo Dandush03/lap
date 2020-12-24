@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :reset do
   desc 'Reset dev server'
   task :development do
