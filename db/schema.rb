@@ -10,17 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_200236) do
+ActiveRecord::Schema.define(version: 2020_12_24_205632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "companies", force: :cascade do |t|
+  create_table "accounts_categories", force: :cascade do |t|
+    t.string "type"
     t.string "name"
-    t.string "indentification"
+    t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["indentification"], name: "index_companies_on_indentification", unique: true
+    t.index ["company_id"], name: "index_accounts_categories_on_company_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "sku", default: "", null: false
+    t.string "description"
+    t.string "picture"
+    t.boolean "inventory", default: true
+    t.boolean "product", default: true
+    t.boolean "service", default: false
+    t.bigint "sell_account_id"
+    t.bigint "buy_account_id"
+    t.bigint "inv_account_id"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buy_account_id"], name: "index_articles_on_buy_account_id"
+    t.index ["company_id"], name: "index_articles_on_company_id"
+    t.index ["inv_account_id"], name: "index_articles_on_inv_account_id"
+    t.index ["name"], name: "index_articles_on_name", unique: true
+    t.index ["sell_account_id"], name: "index_articles_on_sell_account_id"
+    t.index ["sku"], name: "index_articles_on_sku", unique: true
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "identification"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["identification"], name: "index_companies_on_identification", unique: true
     t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
