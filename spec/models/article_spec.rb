@@ -13,6 +13,11 @@ RSpec.describe Article, type: :model do
     it { should belong_to(:buy_account).class_name('AccountsCategory').with_foreign_key('buy_account_id') }
     it { should belong_to(:sell_account).class_name('AccountsCategory').with_foreign_key('sell_account_id') }
     it { should belong_to(:inv_account).class_name('AccountsCategory').with_foreign_key('inv_account_id').optional }
+
+  end
+
+  describe 'picture' do
+    it { is_expected.to be_an_instance_of(ActiveStorage::Attached::One) }
   end
 
   describe 'validations' do
