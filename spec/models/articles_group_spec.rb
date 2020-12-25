@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AccountsCategory, type: :model do
+RSpec.describe ArticlesGroup, type: :model do
   it { should belong_to(:company) }
   it { should have_many(:articles) }
 

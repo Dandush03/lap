@@ -23,10 +23,12 @@ class CreateArticles < ActiveRecord::Migration[6.0]
 
       t.references :company, index: true, foraign_key: true
 
+      t.references :articles_group, index: true, foraign_key: true
+
       t.timestamps
     end
 
-    add_index :articles, :name, unique: true
-    add_index :articles, :sku,  unique: true
+    add_index :articles, :name
+    add_index :articles, :sku
   end
 end

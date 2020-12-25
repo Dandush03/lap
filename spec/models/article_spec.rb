@@ -3,33 +3,28 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-
-  describe 'belong to company' do
-    it { should belong_to(:company) }
-  end
+  it { should belong_to(:company) }
+  it { should belong_to(:articles_group) }
 
   describe 'belong to account' do
     it { should belong_to(:buy_account).class_name('AccountsCategory').with_foreign_key('buy_account_id') }
     it { should belong_to(:sell_account).class_name('AccountsCategory').with_foreign_key('sell_account_id') }
     it { should belong_to(:inv_account).class_name('AccountsCategory').with_foreign_key('inv_account_id').optional }
-
-  end
-
-  describe 'picture' do
-    it { is_expected.to be_an_instance_of(ActiveStorage::Attached::One) }
   end
 
   describe 'validations' do
     context 'uniqueness' do
       subject { Article.new(sell_price: 200, buy_price: 200) }
-      it { should validate_uniqueness_of(:name) }
-      it { should validate_uniqueness_of(:sku) }
+      it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
+      it { should validate_uniqueness_of(:sku).scoped_to(:company_id) }
     end
 
     context 'presences' do
       it { should validate_presence_of(:sell_price) }
       it { should validate_presence_of(:buy_price) }
+      it { should validate_presence_of(:name) }
+
+      it { should validate_presence_of(:sku) }
     end
 
     context 'if inventory' do

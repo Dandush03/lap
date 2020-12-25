@@ -30,8 +30,8 @@ gem 'react-rails'
 gem 'image_processing'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
-gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem 'rspec-rails'
