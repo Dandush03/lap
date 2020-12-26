@@ -28,7 +28,9 @@ const SideMenu = ({
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar}>
+        lab brand logo
+      </div>
       <Divider />
       <List>
         <CollapsableMenuItem
