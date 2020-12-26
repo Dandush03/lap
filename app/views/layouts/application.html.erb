@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lap</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= render 'layouts/head' %>
 
   <body>
-    <%= yield %>
+    <%= react_component("layouts/SideMenu", menu: I18n.t('.side_menu'), 
+      locale: params[:locale], company: params[:company]) %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

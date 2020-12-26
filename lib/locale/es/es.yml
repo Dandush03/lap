@@ -29,6 +29,6 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+es:
   side_menu:
-    articles: [Articles, Groups]
+    articles: [Artículos, Grupos]

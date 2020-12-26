@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   root to: 'companies#index', as: 'company_root'
 
   scope '/:locale' do
+  root to: 'companies#index', as: 'company_root_with_locale'
     scope '/:company' do
       root to: 'articles#index'
+      resources :articles
     end
   end
 end
