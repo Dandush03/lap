@@ -31,4 +31,8 @@
 
 en:
   side_menu:
-    articles: [Articles, Groups]
+    articles: [
+        {title: Articles}, 
+        {name: Articles, path: articles, add: true}, 
+        {name: Groups, path: articles/groups, add: true}
+      ]
