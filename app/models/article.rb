@@ -15,6 +15,6 @@ class Article < ApplicationRecord
 
   validates_presence_of :open_qty, if: :inventory
 
-  validates_presence_of :buy_price
-  validates_presence_of :sell_price
+  validates_presence_of :buy_price, if: :buy_item
+  validates_presence_of :sell_price, if: :sell_item
 end

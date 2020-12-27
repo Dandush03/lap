@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+ main {
+   margin-top: 56px;
+   padding: 24px;
+ }
+
+ @media (min-width: 600px) {
+   main {
+     width: calc(100% - 240px);
+     margin-left: auto;
+     margin-top: 64px;
+   }
+ }

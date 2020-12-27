@@ -10,14 +10,14 @@ class ApplicationController < ActionController::Base
   around_action :set_company
 
   def default_url_options
-    { locale: I18n.locale, company: current_company_user.name }
+    { locale: I18n.locale, company: session[:current_company] }
   end
 
   private
 
   def set_company
-    session[:current_company] ||= current_user.company.id
-    @current_company_user ||= Company.find(session[:current_company])
+    session[:current_company] ||= current_user.company.name
+    @current_company_user ||= Company.find_by_name(session[:current_company])
     yield
   end
 

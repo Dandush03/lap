@@ -13,8 +13,11 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.boolean :product,   default: true
       t.boolean :service,   default: false
 
-      t.decimal :sell_price, precision: 10, scale: 2, null: false
-      t.decimal :buy_price,  precision: 10, scale: 2, null: false
+      t.boolean :sell_item,  default: true
+      t.boolean :buy_item,   default: true
+
+      t.decimal :sell_price, precision: 10, scale: 2, default: 0
+      t.decimal :buy_price,  precision: 10, scale: 2, default: 0
       t.float :open_qty
 
       t.references :sell_account, index: true, foraign_key: { to_table: :accounts_categories }

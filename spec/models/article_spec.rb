@@ -13,23 +13,24 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'validations' do
-    context 'uniqueness' do
-      subject { Article.new(sell_price: 200, buy_price: 200) }
-      it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
-      it { should validate_uniqueness_of(:sku).scoped_to(:company_id) }
-    end
-
-    context 'presences' do
-      it { should validate_presence_of(:sell_price) }
-      it { should validate_presence_of(:buy_price) }
-      it { should validate_presence_of(:name) }
-
-      it { should validate_presence_of(:sku) }
-    end
+    it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
+    it { should validate_uniqueness_of(:sku).scoped_to(:company_id) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:sku) }
 
     context 'if inventory' do
       before { allow(subject).to receive(:inventory).and_return(true) }
       it { should validate_presence_of(:open_qty) }
+    end
+
+    context 'if is a sell item' do 
+      before { allow(subject).to receive(:sell_item).and_return(true) }
+      it { should validate_presence_of(:sell_price) }
+    end
+
+    context 'if is a sell item' do 
+      before { allow(subject).to receive(:buy_item).and_return(true) }
+      it { should validate_presence_of(:buy_price) }
     end
   end
 end

@@ -1,0 +1,13 @@
+es:
+  articles:
+    new:
+      type:
+        caption: Tipo de Articulo
+        product: Producto
+        service: Servicio
+      name: Nombre
+      sku: SKU
+      sku_code: Código de Artículo
+      upc: UPC
+      upc_code: Código de Barra
+      
