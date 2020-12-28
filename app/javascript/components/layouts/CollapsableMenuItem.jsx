@@ -10,7 +10,7 @@ import { Collapse } from '@material-ui/core';
 import useStyles from './menuStyle';
 
 const CollapsableMenuItem = ({
-  menuItem, partUrl, Icon,
+  menuItem, locale, Icon,
 }) => {
   const tempMenuItem = Array.from(menuItem);
   const classes = useStyles();
@@ -24,11 +24,11 @@ const CollapsableMenuItem = ({
 
   const collapsableItems = tempMenuItem.map((el) => (
     <ListItem button className={classes.firstLink} key={el.name}>
-      <ListItem component="a" href={`${partUrl}/${el.path}`}>
+      <ListItem component="a" href={`/${locale}/${el.path}`}>
         <ListItemText primary={el.name} />
       </ListItem>
       { el.add ? (
-        <ListItem button component="a" href={`${partUrl}/${el.path}/new`} className={classes.addLink}>
+        <ListItem button component="a" href={`/${locale}/${el.path}/new`} className={classes.addLink}>
           <ListItemIcon><AddIcon /></ListItemIcon>
         </ListItem>
       ) : null}
@@ -53,7 +53,7 @@ const CollapsableMenuItem = ({
 
 CollapsableMenuItem.propTypes = {
   menuItem: PropTypes.arrayOf(PropTypes.object).isRequired,
-  partUrl: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
   Icon: PropTypes.objectOf(oneOfType([PropTypes.symbol, PropTypes.object])).isRequired,
 };
 

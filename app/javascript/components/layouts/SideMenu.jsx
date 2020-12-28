@@ -14,10 +14,8 @@ import CollapsableMenuItem from './CollapsableMenuItem';
 import useStyles from './menuStyle';
 
 const SideMenu = ({
-  window, menu, locale, company,
+  window, menu, locale,
 }) => {
-  const partUrl = `/${locale}/${company}`;
-
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,7 +33,7 @@ const SideMenu = ({
       <List>
         <CollapsableMenuItem
           menuItem={menu.articles}
-          partUrl={partUrl}
+          locale={locale}
           Icon={ShoppingBasketIcon}
         />
       </List>
@@ -103,7 +101,6 @@ SideMenu.propTypes = {
   window: PropTypes.func,
   menu: PropTypes.objectOf(PropTypes.array).isRequired,
   locale: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
 };
 
 SideMenu.defaultProps = {

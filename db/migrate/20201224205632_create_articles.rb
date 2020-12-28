@@ -3,8 +3,9 @@
 class CreateArticles < ActiveRecord::Migration[6.0]
   def change
     create_table :articles do |t|
-      t.string :name, null: false, default: ''
-      t.string :sku,  null: false, default: ''
+      t.string  :name, null: false, default: ''
+      t.string  :sku,  null: false, default: ''
+      t.string :upc
 
       t.string :description
       t.string :picture

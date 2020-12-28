@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
   create_table "articles", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "sku", default: "", null: false
+    t.string "upc"
     t.string "description"
     t.string "picture"
     t.boolean "inventory", default: true

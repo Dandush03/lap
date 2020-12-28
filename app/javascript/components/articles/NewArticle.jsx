@@ -5,16 +5,17 @@ import {
   Divider, FormControl, FormHelperText, Grid, TextField,
 } from '@material-ui/core';
 
-import changeInputToUppercase from './changeInputToUppercase';
+import { changeInputToUppercase, insertSpaceAndValidateNumber } from './inputFunctions';
 import RadioBtnsField from './_RadioBtnsField';
 import useStyles from './styles';
 
 const NewArticle = ({ auth, labels, errors }) => {
   const classes = useStyles();
+  console.log(errors);
   return (
     <form
       method="post"
-      action="/es/lap/articles/"
+      action="/es/articles/"
       acceptCharset="UTF-8"
       className={classes.root}
     >
@@ -47,7 +48,8 @@ const NewArticle = ({ auth, labels, errors }) => {
               name="article[upc]"
               error={errors ? !!errors.upc : false}
               helperText={errors ? errors.upc : null}
-              onChange={changeInputToUppercase}
+              onKeyDownCapture={insertSpaceAndValidateNumber}
+              inputProps={{ maxLength: 15 }}
             />
             <FormHelperText id="my-helper-text">{labels.upc_code}</FormHelperText>
           </FormControl>
@@ -66,7 +68,7 @@ const NewArticle = ({ auth, labels, errors }) => {
 NewArticle.propTypes = {
   auth: PropTypes.string.isRequired,
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
-  errors: PropTypes.objectOf(PropTypes.object),
+  errors: PropTypes.objectOf(PropTypes.array),
 };
 
 NewArticle.defaultProps = {

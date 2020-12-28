@@ -17,13 +17,13 @@ class ArticlesController < ApplicationController
     puts a.inspect
     puts 'test'
     a.valid?
-    #flash.now[:errors] = a.errors.messages
-    #render :new
+    flash.now[:errors] = a.errors.messages
+    render :new
   end
 
   private
 
   def strong_params
-    params.require(:article).permit(%i[product service name sku])
+    params.require(:article).permit(%i[product service name sku upc])
   end
 end

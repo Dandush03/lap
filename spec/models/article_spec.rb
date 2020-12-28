@@ -15,8 +15,10 @@ RSpec.describe Article, type: :model do
   describe 'validations' do
     it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
     it { should validate_uniqueness_of(:sku).scoped_to(:company_id) }
+    it { should validate_uniqueness_of(:upc).scoped_to(:company_id) }
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:sku) }
+    it { should validate_length_of(:upc).is_equal_to(15).allow_nil.with_message(:upc_length) }
 
     context 'if inventory' do
       before { allow(subject).to receive(:inventory).and_return(true) }

@@ -3,8 +3,6 @@
   <%= render 'layouts/head' %>
 
   <body>
-    <%= react_component("layouts/SideMenu", {menu: I18n.t('.side_menu'), 
-      locale: I18n.locale}) %>
     <main>
       <%= yield %>
       <%= link_to articles_path, data: { turbolinks: false } %>
