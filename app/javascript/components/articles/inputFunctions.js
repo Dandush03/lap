@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const changeInputToUppercase = (e) => {
   const { currentTarget: input } = e;
   input.value = input.value.toUpperCase();
@@ -22,4 +24,44 @@ const insertSpaceAndValidateNumber = (e) => {
   return true;
 };
 
-export { changeInputToUppercase, insertSpaceAndValidateNumber };
+const dragEnterHandler = () => {
+  const file = $('#file_uploader')[0];
+  const label = $('#file_label')[0];
+  if (file) {
+    file.parentNode.classList.add('drop-zone');
+    label.classList.add('drop-zone-label');
+  }
+};
+
+const dragLeaveHandler = (e) => {
+  const file = $('#file_uploader')[0];
+  const label = $('#file_label')[0];
+  if (e.target === file) {
+    file.parentNode.classList.remove('drop-zone');
+    label.classList.remove('drop-zone-label');
+  }
+};
+
+const dragEndHandler = () => {
+  const file = $('#file_uploader')[0];
+  const label = $('#file_label')[0];
+  if (file) {
+    file.parentNode.classList.remove('drop-zone');
+    label.classList.remove('drop-zone-label');
+  }
+};
+
+const changeImageHandler = () => {
+  const file = $('#file_uploader')[0];
+  const img = $('#file_img')[0];
+
+  img.src = URL.createObjectURL(file.files[0]);
+  img.style = 'opacity: 1';
+  const label = $('#file_label')[0];
+  label.lastChild.style = 'opacity: 0';
+};
+
+export {
+  changeInputToUppercase, insertSpaceAndValidateNumber,
+  dragEnterHandler, dragLeaveHandler, dragEndHandler, changeImageHandler,
+};

@@ -10,12 +10,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    puts 'test'
-    puts 'test'
-    puts 'test'
+    puts 'test1'
+    puts 'test1'
     a = Article.new(strong_params)
+    a.save
     puts a.inspect
-    puts 'test'
+    puts 'test1'
     a.valid?
     flash.now[:errors] = a.errors.messages
     render :new
@@ -24,6 +24,6 @@ class ArticlesController < ApplicationController
   private
 
   def strong_params
-    params.require(:article).permit(%i[product service name sku upc])
+    params.require(:article).permit(%i[product service name sku upc picture])
   end
 end
