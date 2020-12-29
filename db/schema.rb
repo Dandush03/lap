@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
   enable_extension "plpgsql"
 
   create_table "accounts_categories", force: :cascade do |t|
-    t.string "type"
+    t.string "category"
     t.string "name"
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false

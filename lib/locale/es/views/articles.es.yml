@@ -6,9 +6,13 @@ es:
         product: Producto
         service: Servicio
       name: Nombre
+      name_info: Nombre del Artículo
       sku: SKU
       sku_code: Código de Artículo
       upc: UPC
       upc_code: Código de Barra
       file_upload: Arrastra tu imagen o busca una
+      buy_item: Información de compra
+      sell_item: Información de venta
+      sell_price: Precio de venta
       

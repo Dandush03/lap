@@ -122,10 +122,12 @@ const useStyles = makeStyles((theme) => ({
     right: '-500px',
     left: '-500px',
   },
-  sellInfo: {
+  info: {
     [theme.breakpoints.up('sm')]: {
       flexBasis: 'calc(50% - .5px)',
       padding: theme.spacing(0, 2),
+      display: 'flex',
+      flexDirection: 'column',
     },
   },
 }));

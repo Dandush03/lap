@@ -1,20 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 
 import {
-  Divider, FormControl, FormHelperText, Grid, Input, TextField,
+  Checkbox,
+  Divider, FormControl, FormControlLabel, FormGroup, Grid, Input, TextField,
 } from '@material-ui/core';
 
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import {
   changeInputToUppercase, dragEnterHandler, dragLeaveHandler,
-  insertSpaceAndValidateNumber, dragEndHandler, changeImageHandler,
+  insertSpaceAndValidateNumber, dragEndHandler, changeImageHandler, currencyHandler,
 } from './inputFunctions';
 import RadioBtnsField from './_RadioBtnsField';
 import useStyles from './styles';
+import SelectLists from './_SelectLists';
 
-const NewArticle = ({ auth, labels, errors }) => {
+const NewArticle = ({
+  auth, labels, errors, sell_accounts: sellAccounts,
+}) => {
+  const sellInfoInput = useRef(null);
   const classes = useStyles();
+
+  console.log(sellAccounts);
+  const [checkedSellInfo, setCheckedSellInfo] = useState();
+
+  const sellInfoHandler = () => {
+    setCheckedSellInfo(!checkedSellInfo);
+  };
 
   useEffect(() => {
     window.addEventListener('dragenter', dragEnterHandler);
@@ -37,19 +49,22 @@ const NewArticle = ({ auth, labels, errors }) => {
             <TextField
               label={labels.name}
               name="article[name]"
+              required
               error={errors ? !!errors.name : false}
               helperText={errors ? errors.name : null}
+              placeholder={labels.name_info}
             />
           </FormControl>
           <FormControl className={classes.textFields}>
             <TextField
               label={labels.sku}
               name="article[sku]"
+              required
               error={errors ? !!errors.sku : false}
               helperText={errors ? errors.sku : null}
               onChange={changeInputToUppercase}
+              placeholder={labels.sku_code}
             />
-            <FormHelperText id="my-helper-text">{labels.sku_code}</FormHelperText>
           </FormControl>
           <FormControl className={classes.textFields}>
             <TextField
@@ -59,8 +74,8 @@ const NewArticle = ({ auth, labels, errors }) => {
               helperText={errors ? errors.upc : null}
               onKeyDownCapture={insertSpaceAndValidateNumber}
               inputProps={{ maxLength: 15 }}
+              placeholder={labels.upc_code}
             />
-            <FormHelperText id="my-helper-text">{labels.upc_code}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item className={classes.dropZoneContainer} sm={5} xs={12}>
@@ -87,8 +102,38 @@ const NewArticle = ({ auth, labels, errors }) => {
       </Grid>
       <Divider />
       <Grid container className={classes.gridContainer}>
-        <Grid item sm={6} xs={12} className={classes.sellInfo}>
-          sell
+        <Grid item sm={6} xs={12} className={classes.info}>
+          <FormGroup>
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  name={labels.sell_item}
+                  color="primary"
+                  onChange={sellInfoHandler}
+                />
+            )}
+              label={labels.sell_item}
+            />
+            <input
+              type="hidden"
+              name="article[sell_item]"
+              value={checkedSellInfo ? 1 : 0}
+              ref={sellInfoInput}
+            />
+          </FormGroup>
+          <FormControl className={classes.textFields}>
+            <TextField
+              disabled={!checkedSellInfo}
+              label={labels.sell_price}
+              name="article[sell_price]"
+              required={checkedSellInfo}
+              error={errors ? !!errors.sell_price : false}
+              helperText={errors ? errors.sell_price : null}
+              onKeyDownCapture={currencyHandler}
+              placeholder="0.00"
+            />
+          </FormControl>
+          <SelectLists />
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item sm={6} xs={12} className={classes.sellInfo}>
@@ -106,10 +151,12 @@ NewArticle.propTypes = {
   auth: PropTypes.string.isRequired,
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
+  sell_accounts: PropTypes.arrayOf(PropTypes.object),
 };
 
 NewArticle.defaultProps = {
   errors: null,
+  sell_accounts: null,
 };
 
 export default NewArticle;

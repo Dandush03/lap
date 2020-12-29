@@ -1,4 +1,22 @@
-<%= react_component("articles/NewArticle", labels: t('.'), auth: form_authenticity_token, errors: flash[:errors]) %>
+<%= react_component("articles/NewArticle", 
+    labels: t('.'), 
+    auth: form_authenticity_token, 
+    errors: flash[:errors],
+    sell_accounts: @sell_accounts
+  )
+  %>
 
 <%= flash[:errors].inspect %>
 <%= t('.').inspect %>
+
+<p>test</p>
+<p>test</p>
+<p>test</p>
+<p>test</p>
+<p>test</p>
+<%= @buy_accounts.inspect %>
+<p>test</p>
+<%= @sell_accounts.inspect %>
+<p>test</p>
+<%= @inv_accounts.inspect %>
+<p>test</p>

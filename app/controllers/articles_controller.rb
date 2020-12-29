@@ -7,6 +7,9 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @buy_accounts = AccountsCategory.buy_accounts
+    @sell_accounts = AccountsCategory.sell_accounts
+    @inv_accounts = AccountsCategory.inv_accounts
   end
 
   def create
@@ -24,6 +27,6 @@ class ArticlesController < ApplicationController
   private
 
   def strong_params
-    params.require(:article).permit(%i[product service name sku upc picture])
+    params.require(:article).permit(%i[product service name sku upc picture sell_item sell_price])
   end
 end
