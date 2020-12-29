@@ -80,9 +80,19 @@ const NewArticle = ({ auth, labels, errors }) => {
             </div>
             <div className={classes.dropZoneLabel}>
               <ImageSearchIcon color="disabled" fontSize="large" />
-              <span>Please Drag Your Images Here Or Search for one</span>
+              <span>{labels.file_upload}</span>
             </div>
           </div>
+        </Grid>
+      </Grid>
+      <Divider />
+      <Grid container className={classes.gridContainer}>
+        <Grid item sm={6} xs={12} className={classes.sellInfo}>
+          sell
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item sm={6} xs={12} className={classes.sellInfo}>
+          buy
         </Grid>
       </Grid>
       <Divider />

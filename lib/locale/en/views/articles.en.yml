@@ -10,4 +10,5 @@ en:
       sku_code: Article Code
       upc: UPC
       upc_code: Bar Code
+      file_upload: Please drag your image or search for one
       
