@@ -22,11 +22,9 @@ class Article < ApplicationRecord
 
   validates :buy_price, presence: true, numericality: { greater_than: 0 }, if: :buy_item
   validates :buy_account, presence: true, if: :buy_item
-  validates :buy_account_tax, presence: true, if: :buy_item
 
   validates :sell_price, presence: true, numericality: { greater_than: 0 }, if: :sell_item
   validates :sell_account, presence: true, if: :sell_item
-  validates :sell_account_tax, presence: true, if: :sell_item
 
   validate :testing
   def testing

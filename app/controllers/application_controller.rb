@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  attr_reader :current_company_user
+  attr_reader :current_company
 
   per_request_react_rails_prerenderer
 
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def set_company
     session[:current_company] ||= current_user.company.name
-    @current_company_user ||= Company.find_by_name(session[:current_company])
+    @current_company ||= Company.find_by_name(session[:current_company])
     yield
   end
 
