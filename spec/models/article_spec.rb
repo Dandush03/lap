@@ -29,6 +29,8 @@ RSpec.describe Article, type: :model do
       before { allow(subject).to receive(:inventory).and_return(true) }
       it { should validate_presence_of(:sell_account) }
       it { should validate_presence_of(:open_qty) }
+      it { should validate_presence_of(:open_qty_value) }
+      it { should validate_numericality_of(:open_qty_value).is_greater_than(0) }
     end
 
     context 'if is a sell item' do

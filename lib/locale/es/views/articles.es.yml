@@ -21,3 +21,7 @@ es:
       buy_accounts: Cuenta
       buy_description: Descripción
       taxes: Impuesto
+      inv_item: Seguimiento de inventario de este artículo
+      inv_account: Cuenta de inventario
+      open_qty: Existencia de Apertura
+      open_qty_value: Tarifa por unidad de existencias iniciales

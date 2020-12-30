@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   scope '/:locale' do
     root to: 'articles#index'
-    resources :articles
+    resources :articles, only: %i[index new create]
   end
 end

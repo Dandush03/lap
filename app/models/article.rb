@@ -17,8 +17,9 @@ class Article < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :company_id }
   validates :upc,  uniqueness: { scope: :company_id }, length: { is: 15, message: :upc_length }, allow_nil: true
 
-  validates :open_qty, presence: true, if: :inventory
   validates :inv_account, presence: true, if: :inventory
+  validates :open_qty, presence: true, if: :inventory
+  validates :open_qty_value, presence: true, numericality: { greater_than: 0 }, if: :inventory
 
   validates :buy_price, presence: true, numericality: { greater_than: 0 }, if: :buy_item
   validates :buy_account, presence: true, if: :buy_item

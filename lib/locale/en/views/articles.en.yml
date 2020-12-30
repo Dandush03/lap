@@ -20,4 +20,7 @@ en:
       buy_accounts: Account
       buy_description: Description
       taxes: Tax
-      
+      inv_item: Inventory tracking for this item
+      inv_account: Inventory account
+      open_qty: Existence of Opening
+      open_qty_value: Initial Stock Unit Fee
