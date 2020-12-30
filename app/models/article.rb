@@ -15,7 +15,7 @@ class Article < ApplicationRecord
 
   validates :sku,  presence: true, uniqueness: { scope: :company_id }
   validates :name, presence: true, uniqueness: { scope: :company_id }
-  validates :upc,  uniqueness: { scope: :company_id }, length: { is: 15, message: :upc_length }, allow_nil: true
+  validates :upc,  uniqueness: { scope: :company_id }, length: { is: 15, message: :upc_length }, allow_blank: true
 
   validates :inv_account, presence: true, if: :inventory
   validates :open_qty, presence: true, if: :inventory
@@ -26,17 +26,4 @@ class Article < ApplicationRecord
 
   validates :sell_price, presence: true, numericality: { greater_than: 0 }, if: :sell_item
   validates :sell_account, presence: true, if: :sell_item
-
-  validate :testing
-  def testing
-    puts 'test'
-    puts 'test'
-    puts 'test'
-    puts sell_item
-    puts sell_price
-    puts errors.messages
-    puts 'test'
-    puts 'test'
-    puts 'test'
-  end
 end

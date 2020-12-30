@@ -24,3 +24,6 @@ en:
       inv_account: Inventory account
       open_qty: Existence of Opening
       open_qty_value: Initial Stock Unit Fee
+      article_group: Article Group
+      submit: Save
+      cancel: Cancel

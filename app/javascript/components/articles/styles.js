@@ -8,10 +8,10 @@ const useStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     padding: theme.spacing(2, 0),
-    display: 'flex',
   },
   textFields: {
     marginBottom: theme.spacing(2),
+    minWidth: '45%',
   },
   imageTextContainer: {
     display: 'flex',
@@ -128,6 +128,19 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0, 2),
       display: 'flex',
       flexDirection: 'column',
+    },
+  },
+  invInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(0, 2),
+    width: '70%',
+  },
+  invInfoGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    '& > div': {
+      width: '45%',
     },
   },
   newCat: {

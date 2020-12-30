@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 
 import {
-  Divider, Grid,
+  Divider, FormControl, Grid,
 } from '@material-ui/core';
 
 import useStyles from './styles';
@@ -10,22 +10,36 @@ import ArticleImage from './partials/ArticleImage';
 import ArticleInformation from './partials/ArticleInformation';
 import SellInformation from './partials/SellInformation';
 import BuyInformation from './partials/BuyInformation';
+import InvInformation from './partials/InvInformation';
+import SelectLists from '../shared/SelectLists';
 
 const NewArticle = ({
   auth, labels, errors, sell_accounts: sellAccounts,
-  taxes, buy_accounts: buyAccounts,
+  taxes, buy_accounts: buyAccounts, inv_accounts: invAccounts,
+  articles_group: articleGroup, locale,
 }) => {
   const classes = useStyles();
 
   return (
     <form
       method="post"
-      action="/es/articles/"
+      action={`/${locale}/articles/`}
       acceptCharset="UTF-8"
       className={classes.root}
       encType="multipart/form-data"
     >
       <input type="hidden" name="authenticity_token" value={auth} />
+      <Divider />
+      <Grid container className={classes.gridContainer}>
+        <FormControl className={classes.textFields}>
+          <SelectLists
+            options={articleGroup}
+            required
+            inputname="article[articles_group_id]"
+            label={labels.article_group}
+          />
+        </FormControl>
+      </Grid>
       <Divider />
       <Grid container className={classes.gridContainer}>
         <ArticleInformation labels={labels} errors={errors} classes={classes} />
@@ -50,7 +64,16 @@ const NewArticle = ({
         />
       </Grid>
       <Divider />
-
+      <Grid container className={classes.gridContainer}>
+        <InvInformation
+          labels={labels}
+          errors={errors}
+          invAccounts={invAccounts}
+          taxes={taxes}
+          classes={classes}
+        />
+      </Grid>
+      <Divider />
       <input type="submit" value="save" />
     </form>
   );
@@ -58,11 +81,14 @@ const NewArticle = ({
 
 NewArticle.propTypes = {
   auth: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
   sell_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
   buy_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  inv_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  articles_group: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 NewArticle.defaultProps = {

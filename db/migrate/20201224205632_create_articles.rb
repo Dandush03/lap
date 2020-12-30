@@ -9,12 +9,12 @@ class CreateArticles < ActiveRecord::Migration[6.0]
 
       t.string :picture
 
-      t.boolean :inventory, default: true
+      t.boolean :inventory, default: false
       t.boolean :product,   default: true
       t.boolean :service,   default: false
 
-      t.boolean :sell_item,  default: true
-      t.boolean :buy_item,   default: true
+      t.boolean :sell_item,  default: false
+      t.boolean :buy_item,   default: false
 
       t.decimal :sell_price, precision: 10, scale: 2, default: 0
       t.decimal :buy_price,  precision: 10, scale: 2, default: 0

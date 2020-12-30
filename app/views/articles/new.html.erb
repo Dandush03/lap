@@ -1,11 +1,13 @@
 <%= react_component("articles/NewArticle", 
     labels: t('.'), 
+    locale: I18n.locale, 
     auth: form_authenticity_token, 
     errors: flash[:errors],
     sell_accounts: @sell_accounts,
     buy_accounts: @buy_accounts,
     inv_accounts: @inv_accounts,
     taxes: @taxes,
+    articles_group: @articles_group,
     article: @article
   )
   %>

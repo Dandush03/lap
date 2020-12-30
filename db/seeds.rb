@@ -17,7 +17,14 @@ AccountsCategory.create!(
     { name: 'Interest income', category: 'in', subcategory: 'Incomes', company_id: '1' },
     { name: 'Uncategorized', category: 'out', subcategory: 'Expenses', company_id: '1' },
     { name: 'Office suplies', category: 'out', subcategory: 'Expenses', company_id: '1' },
-    { name: 'costs of obtaining raw materials', category: 'out', subcategory: 'Production', company_id: '1' },
-    { name: 'test', category: 'inv', subcategory: 'test', company_id: '1' }
+    { name: 'Costs of obtaining raw materials', category: 'out', subcategory: 'Production', company_id: '1' },
+    { name: 'Inventory asset', category: 'inv', subcategory: 'existence', company_id: '1' }
+    { name: 'Finished goods', category: 'inv', subcategory: 'existence', company_id: '1' }
+  ]
+)
+ArticlesGroup.create!(
+  [
+    { name: 'Part of Cars', company_id: '1' },
+    { name: 'Cars', company_id: '1' }
   ]
 )

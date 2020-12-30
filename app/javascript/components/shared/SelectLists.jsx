@@ -48,12 +48,13 @@ SelectLists.propTypes = {
   inputname: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  passRef: PropTypes.objectOf(PropTypes.object).isRequired,
+  passRef: PropTypes.objectOf(PropTypes.object),
 };
 
 SelectLists.defaultProps = {
-  disabled: true,
+  disabled: false,
   required: false,
+  passRef: null,
 };
 
 export default SelectLists;
