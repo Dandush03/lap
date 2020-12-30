@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
 
   create_table "accounts_categories", force: :cascade do |t|
     t.string "category"
+    t.string "subcategory"
     t.string "name"
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
     t.string "name", default: "", null: false
     t.string "sku", default: "", null: false
     t.string "upc"
-    t.string "description"
     t.string "picture"
     t.boolean "inventory", default: true
     t.boolean "product", default: true
@@ -58,7 +58,10 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
     t.boolean "buy_item", default: true
     t.decimal "sell_price", precision: 10, scale: 2, default: "0.0"
     t.decimal "buy_price", precision: 10, scale: 2, default: "0.0"
+    t.string "sell_description"
+    t.string "buy_description"
     t.float "open_qty"
+    t.decimal "open_qty_value"
     t.bigint "sell_account_id"
     t.bigint "buy_account_id"
     t.bigint "inv_account_id"

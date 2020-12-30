@@ -7,20 +7,25 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string  :sku,  null: false, default: ''
       t.string :upc
 
-      t.string :description
+      
       t.string :picture
-
+      
       t.boolean :inventory, default: true
       t.boolean :product,   default: true
       t.boolean :service,   default: false
-
+      
       t.boolean :sell_item,  default: true
       t.boolean :buy_item,   default: true
-
+      
       t.decimal :sell_price, precision: 10, scale: 2, default: 0
       t.decimal :buy_price,  precision: 10, scale: 2, default: 0
-      t.float :open_qty
 
+      t.string :sell_description
+      t.string :buy_description
+
+      t.float :open_qty
+      t.decimal :open_qty_value
+      
       t.references :sell_account, index: true, foraign_key: { to_table: :accounts_categories }
       t.references :buy_account,  index: true, foraign_key: { to_table: :accounts_categories }
       t.references :inv_account,  index: true, foraign_key: { to_table: :accounts_categories }

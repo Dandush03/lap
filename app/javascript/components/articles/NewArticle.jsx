@@ -3,7 +3,7 @@ import PropTypes, { oneOfType } from 'prop-types';
 
 import {
   Checkbox,
-  Divider, FormControl, FormControlLabel, FormGroup, Grid, Input, TextField,
+  Divider, FormControl, FormControlLabel, FormGroup, Grid, Input, TextareaAutosize, TextField,
 } from '@material-ui/core';
 
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
@@ -21,7 +21,6 @@ const NewArticle = ({
   const sellInfoInput = useRef(null);
   const classes = useStyles();
 
-  console.log(sellAccounts);
   const [checkedSellInfo, setCheckedSellInfo] = useState();
 
   const sellInfoHandler = () => {
@@ -103,7 +102,7 @@ const NewArticle = ({
       <Divider />
       <Grid container className={classes.gridContainer}>
         <Grid item sm={6} xs={12} className={classes.info}>
-          <FormGroup>
+          <FormGroup className={classes.textFields}>
             <FormControlLabel
               control={(
                 <Checkbox
@@ -133,7 +132,22 @@ const NewArticle = ({
               placeholder="0.00"
             />
           </FormControl>
-          <SelectLists />
+          <FormControl className={classes.textFields}>
+            <SelectLists
+              options={sellAccounts}
+              inputname="article[sell_account_id]"
+              label={labels.sell_accounts}
+              disabled={!checkedSellInfo}
+            />
+          </FormControl>
+          <FormControl className={classes.textFields}>
+            <TextField
+              inputname="article[sell_description]"
+              label={labels.sell_description}
+              multiline
+              rows={4}
+            />
+          </FormControl>
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item sm={6} xs={12} className={classes.sellInfo}>

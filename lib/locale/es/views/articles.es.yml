@@ -15,4 +15,6 @@ es:
       buy_item: Información de compra
       sell_item: Información de venta
       sell_price: Precio de venta
+      sell_accounts: Cuenta
+      sell_description: Descripción
       

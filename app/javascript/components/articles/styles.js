@@ -130,6 +130,14 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
+  newCat: {
+    width: '100%',
+    backgroundColor: 'red !important',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'red',
+    },
+  },
 }));
 
 export default useStyles;

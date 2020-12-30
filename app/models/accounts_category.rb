@@ -5,6 +5,7 @@ class AccountsCategory < ApplicationRecord
   has_many :articles, class_name: 'Article', foreign_key: 'articles_group_id'
   
   validates :name, presence: true, uniqueness: { scope: :company_id }
+  validates :subcategory, presence: true
 
   validates :category, presence: true, format: {with: /\A(inv|in|out)\z/}
 

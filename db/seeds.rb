@@ -10,3 +10,13 @@
 
 Company.create!({ name: 'lap', identification: 'v-123' })
 User.create!({ email: 'admin@example.com', username: 'admin', password: '123123', password_confirmation: '123123', company_id: '1' })
+AccountsCategory.create!(
+  [
+    {name: 'General income', category: 'in', subcategory: 'Incomes', company_id: '1'},
+    {name: 'Interest income', category: 'in', subcategory: 'Incomes', company_id: '1'},
+    {name: 'Uncategorized', category: 'out', subcategory: 'Expenses', company_id: '1'},
+    {name: 'Office suplies', category: 'out', subcategory: 'Expenses', company_id: '1'},
+    {name: 'costs of obtaining raw materials', category: 'out', subcategory: 'Production', company_id: '1'},
+    {name: 'test', category: 'inv', subcategory: 'test', company_id: '1'}
+  ]
+)

@@ -7,6 +7,7 @@ RSpec.describe AccountsCategory, type: :model do
   it { should have_many(:articles) }
 
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:subcategory) }
   it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
   
   it { should validate_presence_of(:category) }
