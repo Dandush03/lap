@@ -60,21 +60,25 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
     t.decimal "buy_price", precision: 10, scale: 2, default: "0.0"
     t.string "sell_description"
     t.string "buy_description"
-    t.float "open_qty"
-    t.decimal "open_qty_value"
+    t.decimal "open_qty", precision: 10, scale: 2, default: "0.0"
+    t.decimal "open_qty_value", precision: 10, scale: 2, default: "0.0"
     t.bigint "sell_account_id"
     t.bigint "buy_account_id"
     t.bigint "inv_account_id"
+    t.bigint "sell_account_tax_id"
+    t.bigint "buy_account_tax_id"
     t.bigint "company_id"
     t.bigint "articles_group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["articles_group_id"], name: "index_articles_on_articles_group_id"
     t.index ["buy_account_id"], name: "index_articles_on_buy_account_id"
+    t.index ["buy_account_tax_id"], name: "index_articles_on_buy_account_tax_id"
     t.index ["company_id"], name: "index_articles_on_company_id"
     t.index ["inv_account_id"], name: "index_articles_on_inv_account_id"
     t.index ["name"], name: "index_articles_on_name"
     t.index ["sell_account_id"], name: "index_articles_on_sell_account_id"
+    t.index ["sell_account_tax_id"], name: "index_articles_on_sell_account_tax_id"
     t.index ["sku"], name: "index_articles_on_sku"
   end
 
@@ -94,6 +98,13 @@ ActiveRecord::Schema.define(version: 2020_12_24_205632) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["identification"], name: "index_companies_on_identification", unique: true
     t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "taxes", force: :cascade do |t|
+    t.string "name"
+    t.decimal "value", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

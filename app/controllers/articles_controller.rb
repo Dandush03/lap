@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
     @buy_accounts = AccountsCategory.buy_accounts.select(selecte_columns)
     @sell_accounts = AccountsCategory.sell_accounts.select(selecte_columns)
     @inv_accounts = AccountsCategory.inv_accounts.select(selecte_columns)
+    @sell_accounts_taxes = Tax.all.select(%i[id name value])
   end
 
   def create

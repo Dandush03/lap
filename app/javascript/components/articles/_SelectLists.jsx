@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
 import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 
@@ -16,6 +15,8 @@ const SelectLists = ({
       setState(null);
     }
   };
+
+  console.log(options);
 
   return (
     <>

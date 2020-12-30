@@ -10,6 +10,7 @@
 
 Company.create!({ name: 'lap', identification: 'v-123' })
 User.create!({ email: 'admin@example.com', username: 'admin', password: '123123', password_confirmation: '123123', company_id: '1' })
+Tax.create!({name: 'IVA', value: '0.16'})
 AccountsCategory.create!(
   [
     {name: 'General income', category: 'in', subcategory: 'Incomes', company_id: '1'},

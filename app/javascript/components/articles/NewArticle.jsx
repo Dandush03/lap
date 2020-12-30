@@ -3,7 +3,7 @@ import PropTypes, { oneOfType } from 'prop-types';
 
 import {
   Checkbox,
-  Divider, FormControl, FormControlLabel, FormGroup, Grid, Input, TextareaAutosize, TextField,
+  Divider, FormControl, FormControlLabel, FormGroup, Grid, Input, TextField,
 } from '@material-ui/core';
 
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
@@ -16,7 +16,7 @@ import useStyles from './styles';
 import SelectLists from './_SelectLists';
 
 const NewArticle = ({
-  auth, labels, errors, sell_accounts: sellAccounts,
+  auth, labels, errors, sell_accounts: sellAccounts, sell_accounts_taxes: sellAccountsTaxes,
 }) => {
   const sellInfoInput = useRef(null);
   const classes = useStyles();
@@ -148,6 +148,14 @@ const NewArticle = ({
               rows={4}
             />
           </FormControl>
+          <FormControl className={classes.textFields}>
+            <SelectLists
+              options={sellAccountsTaxes.map((obj) => ({ name: `${obj.name} [${obj.value * 100}%]`, id: obj.id }))}
+              inputname="article[sell_account_tax_id]"
+              label={labels.taxes}
+              disabled={!checkedSellInfo}
+            />
+          </FormControl>
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item sm={6} xs={12} className={classes.sellInfo}>
@@ -165,12 +173,12 @@ NewArticle.propTypes = {
   auth: PropTypes.string.isRequired,
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
-  sell_accounts: PropTypes.arrayOf(PropTypes.object),
+  sell_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sell_accounts_taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 NewArticle.defaultProps = {
   errors: null,
-  sell_accounts: null,
 };
 
 export default NewArticle;
