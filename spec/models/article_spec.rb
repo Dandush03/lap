@@ -27,7 +27,7 @@ RSpec.describe Article, type: :model do
 
     context 'if inventory' do
       before { allow(subject).to receive(:inventory).and_return(true) }
-      it { should validate_presence_of(:sell_account) }
+      it { should validate_presence_of(:inv_account) }
       it { should validate_presence_of(:open_qty) }
       it { should validate_presence_of(:open_qty_value) }
       it { should validate_numericality_of(:open_qty_value).is_greater_than(0) }
@@ -35,13 +35,13 @@ RSpec.describe Article, type: :model do
 
     context 'if is a sell item' do
       before { allow(subject).to receive(:sell_item).and_return(true) }
-      it { should validate_presence_of(:inv_account) }
-
+      it { should validate_presence_of(:sell_account) }
+      
       it { should validate_presence_of(:sell_price) }
       it { should validate_numericality_of(:sell_price).is_greater_than(0) }
     end
 
-    context 'if is a sell item' do
+    context 'if is a buy item' do
       before { allow(subject).to receive(:buy_item).and_return(true) }
       it { should validate_presence_of(:buy_account) }
 

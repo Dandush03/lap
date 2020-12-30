@@ -42,7 +42,7 @@
 
 ## About The Project
 
-This project is designed so you can keep your daily task like; working, sleeping, etc. and see a resume of your day. The main object of this project was to show my abilities integrating both Ruby on Rails API as a back end and React and Redux as a front end. This app was mean to be mobile only
+This project is the beginning of a personal project aimed to help businesses in Venezuela to overcome thair dollarization issue
 
 <p align="center">
   <img height="400" src="./mobile.png">
