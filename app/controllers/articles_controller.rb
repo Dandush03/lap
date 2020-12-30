@@ -8,10 +8,10 @@ class ArticlesController < ApplicationController
   def new
     selecte_columns = %i[id name subcategory]
     @article = Article.new
-    @buy_accounts = AccountsCategory.buy_accounts.select(selecte_columns)
-    @sell_accounts = AccountsCategory.sell_accounts.select(selecte_columns)
-    @inv_accounts = AccountsCategory.inv_accounts.select(selecte_columns)
-    @sell_accounts_taxes = Tax.all.select(%i[id name value])
+    @buy_accounts = current_company_user.accounts_categories.buy_accounts.select(selecte_columns)
+    @sell_accounts = current_company_user.accounts_categories.sell_accounts.select(selecte_columns)
+    @inv_accounts = current_company_user.accounts_categories.inv_accounts.select(selecte_columns)
+    @taxes = current_company_user.taxes.all.select(%i[id name value])
   end
 
   def create
@@ -22,13 +22,18 @@ class ArticlesController < ApplicationController
     puts a.inspect
     puts 'test1'
     a.valid?
-    #flash.now[:errors] = a.errors.messages
-    #render :new
+    # flash.now[:errors] = a.errors.messages
+    # render :new
   end
 
   private
 
   def strong_params
-    params.require(:article).permit(%i[product service name sku upc picture sell_item sell_price sell_account_id])
+    permited_values = %i[
+      product service name sku upc picture
+      sell_item sell_price sell_account_id sell_account_tax_id
+      buy_item buy_price buy_account_id buy_account_tax_id
+    ]
+    params.require(:article).permit(permited_values)
   end
 end

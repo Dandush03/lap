@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   attr_reader :current_company_user
 
   per_request_react_rails_prerenderer
-  
+
   protect_from_forgery
 
   before_action :authenticate_user!

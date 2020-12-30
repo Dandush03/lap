@@ -10,8 +10,11 @@ RSpec.describe Article, type: :model do
     it { should belong_to(:buy_account).class_name('AccountsCategory').with_foreign_key('buy_account_id').without_validating_presence }
     it { should belong_to(:sell_account).class_name('AccountsCategory').with_foreign_key('sell_account_id').without_validating_presence }
     it { should belong_to(:inv_account).class_name('AccountsCategory').with_foreign_key('inv_account_id').without_validating_presence }
-    it { should belong_to(:sell_account_tax).class_name('Tax').with_foreign_key('tax_id').without_validating_presence }
-    it { should belong_to(:buy_account_tax).class_name('Tax').with_foreign_key('tax_id').without_validating_presence }
+  end
+
+  describe 'belong to tax' do
+    it { should belong_to(:sell_account_tax).class_name('Tax').with_foreign_key('sell_account_tax_id').without_validating_presence }
+    it { should belong_to(:buy_account_tax).class_name('Tax').with_foreign_key('buy_account_tax_id').without_validating_presence }
   end
 
   describe 'validations' do
@@ -28,7 +31,7 @@ RSpec.describe Article, type: :model do
       it { should validate_presence_of(:open_qty) }
     end
 
-    context 'if is a sell item' do 
+    context 'if is a sell item' do
       before { allow(subject).to receive(:sell_item).and_return(true) }
       it { should validate_presence_of(:inv_account) }
       it { should validate_presence_of(:sell_account_tax) }
@@ -37,7 +40,7 @@ RSpec.describe Article, type: :model do
       it { should validate_numericality_of(:sell_price).is_greater_than(0) }
     end
 
-    context 'if is a sell item' do 
+    context 'if is a sell item' do
       before { allow(subject).to receive(:buy_item).and_return(true) }
       it { should validate_presence_of(:buy_account) }
       it { should validate_presence_of(:buy_account_tax) }

@@ -10,6 +10,9 @@ class Article < ApplicationRecord
   belongs_to :sell_account, class_name: 'AccountsCategory', foreign_key: 'sell_account_id', optional: true
   belongs_to :inv_account,  class_name: 'AccountsCategory', foreign_key: 'inv_account_id', optional: true
 
+  belongs_to :buy_account_tax, class_name: 'Tax', foreign_key: 'buy_account_tax_id', optional: true
+  belongs_to :sell_account_tax, class_name: 'Tax', foreign_key: 'sell_account_tax_id', optional: true
+
   validates :sku,  presence: true, uniqueness: { scope: :company_id }
   validates :name, presence: true, uniqueness: { scope: :company_id }
   validates :upc,  uniqueness: { scope: :company_id }, length: { is: 15, message: :upc_length }, allow_nil: true
@@ -17,14 +20,16 @@ class Article < ApplicationRecord
   validates :open_qty, presence: true, if: :inventory
   validates :inv_account, presence: true, if: :inventory
 
-  validates :buy_price,  presence: true, numericality: { greater_than: 0 }, if: :buy_item
+  validates :buy_price, presence: true, numericality: { greater_than: 0 }, if: :buy_item
   validates :buy_account, presence: true, if: :buy_item
+  validates :buy_account_tax, presence: true, if: :buy_item
 
   validates :sell_price, presence: true, numericality: { greater_than: 0 }, if: :sell_item
   validates :sell_account, presence: true, if: :sell_item
+  validates :sell_account_tax, presence: true, if: :sell_item
 
   validate :testing
-  def testing 
+  def testing
     puts 'test'
     puts 'test'
     puts 'test'

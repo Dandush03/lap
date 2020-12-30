@@ -8,25 +8,25 @@ import {
 import SelectLists from '../../shared/SelectLists';
 import { currencyHandler } from '../inputFunctions';
 
-const SellInformation = ({
-  labels, errors, sellAccounts, taxes, classes,
+const BuyInformation = ({
+  labels, errors, buyAccounts, taxes, classes,
 }) => {
-  const sellInfoInput = useRef(null);
+  const buyInfoInput = useRef(null);
   const price = useRef(null);
   const account = useRef(null);
   const description = useRef(null);
   const tax = useRef(null);
 
-  const [checkedSellInfo, setCheckedSellInfo] = useState();
+  const [checkedBuyInfo, setCheckedBuyInfo] = useState();
 
-  const sellInfoHandler = async () => {
-    if (!checkedSellInfo) return setCheckedSellInfo(!checkedSellInfo);
+  const buyInfoHandler = async () => {
+    if (!checkedBuyInfo) return setCheckedBuyInfo(!checkedBuyInfo);
 
     price.current.value = '';
     description.current.value = '';
     account.current.getElementsByTagName('button')[0].click();
     tax.current.getElementsByTagName('button')[0].click();
-    return setCheckedSellInfo(!checkedSellInfo);
+    return setCheckedBuyInfo(!checkedBuyInfo);
   };
 
   return (
@@ -35,29 +35,29 @@ const SellInformation = ({
         <FormControlLabel
           control={(
             <Checkbox
-              name={labels.sell_item}
+              name={labels.buy_item}
               color="primary"
-              onChange={sellInfoHandler}
+              onChange={buyInfoHandler}
             />
             )}
-          label={labels.sell_item}
+          label={labels.buy_item}
         />
         <input
           type="hidden"
-          name="article[sell_item]"
-          value={checkedSellInfo ? 1 : 0}
-          ref={sellInfoInput}
+          name="article[buy_item]"
+          value={checkedBuyInfo ? 1 : 0}
+          ref={buyInfoInput}
         />
       </FormGroup>
       <FormControl className={classes.textFields}>
         <TextField
-          disabled={!checkedSellInfo}
-          label={labels.sell_price}
-          name="article[sell_price]"
-          required={checkedSellInfo}
+          disabled={!checkedBuyInfo}
+          label={labels.buy_price}
+          name="article[buy_price]"
+          required={checkedBuyInfo}
           inputProps={{ ref: price }}
-          error={errors ? !!errors.sell_price : false}
-          helperText={errors ? errors.sell_price : null}
+          error={errors ? !!errors.buy_price : false}
+          helperText={errors ? errors.buy_price : null}
           onKeyDownCapture={currencyHandler}
           placeholder="0.00"
         />
@@ -65,19 +65,19 @@ const SellInformation = ({
       <FormControl className={classes.textFields}>
         <SelectLists
           passRef={account}
-          required={checkedSellInfo}
-          options={sellAccounts}
-          inputname="article[sell_account_id]"
-          label={labels.sell_accounts}
-          disabled={!checkedSellInfo}
+          required={checkedBuyInfo}
+          options={buyAccounts}
+          inputname="article[buy_account_id]"
+          label={labels.buy_accounts}
+          disabled={!checkedBuyInfo}
         />
       </FormControl>
       <FormControl className={classes.textFields}>
         <TextField
-          inputname="article[sell_description]"
+          inputname="article[buy_description]"
           inputProps={{ ref: description }}
-          disabled={!checkedSellInfo}
-          label={labels.sell_description}
+          disabled={!checkedBuyInfo}
+          label={labels.buy_description}
           multiline
           rows={4}
         />
@@ -86,25 +86,25 @@ const SellInformation = ({
         <SelectLists
           passRef={tax}
           options={taxes.map((obj) => ({ name: `${obj.name} [${obj.value * 100}%]`, id: obj.id }))}
-          inputname="article[sell_account_tax_id]"
+          inputname="article[buy_account_tax_id]"
           label={labels.taxes}
-          disabled={!checkedSellInfo}
+          disabled={!checkedBuyInfo}
         />
       </FormControl>
     </Grid>
   );
 };
 
-SellInformation.propTypes = {
+BuyInformation.propTypes = {
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
-  sellAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  buyAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-SellInformation.defaultProps = {
+BuyInformation.defaultProps = {
   errors: null,
 };
 
-export default SellInformation;
+export default BuyInformation;

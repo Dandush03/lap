@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 
 import {
-  Divider, FormControl, Grid, Input, TextField,
+  Divider, Grid,
 } from '@material-ui/core';
 
-import ImageSearchIcon from '@material-ui/icons/ImageSearch';
-import {
-  changeInputToUppercase, dragEnterHandler, dragLeaveHandler,
-  insertSpaceAndValidateNumber, dragEndHandler, changeImageHandler,
-} from './inputFunctions';
-import RadioBtnsField from '../shared/RadioBtnsField';
 import useStyles from './styles';
-import SellInformation from './partials/SellInformation';
 import ArticleImage from './partials/ArticleImage';
 import ArticleInformation from './partials/ArticleInformation';
+import SellInformation from './partials/SellInformation';
+import BuyInformation from './partials/BuyInformation';
 
 const NewArticle = ({
-  auth, labels, errors, sell_accounts: sellAccounts, sell_accounts_taxes: sellAccountsTaxes,
+  auth, labels, errors, sell_accounts: sellAccounts,
+  taxes, buy_accounts: buyAccounts,
 }) => {
   const classes = useStyles();
 
@@ -41,13 +37,17 @@ const NewArticle = ({
           labels={labels}
           errors={errors}
           sellAccounts={sellAccounts}
-          sellAccountsTaxes={sellAccountsTaxes}
+          taxes={taxes}
           classes={classes}
         />
         <Divider orientation="vertical" flexItem />
-        <Grid item sm={6} xs={12} className={classes.sellInfo}>
-          buy
-        </Grid>
+        <BuyInformation
+          labels={labels}
+          errors={errors}
+          buyAccounts={buyAccounts}
+          taxes={taxes}
+          classes={classes}
+        />
       </Grid>
       <Divider />
 
@@ -61,7 +61,8 @@ NewArticle.propTypes = {
   labels: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
   sell_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sell_accounts_taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  buy_accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 NewArticle.defaultProps = {

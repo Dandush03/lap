@@ -7,6 +7,7 @@ RSpec.describe Company, type: :model do
   it { should have_many(:accounts_categories) }
   it { should have_many(:articles_groups) }
   it { should have_many(:articles) }
+  it { should have_many(:taxes) }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:identification) }

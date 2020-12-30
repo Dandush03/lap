@@ -12,9 +12,12 @@ es:
       upc: UPC
       upc_code: Código de Barra
       file_upload: Arrastra tu imagen o busca una
-      buy_item: Información de compra
       sell_item: Información de venta
       sell_price: Precio de venta
       sell_accounts: Cuenta
       sell_description: Descripción
+      buy_item: Información de compra
+      buy_price: compra Precio
+      buy_accounts: Cuenta
+      buy_description: Descripción
       taxes: Impuesto
