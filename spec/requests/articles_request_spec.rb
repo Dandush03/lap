@@ -10,12 +10,11 @@ RSpec.describe 'Articles', type: :request do
   let!(:buy_accounts) { create_list(:accounts_category, 3, :out, company_id: company.id) }
   let!(:articles_groups) { create_list(:articles_group, 3, company_id: company.id) }
   let!(:taxes) { create_list(:tax, 3, company_id: company.id) }
-  
-  describe "logged user" do
-    before { sign_in user }
 
-    context "#new instace variables" do
-      before { get new_article_path(locale: 'en')}
+  describe 'logged user' do
+    before { sign_in user }
+    context '#new instace variables' do
+      before { get new_article_path(locale: 'en') }
       it 'validate user is logged in' do
         expect(controller.current_user).to eq(user)
       end
@@ -35,7 +34,5 @@ RSpec.describe 'Articles', type: :request do
         expect(controller.instance_variable_get(:@taxes)).to eq(taxes)
       end
     end
-
-    
   end
 end

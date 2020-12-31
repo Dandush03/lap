@@ -34,8 +34,8 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'bullet'
+  gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end

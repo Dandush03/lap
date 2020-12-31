@@ -36,7 +36,7 @@ RSpec.describe Article, type: :model do
     context 'if is a sell item' do
       before { allow(subject).to receive(:sell_item).and_return(true) }
       it { should validate_presence_of(:sell_account) }
-      
+
       it { should validate_presence_of(:sell_price) }
       it { should validate_numericality_of(:sell_price).is_greater_than(0) }
     end

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_company
-    session[:current_company] ||= current_user.company.name
+    session[:current_company] ||= current_user.company.name if current_user
     @current_company ||= Company.find_by_name(session[:current_company])
     yield
   end
