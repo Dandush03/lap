@@ -38,6 +38,7 @@ class AuthenticateUser
   end
 
   def set_access_token
+    user.tokens.destroy_all
     user.tokens.create(token: token_creator, request_ip: @request_ip)
   end
 
