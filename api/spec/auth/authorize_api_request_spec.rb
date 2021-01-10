@@ -5,7 +5,7 @@ RSpec.describe AuthorizeApiRequest, type: :request do
   # Create test user
   let(:user) { create(:user) }
   # Mock `Authorization` header
-  let(:header) { { 'Authorization' => token_generator(user.id, '127.0.0.1') } }
+  let(:header) { token_generator(user.id, '127.0.0.1') }
   # Invalid request subject
   subject(:invalid_request_obj) { described_class.new({}, '') }
   # Valid request subject
@@ -34,7 +34,7 @@ RSpec.describe AuthorizeApiRequest, type: :request do
       context 'when invalid token by user_id' do
         subject(:invalid_request_obj) do
           # custom helper method `token_generator`
-          described_class.new('Authorization' => invalid_token_generator(5, '12'))
+          described_class.new(invalid_token_generator(5, '12'))
         end
 
         it 'raises an InvalidToken error' do
@@ -46,7 +46,7 @@ RSpec.describe AuthorizeApiRequest, type: :request do
       context 'when invalid token by request_ip' do
         subject(:invalid_request_obj) do
           # custom helper method `token_generator`
-          described_class.new('Authorization' => token_generator(user.id, '1'))
+          described_class.new(token_generator(user.id, '1'))
         end
 
         it 'raises an InvalidToken error' do
@@ -57,8 +57,8 @@ RSpec.describe AuthorizeApiRequest, type: :request do
 
       context 'when invalid token by old token' do
         # custom helper method `token_generator`
-        let(:header_new) { { 'Authorization' => token_generator(user.id, '127.0.0.1') } }
-        let(:header) { { 'Authorization' => token_generator(user.id, '127.0.0.123') } }
+        let(:header_new) { token_generator(user.id, '127.0.0.1') }
+        let(:header) { token_generator(user.id, '127.0.0.123') }
         subject(:request_obj) { described_class.new(header, '127.0.0.123') }
         subject(:request_obj_new) { described_class.new(header_new, '127.0.0.1') }
 
@@ -71,7 +71,7 @@ RSpec.describe AuthorizeApiRequest, type: :request do
       end
 
       context 'when token is expired' do
-        let(:header) { { 'Authorization' => expired_token_generator(user.id, '1') } }
+        let(:header) { expired_token_generator(user.id, '1') }
         subject(:request_obj) { described_class.new(header) }
 
         it 'raises ExceptionHandler::ExpiredSignature error' do
@@ -84,7 +84,7 @@ RSpec.describe AuthorizeApiRequest, type: :request do
       end
 
       context 'fake token' do
-        let(:header) { { 'Authorization' => 'foobar' } }
+        let(:header) { 'foobar' }
         subject(:invalid_request_obj) { described_class.new(header) }
 
         it 'handles JWT::DecodeError' do

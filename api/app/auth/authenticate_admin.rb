@@ -1,5 +1,5 @@
-# Authenticate User by JWT
-class AuthenticateUser
+# Authenticate Admin by JWT
+class AuthenticateAdmin
   def initialize(login, password, request_ip)
     @login = login
     @password = password
@@ -32,6 +32,8 @@ class AuthenticateUser
   def user
     @current_user ||= find_user
   
+    raise(ExceptionHandler::NotAdmin, Message.not_admin) unless @current_user.is_admin?
+
     return @current_user if @current_user&.authenticate(password)
 
     # raise Authentication error if credentials are invalid
