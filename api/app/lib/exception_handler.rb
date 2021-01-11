@@ -18,7 +18,7 @@ module ExceptionHandler
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidIp, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidTokenAge, with: :four_twenty_two
-    rescue_from ExceptionHandler::NotAdmin, with: :four_twenty_two
+    rescue_from ExceptionHandler::NotAdmin, with: :unauthorized_request
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       render json: { message: e.message }, status: :not_found

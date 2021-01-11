@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe AuthenticateUser do
   # create test user
-  let(:user) { create(:user) }
+  let(:company) { create(:company)}
+  let(:user) { create(:user, company_id: company.id) }
   # valid request subject
   subject(:valid_auth_obj_by_mail) { described_class.new(user.email, user.password, '127.0.0.1') }
   subject(:valid_auth_obj_by_user) { described_class.new(user.username, user.password, '127.0.0.1') }

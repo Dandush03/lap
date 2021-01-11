@@ -32,7 +32,7 @@ class AuthenticateUser
   def user
     @current_user ||= find_user
   
-    raise(ExceptionHandler::NotAdmin, Message.not_admin) if @current_user.is_admin?
+    raise(ExceptionHandler::NotAdmin, Message.not_admin) if @current_user&.is_admin?
 
     return @current_user if @current_user&.authenticate(password)
 
