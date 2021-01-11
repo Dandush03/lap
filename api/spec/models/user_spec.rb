@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'belong to company' do
+    it { should belong_to(:company) }
+  end
 
   it {
     should have_many(:tokens)

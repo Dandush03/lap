@@ -2,6 +2,9 @@
 class User < ApplicationRecord
   # encrypt password
   has_secure_password
+  has_one_attached :profile
+
+  belongs_to :company, class_name: 'Company', foreign_key: 'company_id'
 
   # Model associations
   has_many :tokens, dependent: :destroy

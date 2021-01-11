@@ -1,6 +1,7 @@
 class CreateUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :users do |t|
+      t.string :profile
       t.string :name
       t.string :lastname
       t.string :username
@@ -9,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
 
       t.boolean :admin, default: false
 
+      t.references :company, index: true, foraign_key: true
       t.timestamps
     end
   end
