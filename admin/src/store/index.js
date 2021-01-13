@@ -9,6 +9,10 @@ const initState = {
   user: {
     login: false,
   },
+  CSRF: {
+    authToken: null,
+    resource: null,
+  },
   flashMessages: { status: null, msg: null },
 };
 

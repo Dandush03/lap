@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.svg';
-import '../stylesheets/App.css';
+import '../styles/App.css';
 
 const App = () => (
   <div className="App">

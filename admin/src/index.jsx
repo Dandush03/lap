@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import storeConfig from './store';
 
-import './stylesheets/index.css';
+import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
 
 import Home from './pages/home';

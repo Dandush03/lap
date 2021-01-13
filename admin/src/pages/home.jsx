@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes, { oneOfType } from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import App from '../components/App';
 
-const Home = () => {
+const Home = ({ history }) => {
   const user = useSelector((state) => state.user);
 
-  if (!user.login) return <Redirect to="/auth/sign_in" />;
+  useEffect(async () => {
+    if (!user.login) history.push('/auth/sign_in');
+  }, []);
+
+  if (!user.login) return null;
+
   return (
     <>
       <App />
     </>
   );
+};
+
+Home.propTypes = {
+  history: PropTypes.objectOf(oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.func,
+    PropTypes.string,
+  ])).isRequired,
 };
 
 export default Home;

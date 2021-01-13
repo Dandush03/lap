@@ -1,15 +1,28 @@
 import axios from 'axios';
-// import { SIGN_IN_USER_SUCCESSFULY, SIGN_IN_USER_ERROR, SIGN_OUT_USER } from './actionsType';
+import {
+  GET_CSRF_PROTECTION, GET_CSRF_PROTECTION_LOGGED_IN,
+  SIGN_IN_USER_ERROR, SIGN_IN_USER_SUCCESSFULY,
+} from './actionsType';
 
-// const signInUserSuccessfuly = (json) => ({
-//   type: SIGN_IN_USER_SUCCESSFULY,
-//   payload: json,
-// });
+const getCSRFProtection = (json) => ({
+  type: GET_CSRF_PROTECTION,
+  payload: json,
+});
 
-// const signInUserUnsuccessfuly = (json) => ({
-//   type: SIGN_IN_USER_ERROR,
-//   payload: json,
-// });
+const getCSRFProtectionLoggedIn = (json) => ({
+  type: GET_CSRF_PROTECTION_LOGGED_IN,
+  payload: json,
+});
+
+const signInUserSuccessfuly = (json) => ({
+  type: SIGN_IN_USER_SUCCESSFULY,
+  payload: json,
+});
+
+const signInUserUnsuccessfuly = (json) => ({
+  type: SIGN_IN_USER_ERROR,
+  payload: json,
+});
 
 // const signOutUserSuccessfuly = (json) => ({
 //   type: SIGN_OUT_USER,
@@ -17,12 +30,14 @@ import axios from 'axios';
 // });
 
 const signInUser = (data) => {
-  const url = '/api/admin/auth/sign_in';
+  const url = '/api/admin/auth/admins/sign_in';
   return ((dispatch) => {
-    console.log(dispatch);
     axios
       .post(url, data, { withCredentials: true })
-      .then((response) => console.log(response));
+      .then((response) => {
+        if (response.status === 201) return dispatch(signInUserSuccessfuly(response.data));
+        return dispatch(signInUserUnsuccessfuly(response.data));
+      });
   });
 };
 
@@ -31,12 +46,14 @@ const signOutUser = () => {
 };
 
 const getSignedUser = () => {
-  const url = '/api/admin/auth/sign_in';
+  const url = '/api/admin/auth/admins/sign_in';
   return ((dispatch) => {
-    console.log(dispatch);
     axios
       .get(url)
-      .then((response) => console.log(response));
+      .then((response) => {
+        if (response.status === 202) return dispatch(getCSRFProtectionLoggedIn(response.data));
+        return dispatch(getCSRFProtection(response.data));
+      });
   });
 };
 

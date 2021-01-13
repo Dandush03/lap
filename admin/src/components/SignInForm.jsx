@@ -1,47 +1,24 @@
 import React, { useRef } from 'react';
-import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
 import {
   Avatar, Box, Button, Checkbox, Container,
   CssBaseline, FormControlLabel, Grid,
-  Link, makeStyles, TextField, Typography,
+  Link, TextField, Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import { LockOutlinedIcon } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import Copyright from './Copyright';
 import { signInUser } from '../actions/user';
+import useStyles from '../styles/signInForm';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-const SignInForm = () => {
+const SignInForm = ({ CSRF }) => {
   const classes = useStyles();
   const form = useRef();
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    console.log('====================================');
-    console.log(Cookies.get('CSRF_TOKEN'));
-    console.log('====================================');
     const formData = new FormData(form.current);
     dispatch(signInUser(formData));
   };
@@ -57,7 +34,7 @@ const SignInForm = () => {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={submitHandler} ref={form}>
-          <input type="hidden" defaultValue={Cookies.get('CSRF_TOKEN')} name="authenticity_token" />
+          <input type="hidden" defaultValue={CSRF.authToken} name="authenticity_token" />
           <TextField
             variant="outlined"
             margin="normal"
@@ -65,7 +42,7 @@ const SignInForm = () => {
             fullWidth
             id="login"
             label="Login"
-            name="user[login]"
+            name={`${CSRF.resource}[login]`}
             autoComplete="login"
             autoFocus
           />
@@ -74,7 +51,7 @@ const SignInForm = () => {
             margin="normal"
             required
             fullWidth
-            name="user[password]"
+            name={`${CSRF.resource}[password]`}
             label="Password"
             type="password"
             id="password"
@@ -112,6 +89,10 @@ const SignInForm = () => {
       </Box>
     </Container>
   );
+};
+
+SignInForm.propTypes = {
+  CSRF: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default SignInForm;
