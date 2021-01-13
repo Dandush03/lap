@@ -4,14 +4,14 @@ module.exports = (app) => {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:3001',
+      target: 'http://localhost:3000',
     }),
   );
 
   app.use(
     '/rails',
     createProxyMiddleware({
-      target: 'http://localhost:3001',
+      target: 'http://localhost:3000',
     }),
   );
 };

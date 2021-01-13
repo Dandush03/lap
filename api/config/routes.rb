@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :admin do
       namespace :auth do
-        resource :sessions, path: 'sign-in', only: %i[create destroy]
+        resource :sessions, path: 'sign_in', only: %i[create destroy show]
       end
     end
 
     namespace :client do
       namespace :auth do
-        resource :sessions, path: 'sign-in', only: %i[create destroy]
+        resource :sessions, path: 'sign_in', only: %i[create destroy]
       end
     end
   end

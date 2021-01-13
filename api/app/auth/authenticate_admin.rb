@@ -11,6 +11,8 @@ class AuthenticateAdmin
     current_user = user
     return unless current_user
 
+    
+
     access_token = set_access_token
     token = JsonWebToken.encode(
       token: access_token.token,
@@ -33,7 +35,6 @@ class AuthenticateAdmin
     @current_user ||= find_user
   
     raise(ExceptionHandler::NotAdmin, Message.not_admin) unless @current_user&.is_admin?
-
     return @current_user if @current_user&.authenticate(password)
 
     # raise Authentication error if credentials are invalid

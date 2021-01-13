@@ -7,6 +7,7 @@ import reducers from '../reducers';
 const initState = {
   fetching: 0,
   user: {
+    login: false,
   },
   flashMessages: { status: null, msg: null },
 };

@@ -36,5 +36,17 @@ module Api
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # This also configures session_options for use below
+config.session_store :cookie_store, key: '_session_id'
+
+# Required for all session management (regardless of session_store)
+config.middleware.use ActionDispatch::Cookies
+
+config.middleware.use config.session_store, config.session_options
+config.middleware.use Rack::MethodOverride
+
+
+
   end
 end
