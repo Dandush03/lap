@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import {
+  BrowserRouter, Switch, Route,
+} from 'react-router-dom';
 import storeConfig from './store';
 
 import './stylesheets/index.css';
-import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+
+import Home from './pages/home';
+import SignIn from './pages/auth/SignIn';
 
 const store = storeConfig();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/auth">
+          <Route path="/auth/sign_in" exact component={SignIn} />
+        </Route>
+        <Route path="/" exact component={Home} />
+      </Switch>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
