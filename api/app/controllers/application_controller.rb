@@ -1,15 +1,12 @@
-class ApplicationController < ActionController::API
-  include ExceptionHandler
-  include ActionController::Cookies
-  include ActionController::RequestForgeryProtection
+class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  protect_from_forgery
+  protected
   
-  before_action :set_csrf_cookie
-
-  attr_accessor :current_user
-  
-  def set_csrf_cookie
-    cookies["CSRF_TOKEN"] = form_authenticity_token
+  def configure_permitted_parameters
+    att_create = %i[avatar full_name username email password password_confirmation]
+    att_update = %i[avatar full_name username email password current_password]
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(att_create) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(att_update) }
   end
 end

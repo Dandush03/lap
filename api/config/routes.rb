@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
   namespace :api, defaults: { format: :json } do
     namespace :admin do
       namespace :auth do
-        resource :sessions, path: 'sign_in', only: %i[create destroy show]
+        devise_for :admins
       end
     end
 

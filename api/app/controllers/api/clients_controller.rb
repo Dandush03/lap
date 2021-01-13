@@ -1,4 +1,4 @@
-class Api::ClientsController < ApplicationController
+class Api::ClientsController < ApiController
   before_action :authorize_request!
 
   private
