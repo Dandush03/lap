@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Cookies from 'js-cookie';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter, Switch, Route,
+  BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import storeConfig from './store';
 
@@ -13,7 +14,10 @@ import Home from './pages/home';
 import SignIn from './pages/auth/SignIn';
 
 const store = storeConfig();
-
+const locale = Cookies.get('locale');
+console.log('====================================');
+console.log(locale);
+console.log('====================================');
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -21,7 +25,8 @@ ReactDOM.render(
         <Route path="/auth">
           <Route path="/auth/sign_in" exact component={SignIn} />
         </Route>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact><Redirect to={locale ? `/${locale}` : '/es'} /></Route>
+        <Route path="/:locale" exact component={Home} />
       </Switch>
     </BrowserRouter>
   </Provider>,

@@ -3,15 +3,18 @@ import PropTypes, { oneOfType } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSignedUser } from '../../actions/user';
 import SignInForm from '../../components/SignInForm';
+import getI18n from '../../actions/i18n';
 
 const SignIn = ({ history }) => {
   const user = useSelector((state) => state.user);
   const CSRF = useSelector((state) => state.CSRF);
+  const i18n = useSelector((state) => state.i18n);
   const [redirect, setRedirect] = useState();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!i18n) dispatch(getI18n());
     dispatch(getSignedUser());
   }, []);
 

@@ -13,6 +13,7 @@ const initState = {
     authToken: null,
     resource: null,
   },
+  i18n: null,
   flashMessages: { status: null, msg: null },
 };
 
