@@ -8,7 +8,7 @@ class Api::Admin::Auth::SessionsController < Devise::SessionsController
 
       # GET /resource/sign_in
       def new
-        render json: csrf, status: :ok
+        render json: {csrf: csrf }, status: :ok
       end
 
       private

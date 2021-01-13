@@ -1,0 +1,29 @@
+en:
+  articles:
+    new:
+      type:
+        caption: Type of Article
+        product: Product
+        service: Service
+      name: Name
+      sku: SKU
+      sku_code: Article Code
+      upc: UPC
+      upc_code: Bar Code
+      file_upload: Please drag your image or search for one
+      sell_item: Sell Information
+      sell_price: Sell Price
+      sell_accounts: Account
+      sell_description: Description
+      buy_item: Buy information
+      buy_price: Buy Price
+      buy_accounts: Account
+      buy_description: Description
+      taxes: Tax
+      inv_item: Inventory tracking for this item
+      inv_account: Inventory account
+      open_qty: Existence of Opening
+      open_qty_value: Initial Stock Unit Fee
+      article_group: Article Group
+      submit: Save
+      cancel: Cancel
