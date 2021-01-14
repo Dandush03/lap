@@ -5,17 +5,20 @@ import { getSignedUser } from '../../actions/user';
 import SignInForm from '../../components/SignInForm';
 import getI18n from '../../actions/i18n';
 
-const SignIn = ({ history }) => {
+const SignIn = ({ history, location }) => {
   const user = useSelector((state) => state.user);
   const CSRF = useSelector((state) => state.CSRF);
-  const i18n = useSelector((state) => state.i18n);
   const [redirect, setRedirect] = useState();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!i18n) dispatch(getI18n());
-    dispatch(getSignedUser());
+    const query = new URLSearchParams(location.search);
+    const redirected = query.get('redirected');
+    if (!redirected) {
+      dispatch(getSignedUser());
+      dispatch(getI18n());
+    }
   }, []);
 
   useEffect(() => {
@@ -23,7 +26,6 @@ const SignIn = ({ history }) => {
       if (history.length > 1) history.goBack();
       if (history.length <= 2) history.replace('/');
     } else if (user.login) {
-      dispatch(getSignedUser());
       setRedirect(true);
     }
   }, [user.login, redirect]);
@@ -42,6 +44,7 @@ SignIn.propTypes = {
     PropTypes.func,
     PropTypes.string,
   ])).isRequired,
+  location: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default SignIn;

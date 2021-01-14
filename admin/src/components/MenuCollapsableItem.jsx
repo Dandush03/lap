@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import { Collapse } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const CollapsableMenuItem = ({
   menuItem, locale, Icon, classes,
@@ -22,11 +23,11 @@ const CollapsableMenuItem = ({
 
   const collapsableItems = tempMenuItem.map((el) => (
     <ListItem button className={classes.firstLink} key={el.name}>
-      <ListItem component="a" href={`/${locale}/${el.path}`}>
+      <ListItem component={Link} to={`/${locale}/${el.path}`}>
         <ListItemText primary={el.name} />
       </ListItem>
       { el.add ? (
-        <ListItem button component="a" href={`/${locale}/${el.path}/new`} className={classes.addLink}>
+        <ListItem button component={Link} to={`/${locale}/${el.path}/new`} className={classes.addLink}>
           <ListItemIcon><AddIcon /></ListItemIcon>
         </ListItem>
       ) : null}
@@ -53,7 +54,7 @@ CollapsableMenuItem.propTypes = {
   menuItem: PropTypes.arrayOf(PropTypes.object).isRequired,
   locale: PropTypes.string.isRequired,
   Icon: PropTypes.objectOf(oneOfType([PropTypes.symbol, PropTypes.object])).isRequired,
-  classes: PropTypes.objectOf(PropTypes.object).isRequired,
+  classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
 };
 
 export default CollapsableMenuItem;

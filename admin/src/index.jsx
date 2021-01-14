@@ -10,14 +10,11 @@ import storeConfig from './store';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
 
-import Home from './pages/home';
+import Layout from './pages/Layout';
 import SignIn from './pages/auth/SignIn';
 
 const store = storeConfig();
 const locale = Cookies.get('locale');
-console.log('====================================');
-console.log(locale);
-console.log('====================================');
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -26,7 +23,7 @@ ReactDOM.render(
           <Route path="/auth/sign_in" exact component={SignIn} />
         </Route>
         <Route path="/" exact><Redirect to={locale ? `/${locale}` : '/es'} /></Route>
-        <Route path="/:locale" exact component={Home} />
+        <Route path="/:locale" component={Layout} />
       </Switch>
     </BrowserRouter>
   </Provider>,
