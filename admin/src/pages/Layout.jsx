@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,12 +6,12 @@ import { Route, Switch } from 'react-router-dom';
 import Menu from '../containers/Menu';
 import getI18n from '../actions/i18n';
 import { getSignedUser } from '../actions/user';
-import SignIn from './auth/SignIn';
+import NewArticle from './articles/NewArticle';
 
 const Layout = ({ history, match }) => {
   const user = useSelector((state) => state.user);
   const i18n = useSelector((state) => state.i18n);
-  const [redirect, setRedirect] = useState(false);
+  const CSRF = useSelector((state) => state.CSRF);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,12 +20,11 @@ const Layout = ({ history, match }) => {
   }, []);
 
   useEffect(async () => {
-    if (redirect && !user.login) history.push('/auth/sign_in?redirected=true');
-    if (!user.login) {
-      if (!redirect) dispatch(getSignedUser());
-      setRedirect(true);
+    if (CSRF.authToken && !user.login) history.push('/auth/sign_in?redirected=true');
+    if (!user.login && !CSRF.authToken) {
+      dispatch(getSignedUser());
     }
-  }, [redirect]);
+  }, [CSRF]);
 
   if (!user.login) return null;
 
@@ -33,7 +32,7 @@ const Layout = ({ history, match }) => {
     <>
       <Menu menu={i18n.side_menu} locale={match.params.locale} />
       <Switch>
-        <Route path="/:locale/article" exact component={SignIn} />
+        <Route path="/:locale/articles/new" exact component={NewArticle} />
       </Switch>
     </>
   );
