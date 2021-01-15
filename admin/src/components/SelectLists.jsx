@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Autocomplete } from '@material-ui/lab';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button, TextField,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -11,14 +13,18 @@ const useStyles = makeStyles(() => ({
     color: 'gray',
     padding: '0',
   },
+  backdrop: {
+    zIndex: '10',
+    paddingLeft: '240px',
+    height: '100%',
+  },
 }));
 
 const SelectLists = ({
-  disabled, options, inputname, label, required, passRef, action,
+  disabled, options, inputname, label, required, passRef, addForm, setAddForm,
 }) => {
   const classes = useStyles();
-
-  const [state, setState] = React.useState(null);
+  const [state, setState] = useState(null);
   const handleChange = (event, newEvent) => {
     if (newEvent) {
       setState(newEvent.id);
@@ -28,7 +34,7 @@ const SelectLists = ({
   };
 
   const clickHandler = () => {
-    action(true);
+    setAddForm(!addForm);
   };
 
   const addBtn = React.createElement(Button,
@@ -53,7 +59,7 @@ const SelectLists = ({
         fullWidth
         renderInput={(params) => {
           const { InputProps: { endAdornment } } = params;
-          const newChilds = [...endAdornment.props.children, addBtn];
+          const newChilds = [...endAdornment.props.children, setAddForm ? addBtn : null];
           return (
             <TextField
               // eslint-disable-next-line react/jsx-props-no-spreading
@@ -83,13 +89,16 @@ SelectLists.propTypes = {
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   passRef: PropTypes.objectOf(PropTypes.object),
-  action: PropTypes.func.isRequired,
+  addForm: PropTypes.bool,
+  setAddForm: PropTypes.func,
 };
 
 SelectLists.defaultProps = {
   disabled: false,
   required: false,
   passRef: null,
+  addForm: null,
+  setAddForm: null,
 };
 
 export default SelectLists;

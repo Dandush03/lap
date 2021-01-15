@@ -151,6 +151,12 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'red',
     },
   },
+  backdrop: {
+    zIndex: '10',
+    paddingLeft: '240px',
+    paddingTop: theme.spacing(8),
+    height: '100%',
+  },
 }));
 
 export default useStyles;

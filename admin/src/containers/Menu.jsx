@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useTheme } from '@material-ui/core/styles';
@@ -19,7 +19,6 @@ const Menu = ({
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const menuContainer = useRef();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -47,7 +46,7 @@ const Menu = ({
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root} ref={menuContainer}>
+    <>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
@@ -95,7 +94,7 @@ const Menu = ({
           </Drawer>
         </Hidden>
       </nav>
-    </div>
+    </>
   );
 };
 

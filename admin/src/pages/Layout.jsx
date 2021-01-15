@@ -3,15 +3,18 @@ import PropTypes, { oneOfType } from 'prop-types';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import { Backdrop, CircularProgress } from '@material-ui/core';
 import Menu from '../containers/Menu';
 import getI18n from '../actions/i18n';
 import { getSignedUser } from '../actions/user';
 import NewArticle from './articles/NewArticle';
+import useStyles from '../styles/layout';
 
 const Layout = ({ history, match }) => {
   const user = useSelector((state) => state.user);
   const i18n = useSelector((state) => state.i18n);
   const CSRF = useSelector((state) => state.CSRF);
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,15 +29,23 @@ const Layout = ({ history, match }) => {
     }
   }, [CSRF]);
 
-  if (!user.login) return null;
+  if (!user.login || !i18n) {
+    return (
+      <Backdrop className={classes.backdrop} open>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   return (
-    <>
+    <div className={classes.root}>
       <Menu menu={i18n.side_menu} locale={match.params.locale} />
-      <Switch>
-        <Route path="/:locale/articles/new" exact component={NewArticle} />
-      </Switch>
-    </>
+      <main className={classes.main}>
+        <Switch>
+          <Route path="/:locale/articles/new" exact component={NewArticle} />
+        </Switch>
+      </main>
+    </div>
   );
 };
 

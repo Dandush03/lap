@@ -6,14 +6,11 @@ import reducers from '../reducers';
 
 const initState = {
   fetching: 0,
-  user: {
-    login: false,
-  },
-  CSRF: {
-    authToken: null,
-    resource: null,
-  },
+  CSRF: { authToken: null, resource: null },
   i18n: null,
+  user: { login: false },
+  accountingAccounts: { buy: [], sell: [], inv: [] },
+  articlesGroups: [],
   flashMessages: { status: null, msg: null },
 };
 
