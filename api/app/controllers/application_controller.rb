@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
+  attr_reader :current_company
+
   before_action :authenticate_api_admin_auth_admin!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   around_action :switch_locale
   around_action :set_company
+
+  respond_to :json
 
   def default_url_options
     { locale: I18n.locale, company: cookies[:company] }
