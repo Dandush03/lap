@@ -35,6 +35,8 @@ const NewArticle = ({
 
   const [groupArticle, setGroupArticle] = useState(false);
   const [sellAccount, setSellAccount] = useState(false);
+  const [buyAccount, setBuyAccount] = useState(false);
+  const [invAccount, setInvAccount] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -60,6 +62,26 @@ const NewArticle = ({
           groups={articlesGroups}
           type="sell"
           accounts={accounts.sell.map((obj) => obj.subcategory)}
+        />
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={buyAccount}>
+        <AddAccountingAccount
+          open={buyAccount}
+          setOpen={setBuyAccount}
+          classes={classes}
+          groups={articlesGroups}
+          type="buy"
+          accounts={accounts.buy.map((obj) => obj.subcategory)}
+        />
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={invAccount}>
+        <AddAccountingAccount
+          open={invAccount}
+          setOpen={setInvAccount}
+          classes={classes}
+          groups={articlesGroups}
+          type="inv"
+          accounts={accounts.inv.map((obj) => obj.subcategory)}
         />
       </Backdrop>
       <Backdrop className={classes.backdrop} open={!!fetching}>
@@ -109,6 +131,8 @@ const NewArticle = ({
             buyAccounts={accounts.buy}
             taxes={taxes}
             classes={classes}
+            addForm={buyAccount}
+            setAddForm={setBuyAccount}
           />
         </Grid>
         <Divider />
@@ -119,6 +143,8 @@ const NewArticle = ({
             invAccounts={accounts.inv}
             taxes={taxes}
             classes={classes}
+            addForm={invAccount}
+            setAddForm={setInvAccount}
           />
         </Grid>
         <Divider />

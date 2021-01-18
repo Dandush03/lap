@@ -9,7 +9,7 @@ import SelectLists from './SelectLists';
 import { currencyHandler } from '../javascripts/inputFunctions';
 
 const InvInformation = ({
-  labels, errors, invAccounts, classes,
+  labels, errors, invAccounts, classes, addForm, setAddForm,
 }) => {
   const sellInfoInput = useRef(null);
   const account = useRef(null);
@@ -58,6 +58,8 @@ const InvInformation = ({
                 inputname="article[inv_account_id]"
                 label={labels.inv_account}
                 disabled={!checkedInvInfo}
+                addForm={addForm}
+                setAddForm={setAddForm}
               />
             </FormControl>
             <FormGroup className={classes.invInfoGroup}>
@@ -97,10 +99,14 @@ InvInformation.propTypes = {
   classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   errors: PropTypes.objectOf(PropTypes.array),
   invAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addForm: PropTypes.bool,
+  setAddForm: PropTypes.func,
 };
 
 InvInformation.defaultProps = {
   errors: null,
+  addForm: false,
+  setAddForm: null,
 };
 
 export default InvInformation;
