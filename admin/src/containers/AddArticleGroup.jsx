@@ -1,15 +1,67 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Button, FormControl, Grid, TextField,
+} from '@material-ui/core';
+import { createArticleGroup } from '../actions/articleGroups';
 
-const AddArticleGroup = () => {
-  const tests = 'tests';
-  console.log(tests);
+const AddArticleGroup = ({
+  open, setOpen, classes, groups,
+}) => {
+  const auth = useSelector((state) => state.CSRF.authToken);
+  const labels = useSelector((state) => state.i18n.articles_groups.show);
+  const form = useRef();
+  const dispatch = useDispatch();
+  const [errors, setErrors] = useState(null);
+  console.log(groups);
+
+  const closeHandler = () => {
+    setOpen(!open);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(form.current);
+    dispatch(createArticleGroup(formData, setErrors, closeHandler));
+    form.current.reset();
+  };
+
   return (
     <>
-      <form action="">
-        <h1>YEY!!!!!</h1>
+      <form action="" className={classes.subForm} ref={form} onSubmit={submitHandler}>
+        <input type="hidden" name="authenticity_token" value={auth} />
+        <h1 className={classes.title}>{labels.title}</h1>
+        <Grid container className={classes.gridContainer}>
+          <FormControl className={classes.textFields} fullWidth>
+            <TextField
+              label={labels.name}
+              name="articles_group[name]"
+              required
+              error={errors ? !!errors.name : false}
+              helperText={errors ? errors.name : null}
+              placeholder={labels.name_info}
+            />
+          </FormControl>
+        </Grid>
+        <Grid container className={classes.btnContainers}>
+          <Button variant="contained" color="primary" onClick={closeHandler}>
+            {labels.cancel}
+          </Button>
+          <Button variant="contained" color="secondary" type="submit">
+            {labels.save}
+          </Button>
+        </Grid>
       </form>
     </>
   );
+};
+
+AddArticleGroup.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  groups: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default AddArticleGroup;

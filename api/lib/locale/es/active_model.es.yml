@@ -35,4 +35,4 @@ es:
       other_than: "must be other than %{count}"
       odd: "must be odd"
       even: "must be even"
-      taken: "ya se ha tomado"
+      taken: "ya fue creado"

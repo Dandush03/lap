@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     maxWidth: '900px',
   },
+  title: {
+    textAlign: 'center',
+  },
   gridContainer: {
     padding: theme.spacing(2, 0),
   },
@@ -152,10 +155,34 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   backdrop: {
-    zIndex: '10',
-    paddingLeft: '240px',
+    zIndex: '9999',
+    left: '240px',
     paddingTop: theme.spacing(8),
     height: '100%',
+    width: ('calc(100% - 240px)'),
+    alignItems: 'baseline',
+  },
+  subForm: {
+    maxWidth: '600px',
+    backgroundColor: 'white',
+    border: 'solid #33418d 3px',
+    borderTop: '0',
+    width: '100%',
+    maxHeight: '100%',
+    margin: theme.spacing(0, 8),
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(0, 8, 4, 8),
+    justifyContent: 'center',
+    borderBottomLeftRadius: '15px',
+    borderBottomRightRadius: '15px',
+  },
+  btnContainers: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    '& > button': {
+      width: '100px',
+    },
   },
 }));
 

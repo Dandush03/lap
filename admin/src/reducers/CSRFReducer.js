@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { GET_CSRF_PROTECTION, GET_CSRF_PROTECTION_LOGGED_IN } from '../actions/actionsType';
+import { GET_CSRF_PROTECTION, GET_CSRF_PROTECTION_LOGGED_IN, RENEW_CSRF_PROTECTION } from '../actions/actionsType';
 
 export default (state = '', action) => {
   switch (action.type) {
@@ -12,6 +12,8 @@ export default (state = '', action) => {
         authToken,
         resource: resource_name,
       }; }
+    case RENEW_CSRF_PROTECTION:
+      return { ...state, authToken: action.payload };
     default:
       return state;
   }

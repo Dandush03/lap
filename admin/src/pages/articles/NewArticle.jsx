@@ -16,7 +16,7 @@ import BuyInformation from '../../components/ArticleBuyInformation';
 import InvInformation from '../../components/ArticleInvInformation';
 import SelectLists from '../../components/SelectLists';
 import getAccounts from '../../actions/accountingAccounts';
-import getArticleGroups from '../../actions/articleGroups';
+import { getArticleGroups } from '../../actions/articleGroups';
 import AddArticleGroup from '../../containers/AddArticleGroup';
 
 const NewArticle = ({
@@ -32,7 +32,7 @@ const NewArticle = ({
   const classes = useStyles();
   const { locale } = match.params;
 
-  const [groupArticle, setGroupArticle] = useState();
+  const [groupArticle, setGroupArticle] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,7 +43,12 @@ const NewArticle = ({
   return (
     <>
       <Backdrop className={classes.backdrop} open={groupArticle}>
-        <AddArticleGroup />
+        <AddArticleGroup
+          open={groupArticle}
+          setOpen={setGroupArticle}
+          classes={classes}
+          groups={articlesGroups}
+        />
       </Backdrop>
       <Backdrop className={classes.backdrop} open={!!fetching}>
         <CircularProgress color="inherit" />
