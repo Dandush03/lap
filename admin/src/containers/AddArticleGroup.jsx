@@ -7,14 +7,13 @@ import {
 import { createArticleGroup } from '../actions/articleGroups';
 
 const AddArticleGroup = ({
-  open, setOpen, classes, groups,
+  open, setOpen, classes,
 }) => {
   const auth = useSelector((state) => state.CSRF.authToken);
   const labels = useSelector((state) => state.i18n.articles_groups.show);
   const form = useRef();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(null);
-  console.log(groups);
 
   const closeHandler = () => {
     setOpen(!open);
@@ -61,7 +60,6 @@ AddArticleGroup.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  groups: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default AddArticleGroup;
