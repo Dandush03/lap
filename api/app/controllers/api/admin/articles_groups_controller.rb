@@ -11,7 +11,6 @@ class Api::Admin::ArticlesGroupsController < ApplicationController
     end
     msg = group.errors.messages
     render json: {group: group, message: msg, csrf: form_authenticity_token}, status: :ok
-    
   end
 
   private

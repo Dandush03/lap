@@ -9,7 +9,7 @@ import SelectLists from './SelectLists';
 import { currencyHandler } from '../javascripts/inputFunctions';
 
 const SellInformation = ({
-  labels, errors, sellAccounts, taxes, classes,
+  labels, errors, sellAccounts, taxes, classes, addForm, setAddForm,
 }) => {
   const sellInfoInput = useRef(null);
   const price = useRef(null);
@@ -70,6 +70,8 @@ const SellInformation = ({
           inputname="article[sell_account_id]"
           label={labels.sell_accounts}
           disabled={!checkedSellInfo}
+          addForm={addForm}
+          setAddForm={setAddForm}
         />
       </FormControl>
       <FormControl className={classes.textFields}>
@@ -101,10 +103,14 @@ SellInformation.propTypes = {
   errors: PropTypes.objectOf(PropTypes.array),
   sellAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addForm: PropTypes.bool,
+  setAddForm: PropTypes.func,
 };
 
 SellInformation.defaultProps = {
   errors: null,
+  addForm: false,
+  setAddForm: null,
 };
 
 export default SellInformation;

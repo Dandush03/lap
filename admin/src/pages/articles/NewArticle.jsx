@@ -15,9 +15,10 @@ import SellInformation from '../../components/ArticleSellInformation';
 import BuyInformation from '../../components/ArticleBuyInformation';
 import InvInformation from '../../components/ArticleInvInformation';
 import SelectLists from '../../components/SelectLists';
-import getAccounts from '../../actions/accountingAccounts';
+import { getAccounts } from '../../actions/accountingAccounts';
 import { getArticleGroups } from '../../actions/articleGroups';
 import AddArticleGroup from '../../containers/AddArticleGroup';
+import AddAccountingAccount from '../../containers/AddAccountingAccount';
 
 const NewArticle = ({
   errors,
@@ -33,6 +34,7 @@ const NewArticle = ({
   const { locale } = match.params;
 
   const [groupArticle, setGroupArticle] = useState(false);
+  const [sellAccount, setSellAccount] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -48,6 +50,16 @@ const NewArticle = ({
           setOpen={setGroupArticle}
           classes={classes}
           groups={articlesGroups}
+        />
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={sellAccount}>
+        <AddAccountingAccount
+          open={sellAccount}
+          setOpen={setSellAccount}
+          classes={classes}
+          groups={articlesGroups}
+          type="sell"
+          accounts={accounts.sell.map((obj) => obj.subcategory)}
         />
       </Backdrop>
       <Backdrop className={classes.backdrop} open={!!fetching}>
@@ -87,6 +99,8 @@ const NewArticle = ({
             sellAccounts={accounts.sell}
             taxes={taxes}
             classes={classes}
+            addForm={sellAccount}
+            setAddForm={setSellAccount}
           />
           <Divider orientation="vertical" flexItem />
           <BuyInformation

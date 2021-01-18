@@ -3,7 +3,16 @@ class Api::Admin::AccountingAccountsController < ApplicationController
     render json: set_accounts, status: :ok
   end
 
-  def create; end
+  def create
+    account = current_company.accounting_accounts.new(secure_params)
+    if account.valid?
+      account.save!
+      return render json: {account: account, message: 'created successfuly', csrf: form_authenticity_token}, status: :created
+    end
+    msg = account.errors.messages
+    render json: {account: account, message: msg, csrf: form_authenticity_token}, status: :ok
+  end
+
 
   private
 
@@ -14,5 +23,9 @@ class Api::Admin::AccountingAccountsController < ApplicationController
       sell: current_company.accounting_accounts.sell_accounts.select(selecte_columns),
       inv: current_company.accounting_accounts.inv_accounts.select(selecte_columns),
     }
+  end
+
+  def secure_params
+    params.require(:accounting_account).permit(%i[name category subcategory])
   end
 end

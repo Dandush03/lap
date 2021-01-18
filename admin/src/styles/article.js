@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   backdrop: {
-    zIndex: '9999',
+    zIndex: '950',
     left: '240px',
     paddingTop: theme.spacing(8),
     height: '100%',
