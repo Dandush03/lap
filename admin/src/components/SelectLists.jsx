@@ -45,11 +45,23 @@ const SelectLists = ({
       onClick: clickHandler,
     }, <AddIcon />);
 
+  const sortOptions = options.sort((a, b) => {
+    const nameA = a.subcategory;
+    const nameB = b.subcategory;
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <>
       {state ? <input type="hidden" name={inputname} value={state} /> : null}
       <Autocomplete
-        options={options}
+        options={sortOptions}
         getOptionLabel={(option) => option.name}
         getOptionSelected={(option) => option.id}
         groupBy={(option) => option.subcategory}
