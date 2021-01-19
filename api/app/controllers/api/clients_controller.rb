@@ -1,11 +1,17 @@
-class Api::ClientsController < ApiController
-  before_action :authorize_request!
+# frozen_string_literal: true
 
-  private
+module Api
+  # Client Main Controller
+  class ClientsController < ApiController
+    before_action :authorize_request!
 
-  # Check for valid request token and return user
-  def authorize_request!
-    raise(ExceptionHandler::MissingToken, Message.missing_token) unless session[:_user_token]
-    @current_user = AuthorizeApiRequest.new(session[:_user_token]['value'], request.ip).call[:user]
+    private
+
+    # Check for valid request token and return user
+    def authorize_request!
+      raise(ExceptionHandler::MissingToken, Message.missing_token) unless session[:_user_token]
+
+      @current_user = AuthorizeApiRequest.new(session[:_user_token]['value'], request.ip).call[:user]
+    end
   end
 end

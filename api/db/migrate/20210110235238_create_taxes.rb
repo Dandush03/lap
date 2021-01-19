@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTaxes < ActiveRecord::Migration[6.1]
   def change
     create_table :articles_groups do |t|

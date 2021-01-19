@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Main App Controller
 class ApplicationController < ActionController::Base
   attr_reader :current_company
 
@@ -15,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  
+
   def configure_permitted_parameters
     att_create = %i[avatar full_name username email password password_confirmation]
     att_update = %i[avatar full_name username email password current_password]

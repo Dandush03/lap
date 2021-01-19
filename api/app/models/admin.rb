@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin < ApplicationRecord
   attr_writer :login
 
@@ -11,7 +13,8 @@ class Admin < ApplicationRecord
 
   validates :firstname, presence: true, length: { minimum: 3, maximum: 50 }
   validates :lastname, presence: true, length: { minimum: 3, maximum: 50 }
-  validates :username, uniqueness: { case_sensitive: false, scope: :company_id }, length: { maximum: 30 }, allow_nil: true
+  validates :username, uniqueness: { case_sensitive: false, scope: :company_id }, length: { maximum: 30 },
+                       allow_nil: true
   validates :email, presence: true, uniqueness: { case_sensitive: false, scope: :company_id }
   validates :password, presence: true, length: { maximum: 15, minimum: 6 }
 
@@ -31,24 +34,34 @@ class Admin < ApplicationRecord
   end
 
   # update without password
-  def update_with_password(params, *options)
+  def update_with_password(params, *_options)
     current_password = params.delete(:current_password)
 
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
+    password_blank
 
-    result = if params[:password].blank? || valid_password?(current_password)
-               update_attributes(params, *options)
-             else
-               assign_attributes(params, *options)
-               valid?
-               errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-               false
-             end
+    result = assing_attr(current_password)
 
     clean_up_passwords
     result
+  end
+
+  private
+
+  def password_blank
+    return unless params[:password].blank?
+
+    params.delete(:password)
+    params.delete(:password_confirmation) if params[:password_confirmation].blank?
+  end
+
+  def assing_attr(current_password)
+    if params[:password].blank? || valid_password?(current_password)
+      update_attributes(params, *options)
+    else
+      assign_attributes(params, *options)
+      valid?
+      errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
   end
 end

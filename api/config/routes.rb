@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json } do
     scope(path_names: { new: 'i18n' }) do
       resource :admin, only: %i[new]
     end
-    
+
     namespace :admin do
       resource :accounting_accounts, only: %i[show create]
       resource :articles_groups, only: %i[show create]

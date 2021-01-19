@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# API RESPONSE FOR DEVISE
 class CustomFailureApp < Devise::FailureApp
   def respond
     if request.format == :json
