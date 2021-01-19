@@ -1,0 +1,134 @@
+---
+openapi: 3.0.1
+components:
+  securitySchemes:
+    admin:
+      type: apiKey
+      in: cookie
+      name: _api_session
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/admin/accounting_accounts":
+    get:
+      summary: Retrieves All Accounting Accounts
+      tags:
+      - AccountingAccounts
+      parameters:
+      - in: cookie
+        required: true
+        name: locale
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Fetch Accountings Accounts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buy:
+                    type: array
+                    items:
+                      type: object
+                  sell:
+                    type: array
+                    items:
+                      type: object
+                  inv:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - buy
+                - sell
+                - inv
+        '401':
+          description: Unauthorized User
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+  "/api/admin/auth/admins/sign_in":
+    get:
+      summary: Retrieves CSRF Token And User
+      tags:
+      - Sessions
+      parameters:
+      - in: cookie
+        required: true
+        name: locale
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Fetch CSRF Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locale:
+                    type: string
+                    default: es
+                  csrf:
+                    resource_name:
+                      type: string
+                    authToken:
+                      type: string
+                required:
+                - csrf
+        '202':
+          description: Fetch CSRF Token and User if Already Login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locale:
+                    type: string
+                    default: es
+                  csrf:
+                    resource_name:
+                      type: string
+                    authToken:
+                      type: string
+                required:
+                - csrf
+                - user
+    post:
+      summary: Login User
+      tags:
+      - Sessions
+      parameters: []
+      responses:
+        '201':
+          description: Login User
+          content: {}
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - api_admin_auth_admin[login]
+              - api_admin_auth_admin[password]
+              properties:
+                authenticity_token:
+                  type: string
+                api_admin_auth_admin[login]:
+                  type: string
+                api_admin_auth_admin[password]:
+                  type: string
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: http://localhost:3000

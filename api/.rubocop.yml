@@ -29,3 +29,6 @@ Style/Documentation:
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'bin/**/*'
+Naming/FileName:
+  Exclude:
+    - 'config/initializers/rswag-ui.rb'
