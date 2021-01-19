@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { Backdrop, CircularProgress } from '@material-ui/core';
+import {
+  Backdrop, CircularProgress, createMuiTheme, jssPreset, StylesProvider, ThemeProvider,
+} from '@material-ui/core';
+import * as locales from '@material-ui/core/locale';
+import { create } from 'jss';
+import rtl from 'jss-rtl';
 import Menu from '../containers/Menu';
 import getI18n from '../actions/i18n';
 import { getSignedUser } from '../actions/user';
@@ -17,9 +22,20 @@ const Layout = ({ history, match }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const lang = {
+    he: ['heIL', 'rtl'],
+    en: ['enUS', 'ltr'],
+    es: ['esES', 'ltr'],
+  };
+
   useEffect(() => {
     Cookies.set('locale', match.params.locale);
     if (!i18n) dispatch(getI18n());
+    const body = document.getElementsByTagName('body')[0];
+    body.setAttribute('dir', lang[match.params.locale][1]);
+  }, []);
+
+  useLayoutEffect(() => {
   }, []);
 
   useEffect(async () => {
@@ -37,15 +53,30 @@ const Layout = ({ history, match }) => {
     );
   }
 
+  const theme = createMuiTheme(
+    {
+      direction: lang[match.params.locale][1],
+      locales: locales[lang[match.params.locale][0]],
+    },
+  );
+
+  const jss = create({
+    plugins: [...jssPreset().plugins, rtl()],
+  });
+
   return (
-    <div className={classes.root}>
-      <Menu menu={i18n.side_menu} locale={match.params.locale} />
-      <main className={classes.main}>
-        <Switch>
-          <Route path="/:locale/articles/new" exact component={NewArticle} />
-        </Switch>
-      </main>
-    </div>
+    <StylesProvider jss={jss}>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <Menu menu={i18n.side_menu} locale={match.params.locale} />
+          <main className={classes.main}>
+            <Switch>
+              <Route path="/:locale/articles/new" exact component={NewArticle} />
+            </Switch>
+          </main>
+        </div>
+      </ThemeProvider>
+    </StylesProvider>
   );
 };
 

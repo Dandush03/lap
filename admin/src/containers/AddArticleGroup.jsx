@@ -45,11 +45,11 @@ const AddArticleGroup = ({
           </FormControl>
         </Grid>
         <Grid container className={classes.btnContainers}>
-          <Button variant="contained" color="primary" onClick={closeHandler}>
-            {labels.cancel}
-          </Button>
-          <Button variant="contained" color="secondary" type="submit">
+          <Button variant="contained" color="primary" type="submit">
             {labels.save}
+          </Button>
+          <Button variant="contained" color="secondary" onClick={closeHandler}>
+            {labels.cancel}
           </Button>
         </Grid>
       </form>
