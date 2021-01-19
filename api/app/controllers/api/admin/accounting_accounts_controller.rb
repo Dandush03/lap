@@ -4,7 +4,7 @@ module Api
   module Admin
     # Admin Accounting Acoounts Controller
     class AccountingAccountsController < ApplicationController
-      def show
+      def index
         render json: set_accounts, status: :ok
       end
 

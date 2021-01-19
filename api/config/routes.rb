@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resource :accounting_accounts, only: %i[show create]
-      resource :articles_groups, only: %i[show create]
+      resources :accounting_accounts, only: %i[index create]
+      resources :articles_groups, only: %i[index create]
       namespace :auth do
         devise_for :admins
       end
