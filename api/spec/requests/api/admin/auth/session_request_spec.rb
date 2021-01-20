@@ -19,8 +19,11 @@ RSpec.describe 'Api::Admin::Auth::Sessions', type: :request do
                properties: {
                  locale: { type: :string, default: 'es' },
                  csrf: {
-                   resource_name: { type: :string },
-                   authToken: { type: :string }
+                   type: :object,
+                   properties: {
+                     resource_name: { type: :string },
+                     authToken: { type: :string }
+                   }
                  }
                },
                required: %w[csrf]
@@ -40,8 +43,25 @@ RSpec.describe 'Api::Admin::Auth::Sessions', type: :request do
                properties: {
                  locale: { type: :string, default: 'es' },
                  csrf: {
-                   resource_name: { type: :string },
-                   authToken: { type: :string }
+                   type: :object,
+                   properties: {
+                     resource_name: { type: :string },
+                     authToken: { type: :string }
+                   }
+                 },
+                 user: {
+                   type: :object,
+                   properties: {
+                     id: { type: :integer },
+                     firstname: { type: :string },
+                     lastname: { type: :string },
+                     username: { type: :string },
+                     email: { type: :string },
+                     company_id: { type: :integer },
+                     user_id: { type: :integer },
+                     created_at: { type: :string, format: 'date-time' },
+                     updated_at: { type: :string, format: 'date-time' }
+                   }
                  }
                },
                required: %w[csrf user]
@@ -58,7 +78,7 @@ RSpec.describe 'Api::Admin::Auth::Sessions', type: :request do
         properties: {
           authenticity_token: { type: :string },
           'api_admin_auth_admin[login]': { type: :string },
-          'api_admin_auth_admin[password]': { type: :string }
+          'api_admin_auth_admin[password]': { type: :password }
         }
       }
 

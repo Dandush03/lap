@@ -56,6 +56,264 @@ paths:
                     type: string
                 required:
                 - message
+    post:
+      summary: Create New Account
+      tags:
+      - AccountingAccounts
+      parameters: []
+      responses:
+        '201':
+          description: Create Accounting Account Successfuly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      category:
+                        type: string
+                      subcategory:
+                        type: string
+                      company_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                  message:
+                    type: string
+                  csrf:
+                    type: string
+                required:
+                - csrf
+                - account
+                - message
+        '200':
+          description: Create Accounting Account Unsuccessfuly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        nullable: true
+                      name:
+                        type: string
+                        nullable: true
+                      category:
+                        type: string
+                        nullable: true
+                      subcategory:
+                        type: string
+                        nullable: true
+                      company_id:
+                        type: integer
+                        nullable: true
+                      user_id:
+                        type: integer
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      updated_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                  csrf:
+                    type: string
+                  message:
+                    type: object
+                required:
+                - csrf
+                - account
+                - message
+        '401':
+          description: User not supported
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - accounting_account[name]
+              - accounting_account[category]
+              - accounting_account[subcategory]
+              - authenticity_token
+              properties:
+                accounting_account[name]:
+                  type: string
+                  description: Name of New Category
+                  example: General Income
+                accounting_account[category]:
+                  type: string
+                  description: Category Should be inv, in, or out
+                  example: in
+                accounting_account[subcategory]:
+                  type: string
+                  description: SubCategory refer to the group which the category will
+                    belong to
+                  example: Income
+                authenticity_token:
+                  type: string
+                  description: CSRF Token Protected
+  "/api/admin/articles_groups":
+    get:
+      summary: Retrieves All Articles Groups
+      tags:
+      - ArticlesGroups
+      parameters:
+      - in: cookie
+        required: true
+        name: locale
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Fetch Articles Groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '401':
+          description: Unauthorized User
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+    post:
+      summary: Create New Article Groups
+      tags:
+      - ArticlesGroups
+      parameters: []
+      responses:
+        '201':
+          description: Create Article Group Successfuly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      company_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                  message:
+                    type: string
+                  csrf:
+                    type: string
+                required:
+                - csrf
+                - group
+                - message
+        '200':
+          description: Create Article Group Unsuccessfuly
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        nullable: true
+                      name:
+                        type: string
+                        nullable: true
+                      company_id:
+                        type: integer
+                        nullable: true
+                      user_id:
+                        type: integer
+                        nullable: true
+                      created_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      updated_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                  csrf:
+                    type: string
+                  message:
+                    type: object
+                required:
+                - csrf
+                - account
+                - message
+        '401':
+          description: User not supported
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                - message
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - articles_group[name]
+              - authenticity_token
+              properties:
+                articles_group[name]:
+                  type: string
+                  description: Name of New Group
+                  example: Fruits
+                authenticity_token:
+                  type: string
+                  description: CSRF Token Protected
   "/api/admin/auth/admins/sign_in":
     get:
       summary: Retrieves CSRF Token And User
@@ -79,10 +337,12 @@ paths:
                     type: string
                     default: es
                   csrf:
-                    resource_name:
-                      type: string
-                    authToken:
-                      type: string
+                    type: object
+                    properties:
+                      resource_name:
+                        type: string
+                      authToken:
+                        type: string
                 required:
                 - csrf
         '202':
@@ -96,10 +356,35 @@ paths:
                     type: string
                     default: es
                   csrf:
-                    resource_name:
-                      type: string
-                    authToken:
-                      type: string
+                    type: object
+                    properties:
+                      resource_name:
+                        type: string
+                      authToken:
+                        type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      firstname:
+                        type: string
+                      lastname:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      company_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
                 required:
                 - csrf
                 - user
@@ -126,7 +411,7 @@ paths:
                 api_admin_auth_admin[login]:
                   type: string
                 api_admin_auth_admin[password]:
-                  type: string
+                  type: password
 servers:
 - url: http://localhost:3000
   variables:
