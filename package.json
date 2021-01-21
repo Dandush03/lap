@@ -24,6 +24,6 @@
     "build": "yarn --cwd admin react-scripts build",
     "test": "yarn --cwd admin react-scripts test",
     "eject": "yarn --cwd admin react-scripts eject",
-    "deploy": "yarn --cwd admin sudo cp -a build/. /var/www/hias/"
+    "deploy": "yarn --cwd admin sudo cp -a build/. /var/www/lap/"
   }
 }
