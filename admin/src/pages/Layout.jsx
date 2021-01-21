@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,20 +29,16 @@ const Layout = ({ history, match }) => {
   };
 
   useEffect(() => {
+    dispatch(getSignedUser());
     Cookies.set('locale', match.params.locale);
     if (!i18n) dispatch(getI18n());
     const body = document.getElementsByTagName('body')[0];
     body.setAttribute('dir', lang[match.params.locale][1]);
   }, []);
 
-  useLayoutEffect(() => {
-  }, []);
-
   useEffect(async () => {
     if (CSRF.authToken && !user.login) history.push('/auth/sign_in?redirected=true');
-    if (!user.login && !CSRF.authToken) {
-      dispatch(getSignedUser());
-    }
+    if (!CSRF.authToken) dispatch(getSignedUser());
   }, [CSRF]);
 
   if (!user.login || !i18n) {

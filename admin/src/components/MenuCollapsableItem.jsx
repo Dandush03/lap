@@ -10,10 +10,10 @@ import { Collapse } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const CollapsableMenuItem = ({
-  menuItem, locale, Icon, classes,
+  menuItem, locale, Icon, classes, opened,
 }) => {
   const tempMenuItem = Array.from(menuItem);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(opened);
 
   const handleClick = () => {
     setOpen(!open);
@@ -53,6 +53,7 @@ const CollapsableMenuItem = ({
 CollapsableMenuItem.propTypes = {
   menuItem: PropTypes.arrayOf(PropTypes.object).isRequired,
   locale: PropTypes.string.isRequired,
+  opened: PropTypes.bool.isRequired,
   Icon: PropTypes.objectOf(oneOfType([PropTypes.symbol, PropTypes.object])).isRequired,
   classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
 };

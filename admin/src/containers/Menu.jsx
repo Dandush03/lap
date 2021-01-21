@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 import { useTheme } from '@material-ui/core/styles';
 import {
-  AppBar, CssBaseline, Divider, Drawer,
-  Hidden, IconButton, List, Toolbar,
-  Typography,
+  CssBaseline, Divider, Drawer,
+  Hidden, List,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import LocalGroceryStoreOutlinedIcon from '@material-ui/icons/LocalGroceryStoreOutlined';
+import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
 
-import CollapsableMenuItem from '../components/MenuCollapsableItem';
 import useStyles from '../styles/layoutMenu';
+import Header from '../components/Header';
+import MenuItem from '../components/MenuItem';
 
 const Menu = ({
   window, menu, locale,
@@ -30,12 +31,27 @@ const Menu = ({
         lab brand logo
       </div>
       <Divider />
-      <List>
-        <CollapsableMenuItem
+      <List className={classes.list}>
+        <MenuItem
           menuItem={menu.articles}
           locale={locale}
           Icon={ShoppingBasketIcon}
           classes={classes}
+        />
+        <MenuItem
+          menuItem={menu.banking}
+          locale={locale}
+          Icon={AccountBalanceOutlinedIcon}
+          classes={classes}
+        />
+      </List>
+      <List className={classes.list}>
+        <MenuItem
+          menuItem={menu.sales}
+          locale={locale}
+          Icon={LocalGroceryStoreOutlinedIcon}
+          classes={classes}
+          opened
         />
       </List>
       <Divider />
@@ -48,22 +64,7 @@ const Menu = ({
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header classes={classes} toggleDrawer={handleDrawerToggle} />
       <nav className={classes.drawer} aria-label="mailbox folders">
         <Hidden smUp implementation="css">
           <Drawer

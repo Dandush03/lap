@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
   Backdrop,
+  Button,
   CircularProgress,
   Divider, FormControl, Grid,
 } from '@material-ui/core';
@@ -19,29 +20,38 @@ import { getAccounts } from '../../actions/accountingAccounts';
 import { getArticleGroups } from '../../actions/articleGroups';
 import AddArticleGroup from '../../containers/AddArticleGroup';
 import AddAccountingAccount from '../../containers/AddAccountingAccount';
+import createArticle from '../../actions/article';
+import getTaxes from '../../actions/taxes';
 
-const NewArticle = ({
-  errors,
-  taxes,
-  match,
-}) => {
+const NewArticle = ({ match, history }) => {
+  const dispatch = useDispatch();
   const fetching = useSelector((state) => state.fetching);
   const auth = useSelector((state) => state.CSRF.authToken);
   const labels = useSelector((state) => state.i18n.articles.new);
   const accounts = useSelector((state) => state.accountingAccounts);
   const articlesGroups = useSelector((state) => state.articlesGroups);
+  const taxes = useSelector((state) => state.taxes);
+
   const classes = useStyles();
+  const form = useRef(null);
   const { locale } = match.params;
 
+  const [errors, setErrors] = useState(null);
   const [groupArticle, setGroupArticle] = useState(false);
   const [sellAccount, setSellAccount] = useState(false);
   const [buyAccount, setBuyAccount] = useState(false);
   const [invAccount, setInvAccount] = useState(false);
 
-  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(form.current);
+    dispatch(createArticle(formData, setErrors, history));
+  };
+
   useEffect(() => {
     if (accounts.buy.length === 0) dispatch(getAccounts());
     if (articlesGroups.length === 0) dispatch(getArticleGroups());
+    if (taxes.length === 0) dispatch(getTaxes());
   }, []);
 
   return (
@@ -93,6 +103,8 @@ const NewArticle = ({
         acceptCharset="UTF-8"
         className={classes.root}
         encType="multipart/form-data"
+        onSubmit={handleSubmit}
+        ref={form}
       >
         <input type="hidden" name="authenticity_token" value={auth} />
         <Divider />
@@ -148,21 +160,19 @@ const NewArticle = ({
           />
         </Grid>
         <Divider />
-        <input type="submit" value="save" />
+        <Grid container className={classes.btnContainers} style={{ marginTop: '24px' }}>
+          <Button variant="contained" color="primary" type="submit">
+            {labels.submit}
+          </Button>
+        </Grid>
       </form>
     </>
   );
 };
 
 NewArticle.propTypes = {
-  errors: PropTypes.objectOf(PropTypes.array),
-  taxes: PropTypes.arrayOf(PropTypes.object),
   match: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-};
-
-NewArticle.defaultProps = {
-  errors: null,
-  taxes: [],
+  history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default NewArticle;

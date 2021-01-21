@@ -1,4 +1,4 @@
-import { GET_CSRF_PROTECTION_LOGGED_IN, SIGN_IN_USER_SUCCESSFULY, SIGN_OUT_USER } from '../actions/actionsType';
+import { GET_CSRF_PROTECTION_LOGGED_IN, SIGN_IN_USER_SUCCESSFULY } from '../actions/actionsType';
 
 export default (state = '', action) => {
   switch (action.type) {
@@ -10,8 +10,6 @@ export default (state = '', action) => {
       const { payload: user } = action;
       return { ...user, login: true };
     }
-    case SIGN_OUT_USER:
-      return { login: false };
     default:
       return state;
   }
