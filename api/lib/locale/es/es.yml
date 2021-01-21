@@ -36,3 +36,11 @@ es:
         {name: Artículos, path: articles, add: true}, 
         {name: Grupos, path: articles/groups, add: true}
       ]
+    banking: [
+        {title: Banca, path: banking}, 
+      ]
+    sales: [
+        {title: Ventas}, 
+        {name: Clientes, path: clients, add: true}, 
+        {name: Facturas, path: invoices, add: true}, 
+      ]

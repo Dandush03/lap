@@ -103,12 +103,12 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
                      subcategory: { type: :string },
                      company_id: { type: :integer },
                      user_id: { type: :integer },
-                     created_at: { type: :string, format: "date-time" },
-                     updated_at: { type: :string, format: "date-time" },
-                   },
+                     created_at: { type: :string, format: 'date-time' },
+                     updated_at: { type: :string, format: 'date-time' }
+                   }
                  },
                  message: { type: :string },
-                 csrf: { type: :string },
+                 csrf: { type: :string }
                },
                required: %w[csrf account message]
 
@@ -145,12 +145,12 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
                      subcategory: { type: :string, nullable: true },
                      company_id: { type: :integer, nullable: true },
                      user_id: { type: :integer, nullable: true },
-                     created_at: { type: :string, format: "date-time", nullable: true  },
-                     updated_at: { type: :string, format: "date-time", nullable: true  },
-                   },
+                     created_at: { type: :string, format: 'date-time', nullable: true  },
+                     updated_at: { type: :string, format: 'date-time', nullable: true  }
+                   }
                  },
                  csrf: { type: :string },
-                 message: { type: :object },
+                 message: { type: :object }
                },
                required: %w[csrf account message]
 
@@ -177,7 +177,7 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
 
         schema type: :object,
                properties: {
-                 message: { type: :string },
+                 message: { type: :string }
                },
                required: %w[message]
 

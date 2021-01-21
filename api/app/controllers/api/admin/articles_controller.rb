@@ -4,11 +4,28 @@ module Api
   module Admin
     # Admin Article Controller
     class ArticlesController < ApplicationController
-      def new; end
+      def create
+        article = current_company.articles.new(strong_params)
+        if article.valid?
+          article.save
+          return render json: { article: article.json_response, message: 'created successfuly', csrf: form_authenticity_token },
+                        status: :created
+        end
+        msg = article.errors.messages
+        render json: { message: msg }, status: :ok
+      end
 
       private
 
-      def set_lists; end
+      def strong_params
+        permited_values = %i[
+          product service name sku upc picture articles_group_id
+          sell_item sell_price sell_account_id sell_account_tax_id
+          buy_item buy_price buy_account_id buy_account_tax_id
+          inventory open_qty open_qty_value inv_account_id
+        ]
+        params.require(:article).permit(permited_values)
+      end
     end
   end
 end

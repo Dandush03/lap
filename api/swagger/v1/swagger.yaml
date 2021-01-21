@@ -285,7 +285,7 @@ paths:
                     type: object
                 required:
                 - csrf
-                - account
+                - group
                 - message
         '401':
           description: User not supported

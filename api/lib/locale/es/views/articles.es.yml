@@ -1,6 +1,7 @@
 es:
   articles:
     new:
+      title: Agregar un Nuevo Articulo
       type:
         caption: Tipo de Articulo
         product: Producto

@@ -2,14 +2,11 @@
 
 # Main App Controller
 class ApplicationController < ActionController::Base
-  attr_reader :current_company
-
   before_action :authenticate_api_admin_auth_admin!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   around_action :switch_locale
-  around_action :set_company
 
   respond_to :json
 
@@ -26,10 +23,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(att_update) }
   end
 
-  def set_company
-    cookies[:current_company] ||= current_api_admin_auth_admin.company.name if current_api_admin_auth_admin
-    @current_company ||= Company.find_by_name(cookies[:current_company])
-    yield
+  def current_company
+    Company.find_by_name(current_api_admin_auth_admin.company.name) if current_api_admin_auth_admin
   end
 
   def switch_locale(&action)

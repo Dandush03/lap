@@ -1,0 +1,12 @@
+en:
+  clients:
+    new:
+      title: Add New Clients
+      bn: BN
+      bn_info: Business Number
+      name: Name
+      name_info: Name of the Company
+      brand_name: Brand Name
+      brand_name_info: Trading Name
+      submit: Save
+      cancel: Cancel

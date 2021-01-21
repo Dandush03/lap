@@ -27,7 +27,7 @@ module Api
 
       def set_groups
         selecte_columns = %i[id name]
-        ArticlesGroup.all.select(selecte_columns)
+        current_company.articles_groups.all.select(selecte_columns)
       end
     end
   end

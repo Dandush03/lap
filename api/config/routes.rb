@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :accounting_accounts, only: %i[index create]
       resources :articles_groups, only: %i[index create]
+      resources :taxes, only: %i[index]
+      resources :articles, only: %i[index create]
       namespace :auth do
         devise_for :admins
       end

@@ -1,0 +1,12 @@
+es:
+  clients:
+    new:
+      title: Agregar un Nuevo Cliente
+      bn: NE
+      bn_info: Numero de Empresa
+      name: Nombre
+      name_info: Nombre de la Compañia
+      brand_name: Nombre la Marca
+      brand_name_info: Nombre Comercial de la Marca
+      submit: Guardar
+      cancel: Cancelar

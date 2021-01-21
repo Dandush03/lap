@@ -1,6 +1,7 @@
 en:
   articles:
     new:
+      title: Add New Article
       type:
         caption: Type of Article
         product: Product

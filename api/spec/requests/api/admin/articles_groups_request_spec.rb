@@ -102,7 +102,7 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
       response '200', 'Create Article Group Unsuccessfuly' do
         let(:articles_group) do
           {
-            'name': '',
+            'name': ''
           }
         end
 
@@ -120,12 +120,12 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
                      name: { type: :string, nullable: true },
                      company_id: { type: :integer, nullable: true },
                      user_id: { type: :integer, nullable: true },
-                     created_at: { type: :string, format: "date-time", nullable: true  },
-                     updated_at: { type: :string, format: "date-time", nullable: true  },
-                   },
+                     created_at: { type: :string, format: 'date-time', nullable: true  },
+                     updated_at: { type: :string, format: 'date-time', nullable: true  }
+                   }
                  },
                  csrf: { type: :string },
-                 message: { type: :object },
+                 message: { type: :object }
                },
                required: %w[csrf group message]
 
@@ -148,7 +148,7 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
 
         schema type: :object,
                properties: {
-                 message: { type: :string },
+                 message: { type: :string }
                },
                required: %w[message]
 
