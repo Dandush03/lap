@@ -56,6 +56,7 @@ const NewArticle = ({ match, history }) => {
 
   return (
     <>
+      <h1 className={classes.mainTitle}>{labels.title}</h1>
       <Backdrop className={classes.backdrop} open={groupArticle}>
         <AddArticleGroup
           open={groupArticle}
@@ -94,7 +95,7 @@ const NewArticle = ({ match, history }) => {
           accounts={accounts.inv.map((obj) => obj.subcategory)}
         />
       </Backdrop>
-      <Backdrop className={classes.backdrop} open={!!fetching}>
+      <Backdrop className={classes.fetching} open={!!fetching}>
         <CircularProgress color="inherit" />
       </Backdrop>
       <form

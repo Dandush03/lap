@@ -14,6 +14,7 @@ import getI18n from '../actions/i18n';
 import { getSignedUser } from '../actions/user';
 import NewArticle from './articles/NewArticle';
 import useStyles from '../styles/layout';
+import NewClient from './clients/NewClient';
 
 const Layout = ({ history, match }) => {
   const user = useSelector((state) => state.user);
@@ -68,6 +69,7 @@ const Layout = ({ history, match }) => {
           <main className={classes.main}>
             <Switch>
               <Route path="/:locale/articles/new" exact component={NewArticle} />
+              <Route path="/:locale/clients/new" exact component={NewClient} />
             </Switch>
           </main>
         </div>
