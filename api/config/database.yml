@@ -81,6 +81,8 @@ test:
 #
 production:
   <<: *default
-  database: api_production
-  username: api
-  password: <%= ENV['API_DATABASE_PASSWORD'] %>
+  database: <%= Rails.application.credentials.dig(:aws_rds, :database) %>
+  username: <%= Rails.application.credentials.dig(:aws_rds, :username) %>
+  password: <%= Rails.application.credentials.dig(:aws_rds, :password) %>
+  host: <%= Rails.application.credentials.dig(:aws_rds, :host) %>
+  port: <%= Rails.application.credentials.dig(:aws_rds, :port) %>
