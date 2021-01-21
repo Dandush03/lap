@@ -1,0 +1,29 @@
+{
+  "name": "lap",
+  "version": "0.1.0",
+  "private": true,
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
+  "repository": {
+    "url": "https://github.com/Dandush03/lap",
+    "type": "git"
+  },
+  "author": {
+    "name": "Daniel Laloush",
+    "email": "info@dev-webs.net"
+  },
+  "bugs": {
+    "url": "https://github.com/Dandush03/lap/issues"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "start": "yarn --cwd admin react-scripts start",
+    "build": "yarn --cwd admin react-scripts build",
+    "test": "yarn --cwd admin react-scripts test",
+    "eject": "yarn --cwd admin react-scripts eject",
+    "deploy": "yarn --cwd admin sudo cp -a build/. /var/www/hias/"
+  }
+}
