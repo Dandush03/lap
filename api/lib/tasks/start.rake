@@ -12,7 +12,7 @@ namespace :start do
     nginx_reset = 'sudo systemctl restart nginx'
     start_server = 'foreman start -f Procfile'
 
-    exec "#{yarn_front} ; #{yarn_back} ; #{yarn_build} ; #{yarn_deploy} ; #{nginx_reset} ; #{start_server}"
+    exec "#{yarn_front} ; #{yarn_build} ; #{yarn_deploy} ; #{nginx_reset} ; #{start_server}"
   end
 end
 task start: 'start:development'
