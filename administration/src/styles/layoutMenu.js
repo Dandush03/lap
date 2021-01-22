@@ -166,6 +166,6 @@ const useStyles = makeStyles((theme) => ({
   list: {
     marginTop: theme.spacing(3),
   },
-}));
+}), { index: 1 });
 
 export default useStyles;

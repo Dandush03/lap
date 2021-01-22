@@ -54,7 +54,7 @@ const Layout = ({ history, match }) => {
     {
       direction: lang[match.params.locale][1],
       locales: locales[lang[match.params.locale][0]],
-    }, { index: 1 },
+    },
   );
 
   const jss = create({

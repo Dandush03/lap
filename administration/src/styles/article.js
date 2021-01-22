@@ -195,6 +195,6 @@ const useStyles = makeStyles((theme) => ({
       width: '100px',
     },
   },
-}));
+}), { index: 1 });
 
 export default useStyles;

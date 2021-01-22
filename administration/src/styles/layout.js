@@ -9,6 +9,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     marginTop: theme.spacing(8),
   },
-}));
+}), { index: 1 });
 
 export default useStyles;
