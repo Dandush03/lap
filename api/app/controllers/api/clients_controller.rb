@@ -2,7 +2,7 @@
 
 module Api
   # Client Main Controller
-  class ClientsController < ApiController
+  class ClientsController < ApplicationController
     before_action :authorize_request!
 
     private
