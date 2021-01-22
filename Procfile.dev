@@ -1,2 +1,2 @@
-web: PORT=3000 yarn --cwd web start
-backend: cd admin/ ; PORT=3001 bundle exec rails s
+api: cd admin/ ; PORT=3000 bundle exec rails s
+admin: PORT=3001 yarn --cwd web start
