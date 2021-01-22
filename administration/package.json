@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "administration",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,7 +31,7 @@
     "build": "react-scripts --max_old_space_size=512 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "sudo cp -a build/. /var/www/lap/"
+    "deploy": "sudo cp -a build/. /var/www/administration/"
   },
   "eslintConfig": {
     "extends": [
