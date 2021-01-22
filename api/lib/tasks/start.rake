@@ -6,7 +6,7 @@ namespace :start do
 
   desc 'Start production server'
   task :production do
-    yarn_front = 'yarn --cwd admin'
+    yarn_front = 'yarn --cwd admin install --production'
     yarn_build = 'yarn --cwd admin build'
     yarn_deploy = 'yarn --cwd admin deploy'
     nginx_reset = 'sudo systemctl restart nginx'
