@@ -6,9 +6,9 @@ namespace :start do
 
   desc 'Start production server'
   task :production do
-    yarn_front = 'yarn --cwd admin'
-    yarn_build = 'yarn --cwd admin build'
-    yarn_deploy = 'yarn --cwd admin deploy'
+    yarn_front = 'yarn --cwd administration'
+    yarn_build = 'yarn --cwd administration build'
+    yarn_deploy = 'yarn --cwd administration deploy'
     nginx_reset = 'sudo systemctl restart nginx'
     start_server = 'foreman start -f Procfile'
 

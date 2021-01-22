@@ -20,10 +20,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
-    "start": "yarn --cwd admin react-scripts start",
-    "build": "yarn --cwd admin react-scripts build",
-    "test": "yarn --cwd admin react-scripts test",
-    "eject": "yarn --cwd admin react-scripts eject",
-    "deploy": "yarn --cwd admin sudo cp -a build/. /var/www/lap/"
+    "build": "yarn --cwd administration react-scripts build",
+    "deploy": "yarn --cwd administration sudo cp -a build/. /var/www/lap/"
   }
 }
