@@ -24,7 +24,7 @@ module Api
         def authenticated_user
           return unless warden.authenticated?(resource_name)
 
-          render json: { user: current_api_admin_auth_admin, csrf: csrf }, status: 202
+          render json: { user: current_api_auth_admin, csrf: csrf }, status: 202
         end
       end
     end

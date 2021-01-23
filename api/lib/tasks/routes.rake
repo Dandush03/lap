@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :routes do
   desc 'Rails Routes'
   task :development do

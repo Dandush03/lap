@@ -7,7 +7,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Company.create!(name: 'lap', identification: 'best!123')
+
+Currency.create!(
+  [
+    { name: 'USD', code: 'USD', symbol: '$', country: 'USA' },
+    { name: 'Bolivares', code: 'VES', symbol: 'Bs', country: 'Venezuela' },
+    { name: 'Shekel', code: 'NIS', symbol: '₪', country: 'Israel' }
+  ]
+)
+
+Company.create!(name: 'lap', identification: 'best!123', base_currency_id: '1', secondary_currency_id: '2')
+
 Admin.create!(
   firstname: 'Daniel',
   lastname: 'Laloush',
@@ -17,6 +27,7 @@ Admin.create!(
   password_confirmation: '123123',
   company_id: '1'
 )
+
 Tax.create!({ name: 'IVA', value: '0.16', company_id: '1' })
 AccountingAccount.create!(
   [

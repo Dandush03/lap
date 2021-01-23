@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :console do
   desc 'Rails Console'
   task :development do

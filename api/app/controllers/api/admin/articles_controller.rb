@@ -8,8 +8,7 @@ module Api
         article = current_company.articles.new(strong_params)
         if article.valid?
           article.save
-          return render json: { article: article.json_response, message: 'created successfuly', csrf: form_authenticity_token },
-                        status: :created
+          return render json: create_response, status: :created
         end
         msg = article.errors.messages
         render json: { message: msg }, status: :ok
@@ -25,6 +24,11 @@ module Api
           inventory open_qty open_qty_value inv_account_id
         ]
         params.require(:article).permit(permited_values)
+      end
+
+      def create_response
+        { article: article.json_response, message: 'created successfuly',
+          csrf: form_authenticity_token }
       end
     end
   end

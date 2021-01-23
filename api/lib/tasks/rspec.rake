@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :rspec do
   desc 'Rspec'
   task :development do

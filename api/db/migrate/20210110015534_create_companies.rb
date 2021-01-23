@@ -8,6 +8,9 @@ class CreateCompanies < ActiveRecord::Migration[6.1]
 
       t.string :identification
 
+      t.references :base_currency, index: true, foraign_key: true
+      t.references :secondary_currency, index: true, foraign_key: true
+
       t.timestamps
     end
 

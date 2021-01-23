@@ -2,7 +2,7 @@
 
 # Main App Controller
 class ApplicationController < ActionController::Base
-  before_action :authenticate_api_admin_auth_admin!
+  before_action :authenticate_api_auth_admin!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    Company.find_by_name(current_api_admin_auth_admin.company.name) if current_api_admin_auth_admin
+    Company.find_by_name(current_api_auth_admin.company.name) if current_api_auth_admin
   end
 
   def switch_locale(&action)

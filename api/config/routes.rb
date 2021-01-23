@@ -6,7 +6,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json } do
     scope(path_names: { new: 'i18n' }) do
-      resource :admin, only: %i[new]
+      resources :admins, only: %i[new index]
+    end
+
+    scope module: 'admin' do
+      namespace :auth do
+        devise_for :admins
+      end
     end
 
     namespace :admin do
@@ -14,9 +20,6 @@ Rails.application.routes.draw do
       resources :articles_groups, only: %i[index create]
       resources :taxes, only: %i[index]
       resources :articles, only: %i[index create]
-      namespace :auth do
-        devise_for :admins
-      end
     end
 
     namespace :client do

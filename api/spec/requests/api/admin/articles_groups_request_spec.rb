@@ -3,12 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
-  let(:company) { create(:company) }
+  let(:currency) { create(:currency) }
+  let(:company) { create(:company, base_currency_id: currency.id) }
   let(:admin) { create(:admin, company_id: company.id) }
   let(:group) { build(:articles_group) }
 
   let(:credentials) do
-    { api_admin_auth_admin: {
+    { api_auth_admin: {
       login: admin.email,
       password: admin.password
     } }
@@ -23,7 +24,7 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
       response '200', 'Fetch Articles Groups' do
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
 
         schema type: :array, items: { type: :object }
@@ -71,7 +72,7 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
 
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
 
         schema type: :object,
@@ -108,7 +109,7 @@ RSpec.describe 'Api::Admin::ArticlesGroups', type: :request do
 
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
 
         schema type: :object,

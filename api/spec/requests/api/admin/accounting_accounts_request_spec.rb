@@ -3,12 +3,13 @@
 require 'swagger_helper'
 
 RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
-  let(:company) { create(:company) }
+  let(:currency) { create(:currency) }
+  let(:company) { create(:company, base_currency_id: currency.id) }
   let(:admin) { create(:admin, company_id: company.id) }
   let(:account) { build(:accounting_account, :inv) }
 
   let(:credentials) do
-    { api_admin_auth_admin: {
+    { api_auth_admin: {
       login: admin.email,
       password: admin.password
     } }
@@ -23,7 +24,7 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
       response '200', 'Fetch Accountings Accounts' do
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
         schema type: :object,
                properties: {
@@ -89,7 +90,7 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
 
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
 
         schema type: :object,
@@ -131,7 +132,7 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
 
         before do
           cookies['locale'] = 'en'
-          post '/api/admin/auth/admins/sign_in', params: credentials
+          post '/api/auth/admins/sign_in', params: credentials
         end
 
         schema type: :object,
