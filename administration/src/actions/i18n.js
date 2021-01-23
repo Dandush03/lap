@@ -7,7 +7,7 @@ const getI18nSuccessfull = (json) => ({
 });
 
 const getI18n = () => {
-  const url = '/api/admin/i18n';
+  const url = '/api/admins/i18n';
   return ((dispatch) => {
     axios
       .get(url)

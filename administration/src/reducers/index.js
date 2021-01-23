@@ -7,7 +7,8 @@ import articlesReducer from './articlesReducer';
 import CSRFReducer from './CSRFReducer';
 import fetchingReducer from './fetchingReducer';
 import i18nReducer from './i18nReducer';
-import taxesReducers from './taxesReducers';
+import taxesReducer from './taxesReducer';
+import companyReducer from './companyReducer';
 import UserReducer from './UserReducer';
 
 const appReducer = combineReducers({
@@ -18,7 +19,8 @@ const appReducer = combineReducers({
   accountingAccounts: accountingAccountsReducer,
   articlesGroups: articleGroupsReducer,
   articles: articlesReducer,
-  taxes: taxesReducers,
+  taxes: taxesReducer,
+  company: companyReducer,
 });
 
 const rootReducer = (rootState, action) => {

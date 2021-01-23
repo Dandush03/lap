@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -16,12 +16,9 @@ import SellInformation from '../../components/ArticleSellInformation';
 import BuyInformation from '../../components/ArticleBuyInformation';
 import InvInformation from '../../components/ArticleInvInformation';
 import SelectLists from '../../components/SelectLists';
-import { getAccounts } from '../../actions/accountingAccounts';
-import { getArticleGroups } from '../../actions/articleGroups';
 import AddArticleGroup from '../../containers/AddArticleGroup';
 import AddAccountingAccount from '../../containers/AddAccountingAccount';
 import createArticle from '../../actions/article';
-import getTaxes from '../../actions/taxes';
 
 const NewArticle = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -31,6 +28,7 @@ const NewArticle = ({ match, history }) => {
   const accounts = useSelector((state) => state.accountingAccounts);
   const articlesGroups = useSelector((state) => state.articlesGroups);
   const taxes = useSelector((state) => state.taxes);
+  const company = useSelector((state) => state.company);
 
   const classes = useStyles();
   const form = useRef(null);
@@ -47,12 +45,6 @@ const NewArticle = ({ match, history }) => {
     const formData = new FormData(form.current);
     dispatch(createArticle(formData, setErrors, history));
   };
-
-  useEffect(() => {
-    if (accounts.buy.length === 0) dispatch(getAccounts());
-    if (articlesGroups.length === 0) dispatch(getArticleGroups());
-    if (taxes.length === 0) dispatch(getTaxes());
-  }, []);
 
   return (
     <>
@@ -136,6 +128,7 @@ const NewArticle = ({ match, history }) => {
             classes={classes}
             addForm={sellAccount}
             setAddForm={setSellAccount}
+            currency={company.currency}
           />
           <Divider orientation="vertical" flexItem />
           <BuyInformation
@@ -146,6 +139,7 @@ const NewArticle = ({ match, history }) => {
             classes={classes}
             addForm={buyAccount}
             setAddForm={setBuyAccount}
+            currencySymbol={company.currency ? company.currency.symbol : null}
           />
         </Grid>
         <Divider />

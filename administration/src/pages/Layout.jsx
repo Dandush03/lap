@@ -30,7 +30,6 @@ const Layout = ({ history, match }) => {
   };
 
   useEffect(() => {
-    dispatch(getSignedUser());
     Cookies.set('locale', match.params.locale);
     if (!i18n) dispatch(getI18n());
     const body = document.getElementsByTagName('body')[0];
@@ -38,7 +37,7 @@ const Layout = ({ history, match }) => {
   }, []);
 
   useEffect(async () => {
-    if (CSRF.authToken && !user.login) history.push('/auth/sign_in?redirected=true');
+    if (CSRF.authToken && !user.login) history.push('/auth/sign_in');
     if (!CSRF.authToken) dispatch(getSignedUser());
   }, [CSRF]);
 

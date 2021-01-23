@@ -5,7 +5,7 @@ import { getSignedUser } from '../../actions/user';
 import SignInForm from '../../components/SignInForm';
 import getI18n from '../../actions/i18n';
 
-const SignIn = ({ history, location }) => {
+const SignIn = ({ history }) => {
   const user = useSelector((state) => state.user);
   const CSRF = useSelector((state) => state.CSRF);
   const [redirect, setRedirect] = useState();
@@ -13,9 +13,7 @@ const SignIn = ({ history, location }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const query = new URLSearchParams(location.search);
-    const redirected = query.get('redirected');
-    if (!redirected) {
+    if (!CSRF.authToken) {
       dispatch(getSignedUser());
       dispatch(getI18n());
     }
@@ -44,7 +42,6 @@ SignIn.propTypes = {
     PropTypes.func,
     PropTypes.string,
   ])).isRequired,
-  location: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default SignIn;

@@ -1,10 +1,12 @@
 import {
   CREATE_BUY_ACCOUNTING_ACCOUNTS, CREATE_INV_ACCOUNTING_ACCOUNTS,
-  CREATE_SELL_ACCOUNTING_ACCOUNTS, GET_ACCOUNTING_ACOUNTS,
+  CREATE_SELL_ACCOUNTING_ACCOUNTS, GET_ACCOUNTING_ACOUNTS, GET_STORE_DATA,
 } from '../actions/actionsType';
 
 export default (state = '', action) => {
   switch (action.type) {
+    case GET_STORE_DATA:
+      return action.payload.accounts;
     case GET_ACCOUNTING_ACOUNTS:
       return { ...action.payload };
     case CREATE_SELL_ACCOUNTING_ACCOUNTS: {

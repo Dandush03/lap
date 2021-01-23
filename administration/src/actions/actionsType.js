@@ -1,7 +1,10 @@
 // I18N
 export const GET_I18N = 'GET_I18N';
 
-// Fetching
+// STORE DATA
+export const GET_STORE_DATA = 'GET_STORE_DATA';
+
+// FETCHING
 export const START_FETCHING = 'START_FETCHING';
 export const FINISH_FETCHING = 'FINISH_FETCHING';
 

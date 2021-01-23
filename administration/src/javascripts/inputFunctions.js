@@ -69,25 +69,11 @@ const changeImageHandler = () => {
   label.lastChild.style = 'opacity: 0';
 };
 
-const insertAt = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
+// const insertAt = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
 
-const currencyHandler = (e) => {
-  const { keyCode, key, target } = e;
-  const { value: { length } } = target;
-  if (keyCode === 8) {
-    if (length === 4) {
-      const str = `0${target.value.replace('.', '')}`;
-      const tempValue = insertAt(str, '.', 1);
-      target.value = tempValue;
-      return 0;
-    }
-
-    const tempValue = insertAt(target.value.replace('.', ''), '.', length - 4);
-    target.value = tempValue;
-    return true;
-  }
-
-  if (keyCode === 13) {
+const onlyNumber = (e) => {
+  const { keyCode, key } = e;
+  if (keyCode === 8 || keyCode === 13 || keyCode === 110 || keyCode === 190) {
     return true;
   }
 
@@ -95,29 +81,25 @@ const currencyHandler = (e) => {
     return e.preventDefault();
   }
 
-  if (length === 0) {
-    target.value = '0.0';
-    return true;
+  return true;
+};
+
+const currencyHandler = (e) => {
+  const { target } = e;
+
+  if (target.value.match(/\.+/g)) {
+    target.value = target.value
+      .replace(/,/g, '')
+      .replace(/(\B(?=(\d{3})+(?!\d)\.))/g, ',')
+      .substring(0, target.value.lastIndexOf('.') + 3);
+  } else {
+    target.value = target.value.replace(/,/g, '').replace(/(\B(?=(\d{3})+(?!\d)))/g, ',');
   }
 
-  if (length === 4) {
-    if (target.value.slice(2, 3) === '0' && target.value.slice(0, 1) === '0') {
-      target.value = `0.${target.value.slice(-1)}`;
-      return true;
-    }
-
-    if (target.value.slice(0, 1) === '0') {
-      target.value = `${target.value.slice(2, 3)}.${target.value.slice(-1)}`;
-      return true;
-    }
-  }
-
-  const tempValue = insertAt(target.value.replace('.', ''), '.', length - 2);
-  target.value = tempValue;
   return true;
 };
 
 export {
-  changeInputToUppercase, insertSpaceAndValidateNumber, currencyHandler,
+  changeInputToUppercase, insertSpaceAndValidateNumber, currencyHandler, onlyNumber,
   dragEnterHandler, dragLeaveHandler, dragEndHandler, changeImageHandler,
 };

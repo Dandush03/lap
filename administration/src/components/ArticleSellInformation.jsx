@@ -2,14 +2,14 @@ import React, { useRef, useState } from 'react';
 import PropTypes, { oneOfType } from 'prop-types';
 
 import {
-  Checkbox, FormControl, FormControlLabel, FormGroup, Grid, TextField,
+  Checkbox, FormControl, FormControlLabel, FormGroup, Grid, InputAdornment, TextField,
 } from '@material-ui/core';
 
 import SelectLists from './SelectLists';
-import { currencyHandler } from '../javascripts/inputFunctions';
+import { currencyHandler, onlyNumber } from '../javascripts/inputFunctions';
 
 const SellInformation = ({
-  labels, errors, sellAccounts, taxes, classes, addForm, setAddForm,
+  labels, errors, sellAccounts, taxes, classes, addForm, setAddForm, currency,
 }) => {
   const sellInfoInput = useRef(null);
   const price = useRef(null);
@@ -18,6 +18,7 @@ const SellInformation = ({
   const tax = useRef(null);
 
   const [checkedSellInfo, setCheckedSellInfo] = useState();
+  const [convertion, setConvertion] = useState('0.00');
 
   const sellInfoHandler = async () => {
     if (!checkedSellInfo) return setCheckedSellInfo(!checkedSellInfo);
@@ -27,6 +28,11 @@ const SellInformation = ({
     account.current.getElementsByTagName('button')[0].click();
     tax.current.getElementsByTagName('button')[0].click();
     return setCheckedSellInfo(!checkedSellInfo);
+  };
+
+  const convertCurrencyHandler = (e) => {
+    currencyHandler(e);
+    setConvertion(e.target.value);
   };
 
   return (
@@ -55,10 +61,17 @@ const SellInformation = ({
           label={labels.sell_price}
           name="article[sell_price]"
           required={checkedSellInfo}
-          inputProps={{ ref: price }}
+          InputProps={
+            {
+              ref: price,
+              startAdornment: <InputAdornment position="start">{currency.base.symbol}</InputAdornment>,
+              endAdornment: <InputAdornment position="end">{currency.base.code}</InputAdornment>,
+            }
+          }
           error={errors ? !!errors.sell_price : false}
-          helperText={errors ? errors.sell_price : null}
-          onKeyDownCapture={currencyHandler}
+          helperText={errors ? errors.sell_price : `${currency.secondary.symbol} ${convertion || '0.00'} ${currency.secondary.code}`}
+          onKeyUpCapture={convertCurrencyHandler}
+          onKeyDownCapture={onlyNumber}
           placeholder="0.00"
         />
       </FormControl>
@@ -103,6 +116,7 @@ SellInformation.propTypes = {
   errors: PropTypes.objectOf(PropTypes.array),
   sellAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   taxes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currency: PropTypes.objectOf(PropTypes.object),
   addForm: PropTypes.bool,
   setAddForm: PropTypes.func,
 };
@@ -111,6 +125,7 @@ SellInformation.defaultProps = {
   errors: null,
   addForm: false,
   setAddForm: null,
+  currency: { base: {}, secondary: {} },
 };
 
 export default SellInformation;
