@@ -15,6 +15,7 @@ import { getSignedUser } from '../actions/user';
 import NewArticle from './articles/NewArticle';
 import useStyles from '../styles/layout';
 import NewClient from './clients/NewClient';
+import ExchangesIndex from './exchanges/ExchangesIndex';
 
 const Layout = ({ history, match }) => {
   const user = useSelector((state) => state.user);
@@ -29,11 +30,13 @@ const Layout = ({ history, match }) => {
     es: ['esES', 'ltr'],
   };
 
+  const { locale } = match.params;
+
   useEffect(() => {
-    Cookies.set('locale', match.params.locale);
+    Cookies.set('locale', locale);
     if (!i18n) dispatch(getI18n());
     const body = document.getElementsByTagName('body')[0];
-    body.setAttribute('dir', lang[match.params.locale][1]);
+    body.setAttribute('dir', lang[locale][1]);
   }, []);
 
   useEffect(async () => {
@@ -69,6 +72,7 @@ const Layout = ({ history, match }) => {
             <Switch>
               <Route path="/:locale/articles/new" exact component={NewArticle} />
               <Route path="/:locale/clients/new" exact component={NewClient} />
+              <Route path="/:locale/exchange" exact component={() => <ExchangesIndex locale={locale} />} />
             </Switch>
           </main>
         </div>

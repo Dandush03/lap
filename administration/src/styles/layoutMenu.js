@@ -50,6 +50,30 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: '16px',
     },
   },
+  unique: {
+    position: 'relative',
+    '& > a': {
+      color: 'black',
+      [theme.breakpoints.up('md')]: {
+        '&:nth-child(2)': {
+          display: 'none',
+        },
+      },
+    },
+    '&:hover': {
+      backgroundColor: 'rgba(0,0,0,.04)',
+    },
+    '&:hover > a': {
+      '&:nth-child(2)': {
+        display: 'flex',
+        paddingLeft: '0',
+        paddingRight: '0',
+        justifyContent: 'center',
+      },
+    },
+    '&:hover > a > div': {
+    },
+  },
   firstLink: {
     paddingTop: 0,
     paddingBottom: 0,

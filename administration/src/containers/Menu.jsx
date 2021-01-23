@@ -9,6 +9,7 @@ import {
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LocalGroceryStoreOutlinedIcon from '@material-ui/icons/LocalGroceryStoreOutlined';
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import useStyles from '../styles/layoutMenu';
 import Header from '../components/Header';
@@ -43,6 +44,13 @@ const Menu = ({
           locale={locale}
           Icon={AccountBalanceOutlinedIcon}
           classes={classes}
+        />
+        <MenuItem
+          menuItem={menu.exchange}
+          locale={locale}
+          Icon={AttachMoneyIcon}
+          classes={classes}
+          opened
         />
       </List>
       <List className={classes.list}>

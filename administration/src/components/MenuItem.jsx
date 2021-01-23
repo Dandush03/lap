@@ -14,6 +14,7 @@ const MenuItem = ({
           locale={locale}
           Icon={Icon}
           classes={classes}
+          opened={opened}
         />
       </>
     );

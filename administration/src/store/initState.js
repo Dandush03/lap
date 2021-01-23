@@ -9,4 +9,5 @@ export default {
   taxes: [],
   articles: [],
   flashMessages: { status: null, msg: null },
+  exchanges: [],
 };

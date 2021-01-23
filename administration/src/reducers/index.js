@@ -10,6 +10,7 @@ import i18nReducer from './i18nReducer';
 import taxesReducer from './taxesReducer';
 import companyReducer from './companyReducer';
 import UserReducer from './UserReducer';
+import exchangesReducer from './exchangesReducer';
 
 const appReducer = combineReducers({
   fetching: fetchingReducer,
@@ -21,6 +22,7 @@ const appReducer = combineReducers({
   articles: articlesReducer,
   taxes: taxesReducer,
   company: companyReducer,
+  exchanges: exchangesReducer,
 });
 
 const rootReducer = (rootState, action) => {
