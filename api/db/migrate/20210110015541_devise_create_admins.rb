@@ -38,6 +38,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
       t.datetime :locked_at
 
       t.references :company, index: true, foraign_key: true
+      t.references :role, index: true, foraign_key: true
       t.timestamps null: false
     end
 

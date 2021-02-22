@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Backdrop,
   Button,
-  CircularProgress,
   Divider, FormControl, Grid,
 } from '@material-ui/core';
 
@@ -22,7 +21,6 @@ import createArticle from '../../actions/article';
 
 const NewArticle = ({ match, history }) => {
   const dispatch = useDispatch();
-  const fetching = useSelector((state) => state.fetching);
   const auth = useSelector((state) => state.CSRF.authToken);
   const labels = useSelector((state) => state.i18n.articles.new);
   const accounts = useSelector((state) => state.accountingAccounts);
@@ -48,12 +46,10 @@ const NewArticle = ({ match, history }) => {
 
   return (
     <>
-      <h1 className={classes.mainTitle}>{labels.title}</h1>
       <Backdrop className={classes.backdrop} open={groupArticle}>
         <AddArticleGroup
           open={groupArticle}
           setOpen={setGroupArticle}
-          classes={classes}
           groups={articlesGroups}
         />
       </Backdrop>
@@ -61,7 +57,6 @@ const NewArticle = ({ match, history }) => {
         <AddAccountingAccount
           open={sellAccount}
           setOpen={setSellAccount}
-          classes={classes}
           groups={articlesGroups}
           type="sell"
           accounts={accounts.sell.map((obj) => obj.subcategory)}
@@ -71,7 +66,6 @@ const NewArticle = ({ match, history }) => {
         <AddAccountingAccount
           open={buyAccount}
           setOpen={setBuyAccount}
-          classes={classes}
           groups={articlesGroups}
           type="buy"
           accounts={accounts.buy.map((obj) => obj.subcategory)}
@@ -87,9 +81,6 @@ const NewArticle = ({ match, history }) => {
           accounts={accounts.inv.map((obj) => obj.subcategory)}
         />
       </Backdrop>
-      <Backdrop className={classes.fetching} open={!!fetching}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
       <form
         method="post"
         action={`/${locale}/articles/`}
@@ -99,6 +90,7 @@ const NewArticle = ({ match, history }) => {
         onSubmit={handleSubmit}
         ref={form}
       >
+        <h1 className={classes.mainTitle}>{labels.title}</h1>
         <input type="hidden" name="authenticity_token" value={auth} />
         <Divider />
         <Grid container className={classes.gridContainer}>

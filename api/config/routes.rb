@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :articles_groups, only: %i[index create]
       resources :taxes, only: %i[index]
       resources :articles, only: %i[index create]
+      resources :exchanges, only: %i[create]
     end
 
     namespace :client do

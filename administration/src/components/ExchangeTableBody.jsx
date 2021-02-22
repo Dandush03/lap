@@ -42,9 +42,10 @@ const ExchangeTableBody = ({
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row, index) => {
           const {
-            id, base_currency: baseCurrency, secondary_currency: secondaryCurrency, value,
+            id, base, secondary, value,
             created_at: date, created_by: owner,
           } = row;
+
           const isItemSelected = isSelected(id);
           const labelId = `enhanced-table-checkbox-${index}`;
           return (
@@ -64,7 +65,7 @@ const ExchangeTableBody = ({
                 />
               </TableCell>
               <TableCell component="th" id={labelId} scope="row" padding="none">
-                {`${secondaryCurrency}/${baseCurrency}`}
+                {`${secondary}/${base}`}
               </TableCell>
               <TableCell>{convertNumberToCurrency(value)}</TableCell>
               <TableCell>{owner}</TableCell>

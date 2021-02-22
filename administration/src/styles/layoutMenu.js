@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     '& > a': {
       color: 'black',
+    },
+    '& > div': {
       [theme.breakpoints.up('md')]: {
         '&:nth-child(2)': {
           display: 'none',
@@ -63,15 +65,13 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: 'rgba(0,0,0,.04)',
     },
-    '&:hover > a': {
+    '&:hover > div': {
       '&:nth-child(2)': {
         display: 'flex',
         paddingLeft: '0',
         paddingRight: '0',
         justifyContent: 'center',
       },
-    },
-    '&:hover > a > div': {
     },
   },
   firstLink: {
@@ -96,8 +96,6 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: '0',
         justifyContent: 'center',
       },
-    },
-    '&:hover > a > div': {
     },
   },
   addLink: {

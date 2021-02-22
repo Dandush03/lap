@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_company
-    Company.find_by_name(current_api_auth_admin.company.name) if current_api_auth_admin
+    current_api_auth_admin&.company
   end
 
   def switch_locale(&action)

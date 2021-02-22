@@ -39,9 +39,13 @@ en:
     banking: [
         {title: Banking, path: banking}, 
       ]
+    exchange: [
+        {title: Exchanges, path: exchange}, 
+      ]
     sales: [
         {title: Sales}, 
         {name: Customers, path: clients, add: true}, 
         {name: Invoices, path: invoices, add: true}, 
       ]
+  exchange_warning: Exchange Rate is Outdated
       

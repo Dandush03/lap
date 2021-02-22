@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { createAccount } from '../actions/accountingAccounts';
+import useStyles from '../styles/PopUpForms';
 
 const types = {
   buy: 'out',
@@ -14,13 +15,15 @@ const types = {
 };
 
 const AddAccountingAccount = ({
-  open, setOpen, classes, type, accounts,
+  open, setOpen, type, accounts,
 }) => {
   const auth = useSelector((state) => state.CSRF.authToken);
   const labels = useSelector((state) => state.i18n.accounting_accounts.show);
   const form = useRef();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(null);
+
+  const classes = useStyles();
 
   const closeHandler = () => {
     setOpen(!open);
@@ -89,7 +92,6 @@ AddAccountingAccount.propTypes = {
   open: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   setOpen: PropTypes.func.isRequired,
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
   accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

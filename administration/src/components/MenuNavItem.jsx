@@ -7,11 +7,15 @@ import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
 
 const MenuNavItem = ({
-  menuItem, locale, Icon, classes, opened,
+  menuItem, locale, Icon, classes, opened, specialAdd,
 }) => {
   const tempMenuItem = Array.from(menuItem);
 
   const listGroup = tempMenuItem.shift();
+
+  const clickHandler = () => {
+    if (specialAdd) specialAdd(true);
+  };
 
   return (
     <>
@@ -23,7 +27,13 @@ const MenuNavItem = ({
           <ListItemText primary={listGroup.title} />
         </ListItem>
         {opened ? (
-          <ListItem button component={Link} to={`/${locale}/${listGroup.path}/new`} className={classes.addLink}>
+          <ListItem
+            button
+            component={specialAdd ? null : Link}
+            to={`/${locale}/${listGroup.path}/new`}
+            className={classes.addLink}
+            onClick={clickHandler}
+          >
             <ListItemIcon><AddIcon /></ListItemIcon>
           </ListItem>
         ) : null}
@@ -38,10 +48,12 @@ MenuNavItem.propTypes = {
   Icon: PropTypes.objectOf(oneOfType([PropTypes.symbol, PropTypes.object])).isRequired,
   classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   opened: PropTypes.bool,
+  specialAdd: PropTypes.func,
 };
 
 MenuNavItem.defaultProps = {
   opened: false,
+  specialAdd: null,
 };
 
 export default MenuNavItem;

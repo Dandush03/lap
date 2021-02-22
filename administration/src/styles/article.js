@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     maxWidth: '900px',
+    margin: theme.spacing(3),
   },
   mainTitle: {
     fontWeight: 'normal',
@@ -165,13 +166,6 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: ('calc(100% - 240px)'),
     alignItems: 'baseline',
-  },
-  fetching: {
-    zIndex: '950',
-    left: '240px',
-    paddingTop: theme.spacing(8),
-    height: '100%',
-    width: ('calc(100% - 240px)'),
   },
   subForm: {
     maxWidth: '600px',

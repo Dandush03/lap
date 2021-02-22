@@ -6,11 +6,13 @@ class Company < ApplicationRecord
 
   has_one_attached :logo
 
-  has_many :users, class_name: 'User', foreign_key: 'company_id'
-  has_many :articles, class_name: 'Article', foreign_key: 'company_id'
-  has_many :accounting_accounts, class_name: 'AccountingAccount', foreign_key: 'company_id'
-  has_many :articles_groups, class_name: 'ArticlesGroup', foreign_key: 'company_id'
-  has_many :taxes, class_name: 'Tax', foreign_key: 'company_id'
+  has_many :roles, class_name: 'Role', foreign_key: 'company_id',  dependent: :destroy
+  has_many :users, class_name: 'User', foreign_key: 'company_id',  dependent: :destroy
+  has_many :articles, class_name: 'Article', foreign_key: 'company_id', dependent: :destroy
+  has_many :accounting_accounts, class_name: 'AccountingAccount', foreign_key: 'company_id', dependent: :destroy
+  has_many :articles_groups, class_name: 'ArticlesGroup', foreign_key: 'company_id', dependent: :destroy
+  has_many :taxes, class_name: 'Tax', foreign_key: 'company_id', dependent: :destroy
+  has_many :exchanges, class_name: 'Exchange', foreign_key: 'company_id', dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :identification, presence: true, uniqueness: true
@@ -25,9 +27,10 @@ class Company < ApplicationRecord
 
   def currencies
     except_columns = %i[updated_at created_at logo]
+    company_currencies = Currency.find([base_currency_id, secondary_currency_id])
     {
-      base: base_currency.as_json(except: except_columns),
-      secondary: secondary_currency.as_json(except: except_columns)
+      base: company_currencies.first.as_json(except: except_columns),
+      secondary: company_currencies.second.as_json(except: except_columns)
     }
   end
 end

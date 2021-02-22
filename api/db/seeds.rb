@@ -16,19 +16,55 @@ Currency.create!(
   ]
 )
 
+ModelsCategory.create!(name: 'inventory')
+ModelsCategory.create!([{ name: 'inventory' }, { name: 'accounting' }, { name: 'sell' }])
+
+Model.create!([{ name: 'Article' },
+                { name: 'ArticlesGroup' },
+                { name: 'AccountingAccounts' },
+                { name: 'Exchange' },
+                { name: 'Currency' }])
+
 Company.create!(name: 'lap', identification: 'best!123', base_currency_id: '1', secondary_currency_id: '2')
 
-Admin.create!(
-  firstname: 'Daniel',
-  lastname: 'Laloush',
-  email: 'd.laloush@outlook.com',
-  username: 'dandush',
-  password: '123123',
-  password_confirmation: '123123',
-  company_id: '1'
-)
+Role.create!([{ name: 'admin', company_id: Company.first.id }, { name: 'staff', company_id: Company.first.id }])
+
+
+Admin.create!([
+                { firstname: 'Daniel',
+                  lastname: 'Laloush',
+                  email: 'd.laloush@outlook.com',
+                  username: 'dandush',
+                  password: '123123',
+                  password_confirmation: '123123',
+                  role_id: '1',
+                  company_id: '1' 
+                },
+                {
+                  firstname: 'Daniel',
+                  lastname: 'Laloush',
+                  email: 'd.laloush1@outlook.com',
+                  username: 'dandush1',
+                  password: '123123',
+                  password_confirmation: '123123',
+                  company_id: '1',
+                  role_id: '1'
+                }
+              ])
 
 Tax.create!({ name: 'IVA', value: '0.16', company_id: '1' })
+
+Exchange.create!([
+                   { value: 1_600_000.23, base_currency_id: '1', secondary_currency_id: '2', admin_id: '1',
+                     company_id: '1' },
+                   { value: 1_900_000.23, base_currency_id: '1', secondary_currency_id: '2', admin_id: '1',
+                     company_id: '1', created_at: 1.days.ago },
+                   { value: 1_800_000.23, base_currency_id: '1', secondary_currency_id: '2', admin_id: '1',
+                     company_id: '1', created_at: 2.days.ago },
+                   { value: 1_500_000.23, base_currency_id: '1', secondary_currency_id: '2', admin_id: '1',
+                     company_id: '1', created_at: 3.days.ago }
+                 ])
+
 AccountingAccount.create!(
   [
     { name: 'General income', category: 'in', subcategory: 'Incomes', company_id: '1' },
@@ -40,6 +76,7 @@ AccountingAccount.create!(
     { name: 'Finished goods', category: 'inv', subcategory: 'existence', company_id: '1' }
   ]
 )
+
 ArticlesGroup.create!(
   [
     { name: 'Part of Cars', company_id: '1' },

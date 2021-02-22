@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_034616) do
+ActiveRecord::Schema.define(version: 2021_01_23_030747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,12 +75,14 @@ ActiveRecord::Schema.define(version: 2021_01_13_034616) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.bigint "company_id"
+    t.bigint "role_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_admins_on_company_id"
     t.index ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_admins_on_role_id"
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
   end
 
@@ -149,6 +151,58 @@ ActiveRecord::Schema.define(version: 2021_01_13_034616) do
     t.string "symbol", limit: 3, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exchanges", force: :cascade do |t|
+    t.decimal "value", precision: 13, scale: 2
+    t.bigint "base_currency_id"
+    t.bigint "secondary_currency_id"
+    t.bigint "admin_id"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_exchanges_on_admin_id"
+    t.index ["base_currency_id"], name: "index_exchanges_on_base_currency_id"
+    t.index ["company_id"], name: "index_exchanges_on_company_id"
+    t.index ["secondary_currency_id"], name: "index_exchanges_on_secondary_currency_id"
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "models_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_roles_on_company_id"
+  end
+
+  create_table "roles_permitions", force: :cascade do |t|
+    t.boolean "allow_view", default: false
+    t.boolean "allow_edit", default: false
+    t.boolean "allow_create", default: false
+    t.boolean "allow_delete", default: false
+    t.boolean "allow_assign", default: false
+    t.boolean "allow_approve", default: false
+    t.boolean "allow_owner", default: false
+    t.bigint "role_id"
+    t.bigint "models_category_id"
+    t.bigint "model_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["model_id"], name: "index_roles_permitions_on_model_id"
+    t.index ["models_category_id"], name: "index_roles_permitions_on_models_category_id"
+    t.index ["role_id"], name: "index_roles_permitions_on_role_id"
   end
 
   create_table "taxes", force: :cascade do |t|

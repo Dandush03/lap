@@ -5,15 +5,18 @@ import {
   Button, FormControl, Grid, TextField,
 } from '@material-ui/core';
 import { createArticleGroup } from '../actions/articleGroups';
+import useStyles from '../styles/PopUpForms';
 
 const AddArticleGroup = ({
-  open, setOpen, classes,
+  open, setOpen,
 }) => {
   const auth = useSelector((state) => state.CSRF.authToken);
   const labels = useSelector((state) => state.i18n.articles_groups.show);
   const form = useRef();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(null);
+
+  const classes = useStyles();
 
   const closeHandler = () => {
     setOpen(!open);
@@ -60,7 +63,6 @@ const AddArticleGroup = ({
 AddArticleGroup.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default AddArticleGroup;

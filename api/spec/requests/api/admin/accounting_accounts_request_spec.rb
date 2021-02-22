@@ -3,9 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
-  let(:currency) { create(:currency) }
-  let(:company) { create(:company, base_currency_id: currency.id) }
-  let(:admin) { create(:admin, company_id: company.id) }
+  let(:admin) { create(:admin) }
   let(:account) { build(:accounting_account, :inv) }
 
   let(:credentials) do
@@ -118,7 +116,6 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
           expect(data['account']['category']).to eq(account.category)
           expect(data['account']['subcategory']).to eq(account.subcategory)
           expect(data['account']['name']).to eq(account.name)
-          expect(data['account']['company_id']).to eq(company.id)
         end
       end
 
@@ -159,7 +156,7 @@ RSpec.describe 'Api::Admin::AccountingAccounts', type: :request do
           data = JSON.parse(response.body)
           expect(data['account']['category']).to eq(account.category)
           expect(data['account']['name']).to eq(account.name)
-          expect(data['account']['company_id']).to eq(company.id)
+          expect(data['account']['company_id']).to eq(admin.company_id)
           expect(data['message']['subcategory']).to eq(["can't be blank"])
         end
       end

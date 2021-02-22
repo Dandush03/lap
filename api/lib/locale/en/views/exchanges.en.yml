@@ -1,0 +1,17 @@
+en:
+  exchanges:
+    index:
+      title: Exchanges Rates
+      selected: Selected
+      head_cells: [
+        {id: currency, numeric: false, disablePadding: true, label: 'Currency'},
+        {id: value, numeric: false, disablePadding: false, label: 'Value'},
+        {id: created_by, numeric: false, disablePadding: false, label: 'Updated By'},
+        {id: created_at, numeric: false, disablePadding: false, label: 'Updated At'}
+      ]
+    new:
+      title: Update Rate
+      value: Rate
+      value_info: Insert New Rate Value
+      save: Save
+      cancel: Cancel

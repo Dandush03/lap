@@ -5,6 +5,7 @@ import MenuNavItem from './MenuNavItem';
 
 const MenuItem = ({
   menuItem, locale, Icon, classes, opened,
+  specialAdd,
 }) => {
   if (menuItem.length === 1) {
     return (
@@ -15,6 +16,7 @@ const MenuItem = ({
           Icon={Icon}
           classes={classes}
           opened={opened}
+          specialAdd={specialAdd}
         />
       </>
     );
@@ -28,6 +30,7 @@ const MenuItem = ({
         Icon={Icon}
         classes={classes}
         opened={opened}
+        specialAdd={specialAdd}
       />
     </>
   );
@@ -36,6 +39,7 @@ const MenuItem = ({
 MenuItem.propTypes = {
   menuItem: PropTypes.arrayOf(PropTypes.object).isRequired,
   locale: PropTypes.string.isRequired,
+  specialAdd: PropTypes.func,
   Icon: PropTypes.objectOf(oneOfType([PropTypes.symbol, PropTypes.object])).isRequired,
   classes: PropTypes.objectOf(oneOfType([PropTypes.object, PropTypes.string])).isRequired,
   opened: PropTypes.bool,
@@ -43,6 +47,7 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   opened: false,
+  specialAdd: null,
 };
 
 export default MenuItem;

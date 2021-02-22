@@ -19,16 +19,19 @@ module Api
         articles: current_company.articles.map(&:json_response),
         accounts: accounting_accounts,
         taxes: current_company.taxes,
+        exchanges: current_company.exchanges.includes(%i[base_currency secondary_currency
+                                                         admin]).map(&:json_response),
         csrf: form_authenticity_token
       }
     end
 
     def accounting_accounts
-      selecte_columns = %i[id name subcategory]
+      selecte_columns = %i[id name subcategory category]
+      accounts = current_company.accounting_accounts.select(selecte_columns)
       {
-        buy: current_company.accounting_accounts.buy_accounts.select(selecte_columns),
-        sell: current_company.accounting_accounts.sell_accounts.select(selecte_columns),
-        inv: current_company.accounting_accounts.inv_accounts.select(selecte_columns)
+        buy: accounts.select { |a| a.category == 'out' },
+        sell: accounts.select { |a| a.category == 'in' },
+        inv: accounts.select { |a| a.category == 'inv' }
       }
     end
   end

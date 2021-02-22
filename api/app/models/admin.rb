@@ -3,7 +3,10 @@
 class Admin < ApplicationRecord
   attr_writer :login
 
+  has_many :exchanges, class_name: 'Exchange', foreign_key: 'admin_id'
+
   belongs_to :company, class_name: 'Company', foreign_key: 'company_id'
+  belongs_to :role, class_name: 'Role', foreign_key: 'role_id'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -39,8 +39,12 @@ es:
     banking: [
         {title: Banca, path: banking}, 
       ]
+    exchange: [
+        {title: Tasas, path: exchange}, 
+      ]
     sales: [
         {title: Ventas}, 
         {name: Clientes, path: clients, add: true}, 
         {name: Facturas, path: invoices, add: true}, 
       ]
+  exchange_warning: La tasa de cambio esta desactualizada

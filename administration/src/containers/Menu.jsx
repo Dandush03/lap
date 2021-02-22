@@ -16,7 +16,7 @@ import Header from '../components/Header';
 import MenuItem from '../components/MenuItem';
 
 const Menu = ({
-  window, menu, locale,
+  window, menu, locale, exchange,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -24,6 +24,11 @@ const Menu = ({
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const closeDrawerAndOpenMenu = () => {
+    setMobileOpen(false);
+    exchange(true);
   };
 
   const drawer = (
@@ -51,6 +56,7 @@ const Menu = ({
           Icon={AttachMoneyIcon}
           classes={classes}
           opened
+          specialAdd={closeDrawerAndOpenMenu}
         />
       </List>
       <List className={classes.list}>
@@ -109,6 +115,7 @@ const Menu = ({
 
 Menu.propTypes = {
   window: PropTypes.func,
+  exchange: PropTypes.func.isRequired,
   menu: PropTypes.objectOf(PropTypes.array).isRequired,
   locale: PropTypes.string.isRequired,
 };

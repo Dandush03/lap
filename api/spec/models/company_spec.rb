@@ -10,6 +10,7 @@ RSpec.describe Company, type: :model do
   }
 
   it { should have_many(:users) }
+  it { should have_many(:exchanges) }
   it { should have_many(:accounting_accounts) }
   it { should have_many(:articles_groups) }
   it { should have_many(:articles) }

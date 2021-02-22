@@ -1,5 +1,3 @@
-// import $ from 'jquery';
-
 const changeInputToUppercase = (e) => {
   const { currentTarget: input } = e;
   input.value = input.value.toUpperCase();
@@ -27,8 +25,6 @@ const insertSpaceAndValidateNumber = (e) => {
 const dragEnterHandler = () => {
   const file = document.getElementById('file_uploader');
   const label = document.getElementById('file_label');
-  // const file = $('#file_uploader')[0];
-  // const label = $('#file_label')[0];
   if (file) {
     file.parentNode.classList.add('drop-zone');
     label.classList.add('drop-zone-label');
@@ -38,8 +34,6 @@ const dragEnterHandler = () => {
 const dragLeaveHandler = (e) => {
   const file = document.getElementById('file_uploader');
   const label = document.getElementById('file_label');
-  // const file = $('#file_uploader')[0];
-  // const label = $('#file_label')[0];
   if (e.target === file) {
     file.parentNode.classList.remove('drop-zone');
     label.classList.remove('drop-zone-label');
@@ -49,8 +43,6 @@ const dragLeaveHandler = (e) => {
 const dragEndHandler = () => {
   const file = document.getElementById('file_uploader');
   const label = document.getElementById('file_label');
-  // const file = $('#file_uploader')[0];
-  // const label = $('#file_label')[0];
   if (file) {
     file.parentNode.classList.remove('drop-zone');
     label.classList.remove('drop-zone-label');
@@ -61,19 +53,19 @@ const changeImageHandler = () => {
   const file = document.getElementById('file_uploader');
   const img = document.getElementById('file_img');
   const label = document.getElementById('file_label');
-  // const file = $('#file_uploader')[0];
-  // const img = $('#file_img')[0];
-  // const label = $('#file_label')[0];
   img.src = URL.createObjectURL(file.files[0]);
   img.style = 'opacity: 1';
   label.lastChild.style = 'opacity: 0';
 };
 
-// const insertAt = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
-
 const onlyNumber = (e) => {
-  const { keyCode, key } = e;
-  if (keyCode === 8 || keyCode === 13 || keyCode === 110 || keyCode === 190) {
+  const { keyCode, key, target: { value } } = e;
+  if (keyCode === 8 || keyCode === 13) {
+    return true;
+  }
+
+  if (keyCode === 110 || keyCode === 190) {
+    if (value.includes('.')) return e.preventDefault();
     return true;
   }
 
@@ -81,6 +73,11 @@ const onlyNumber = (e) => {
     return e.preventDefault();
   }
 
+  const isDecimal = value.indexOf('.') > 0;
+  const isTooMuchDecimal = value.length - value.indexOf('.') === 3;
+  if (isDecimal && isTooMuchDecimal) {
+    return e.preventDefault();
+  }
   return true;
 };
 
@@ -90,8 +87,7 @@ const currencyHandler = (e) => {
   if (target.value.match(/\.+/g)) {
     target.value = target.value
       .replace(/,/g, '')
-      .replace(/(\B(?=(\d{3})+(?!\d)\.))/g, ',')
-      .substring(0, target.value.lastIndexOf('.') + 3);
+      .replace(/(\B(?=(\d{3})+(?!\d)\.))/g, ',');
   } else {
     target.value = target.value.replace(/,/g, '').replace(/(\B(?=(\d{3})+(?!\d)))/g, ',');
   }

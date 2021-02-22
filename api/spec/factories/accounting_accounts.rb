@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :accounting_account do
+    company
     name { Faker::Name.unique.name  }
     subcategory { Faker::Lorem.word }
 

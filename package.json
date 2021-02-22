@@ -24,3 +24,5 @@
     "deploy": "yarn --cwd administration sudo cp -a build/. /var/www/lap/"
   }
 }
+
+
