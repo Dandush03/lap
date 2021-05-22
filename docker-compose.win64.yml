@@ -29,6 +29,18 @@ services:
       - webserver
     tty: true
     stdin_open: true
+  administration:
+    build:
+      context: .\administration
+      dockerfile: .\Dockerfile
+      args:
+        RAILS_ENV: ${RAILS_ENV}
+    volumes:
+      - .\administration:\usr\src\app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api
   client:
     build:
       context: .\client
@@ -38,6 +50,7 @@ services:
     volumes:
       - .\client:\usr\src\app
     ports:
-      - "3001:3001"
+      - "3002:3002"
     depends_on:
       - api
+      - administration

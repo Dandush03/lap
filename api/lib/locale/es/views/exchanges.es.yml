@@ -1,0 +1,17 @@
+es:
+  exchanges:
+    index:
+      title: Tasas de Cambio
+      selected: Selecionados
+      head_cells: [
+        {id: currency, numeric: false, disablePadding: true, label: 'Moneda'},
+        {id: value, numeric: false, disablePadding: false, label: 'Valor'},
+        {id: created_by, numeric: false, disablePadding: false, label: 'Creado Por'},
+        {id: created_at, numeric: false, disablePadding: false, label: 'Actualizado el'}
+      ]
+    new:
+      title: Actualizacion de Tasa
+      value: Tasa
+      value_info: Ingresa una nueva Tasa
+      save: Guardar
+      cancel: Cancelar

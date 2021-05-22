@@ -1,0 +1,21 @@
+es:
+  clients:
+    new:
+      title: Agregar un Nuevo Cliente
+      company_id: NE / CI
+      company_id_info: Numero de Empresa / Cedula de Identidad
+      name: Nombre
+      name_info: Nombre de la Compañia
+      display_name: Nombre para Mostrar
+      display_name_info: Nombre que Aparecera en las Transaciones
+      brand_name: Nombre de la Marca
+      brand_name_info: Nombre Comercial de la Marca
+      email: Email
+      email_info: Email del Cliente
+      phone: Telefono
+      phone_info: Telefono del Cliente
+      mobile: Mobil
+      phone_info: Mobil del Cliente
+      website: Pagina Web
+      submit: Guardar
+      cancel: Cancelar

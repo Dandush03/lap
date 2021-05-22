@@ -5,7 +5,15 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       # Add Devise Support For Api::V1
-      namespace :auth do
+      namespace :admins do
+        namespace :auth do
+          devise_for :admins
+        end
+        resources :accounting_accounts, only: %i[index create]
+        resources :articles_groups, only: %i[index create]
+        resources :taxes, only: %i[index]
+        resources :articles, only: %i[index create]
+        resources :exchanges, only: %i[create]
       end
 
       resources :profiles

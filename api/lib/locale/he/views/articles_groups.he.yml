@@ -1,0 +1,7 @@
+he:
+  articles_groups:
+    show:
+      title: Create new group of articles
+      name: Name of the Group
+      save: Save
+      cancel: Cancel

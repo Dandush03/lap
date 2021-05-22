@@ -1,0 +1,31 @@
+es:
+  articles:
+    new:
+      title: Agregar un Nuevo Articulo
+      type:
+        caption: Tipo de Articulo
+        product: Producto
+        service: Servicio
+      name: Nombre
+      name_info: Nombre del Artículo
+      sku: SKU
+      sku_code: Código de Artículo
+      upc: UPC
+      upc_code: Código de Barra
+      file_upload: Arrastra tu imagen o busca una
+      sell_item: Información de venta
+      sell_price: Precio de venta
+      sell_accounts: Cuenta
+      sell_description: Descripción
+      buy_item: Información de compra
+      buy_price: compra Precio
+      buy_accounts: Cuenta
+      buy_description: Descripción
+      taxes: Impuesto
+      inv_item: Seguimiento de inventario de este artículo
+      inv_account: Cuenta de inventario
+      open_qty: Existencia de Apertura
+      open_qty_value: Tarifa por unidad
+      article_group: Grupo de Artículo
+      submit: Guardar
+      cancel: Cancelar
