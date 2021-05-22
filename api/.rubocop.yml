@@ -1,0 +1,36 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - node_modules/**/*
+    - vendor/**/*
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+    - db/**/*
+    - Guardfile
+Metrics/MethodLength:
+  Exclude:
+    - db/**/*
+    - bin/**/*
+Metrics/AbcSize:
+  Exclude:
+    - db/**/*
+Layout/LineLength:
+  Exclude:
+    - bin/**/*
+    - config/initializers/**/*
+Metrics/PerceivedComplexity: 
+  Exclude:
+    - bin/**/*
+Style/Documentation:
+  Exclude:
+    - db/**/*
+    - config/**/*
+    - app/models/**/*
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - bin/**/*
+Naming/FileName:
+  Exclude:
+    - config/initializers/rswag-ui.rb

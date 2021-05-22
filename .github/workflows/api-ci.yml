@@ -1,0 +1,75 @@
+name: Api CI
+
+on:
+  push:
+    paths: 'api/**'
+
+jobs:
+  RSpec:
+    name: RSpec in Api
+    runs-on: ubuntu-latest
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+      api-dir: ./api 
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Install Docker
+      run: |
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install docker-ce
+        sudo systemctl status docker
+    - name: Install docker compose
+      run: |
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compos
+        sudo chmod +x /usr/local/bin/docker-compose
+    - name: Allow Everything
+      run: |
+        sudo chown -R $USER:$USER .
+    - name: Build Api
+      run: |
+        docker-compose -f docker-compose.linux.yml build api
+    - name: Create Database
+      run: |
+        docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} api rails db:setup
+    - name: Run Test
+      run: |
+        docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} -T api rspec
+
+  Rubocop:
+    name: Rubocop in Api
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    
+    - name: Install Rubocop
+      run: |
+          gem install rubocop
+
+    - name: Run Tests
+      working-directory: ${{env.api-dir}}
+      run: |
+        rubocop

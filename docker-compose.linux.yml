@@ -1,0 +1,43 @@
+version: "3"
+services:
+  webserver:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    tty: true
+  database:
+    image: postgres:latest
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  api:
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+      args:
+        RAILS_ENV: ${RAILS_ENV}
+        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    volumes:
+      - ./api:/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - webserver
+    tty: true
+    stdin_open: true
+  client:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+      args:
+        RAILS_ENV: ${RAILS_ENV}
+    volumes:
+      - ./client:/usr/src/app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api

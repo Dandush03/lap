@@ -1,0 +1,4 @@
+/tmp
+/.vs*
+
+docker-compose.yml
