@@ -1,8 +1,8 @@
 name: Api CI
 
-# on:
-#   push:
-#     paths: 'api/**'
+on:
+  push:
+#    paths: 'api/**'
 
 jobs:
   RSpec:
