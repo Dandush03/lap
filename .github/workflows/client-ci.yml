@@ -1,7 +1,9 @@
 name: Client CI
-on:
-  push:
-    paths: 'client/**'
+
+# on:
+#   push:
+#     paths: 'client/**'
+
 jobs:
   Jest:
     env:
