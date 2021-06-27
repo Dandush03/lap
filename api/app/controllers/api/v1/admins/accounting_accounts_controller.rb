@@ -8,7 +8,7 @@ module Api
         def index
           render json: set_accounts, status: :ok
         end
-  
+
         def create
           account = current_company.accounting_accounts.new(secure_params)
           if account.valid?
@@ -19,9 +19,9 @@ module Api
           msg = account.errors.messages
           render json: { account: account, message: msg, csrf: form_authenticity_token }, status: :ok
         end
-  
+
         private
-  
+
         def set_accounts
           selecte_columns = %i[id name subcategory]
           {
@@ -30,7 +30,7 @@ module Api
             inv: current_company.accounting_accounts.inv_accounts.select(selecte_columns)
           }
         end
-  
+
         def secure_params
           params.require(:accounting_account).permit(%i[name category subcategory])
         end

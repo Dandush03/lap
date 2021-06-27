@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Admin Controller
     class AdminsController < ApiController
       before_action :authenticate_api_v1_auth_admin!
 

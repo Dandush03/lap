@@ -1,15 +1,10 @@
 import axios from 'axios';
 import {
-  CREATE_ARTICLE, FINISH_FETCHING, RENEW_CSRF_PROTECTION, START_FETCHING,
+  CREATE_ARTICLE, FINISH_FETCHING, START_FETCHING,
 } from './actionsType';
 
 const createArticleSuccessfuly = (json) => ({
   type: CREATE_ARTICLE,
-  payload: json,
-});
-
-const renewCSRFProtection = (json) => ({
-  type: RENEW_CSRF_PROTECTION,
   payload: json,
 });
 

@@ -14,7 +14,7 @@ import createArticle from 'actions/article';
 import ClientInformation from './components/ClientInformation';
 import ClientImage from './components/ClientImage';
 
-const NewClient = ({ match, history }) => {
+const NewClient = ({ history }) => {
   const dispatch = useDispatch();
   const fetching = useSelector((state) => state.fetching);
   const auth = useSelector((state) => state.CSRF.authToken);
@@ -22,7 +22,6 @@ const NewClient = ({ match, history }) => {
 
   const classes = useStyles();
   const form = useRef(null);
-  const { locale } = match.params;
 
   const [errors, setErrors] = useState(null);
 
@@ -43,7 +42,7 @@ const NewClient = ({ match, history }) => {
       </Backdrop>
       <form
         method="post"
-        action={`articles/`}
+        action="articles/"
         acceptCharset="UTF-8"
         className={classes.root}
         encType="multipart/form-data"
@@ -68,7 +67,6 @@ const NewClient = ({ match, history }) => {
 };
 
 NewClient.propTypes = {
-  match: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   history: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 

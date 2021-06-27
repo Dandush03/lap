@@ -10,4 +10,3 @@ if [[ $RAILS_ENV == 'production' ]]; then
 else
   exec "$@"
 fi
-  

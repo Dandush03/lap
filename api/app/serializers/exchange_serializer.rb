@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Exchange Serializer
 class ExchangeSerializer < ActiveModel::Serializer
   attributes :id, :value, :created_by, :base, :secondary, :created_at
 

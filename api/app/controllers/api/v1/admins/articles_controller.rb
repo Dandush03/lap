@@ -13,15 +13,15 @@ module Api
           article = current_company.articles.new(strong_params)
           if article.valid?
             article.save
-            flash[:notice] = "Article successfully created"
+            flash[:notice] = 'Article successfully created'
             return render json: { article: ArticleSerializer.new(article) }, status: :created
           end
           msg = article.errors.messages
           render json: { message: msg }, status: :ok
         end
-  
+
         private
-  
+
         def strong_params
           permited_values = %i[
             product service name sku upc picture articles_group_id

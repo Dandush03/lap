@@ -6,8 +6,8 @@ class Company < ApplicationRecord
 
   has_one_attached :logo
 
-  has_many :admins, class_name: 'Admin', foreign_key: 'company_id',  dependent: :destroy
-  has_many :users, class_name: 'User', foreign_key: 'company_id',  dependent: :destroy
+  has_many :admins, class_name: 'Admin', foreign_key: 'company_id', dependent: :destroy
+  has_many :users, class_name: 'User', foreign_key: 'company_id', dependent: :destroy
   has_many :articles, class_name: 'Article', foreign_key: 'company_id', dependent: :destroy
   has_many :accounting_accounts, class_name: 'AccountingAccount', foreign_key: 'company_id', dependent: :destroy
   has_many :articles_groups, class_name: 'ArticlesGroup', foreign_key: 'company_id', dependent: :destroy
