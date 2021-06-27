@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Acounting Accounts Serializer
 class AccountingAccountsSerializer
   attr_reader :accounts
 
@@ -7,7 +10,7 @@ class AccountingAccountsSerializer
     @accounts = accounts.select(selecte_columns)
   end
 
-  def self.serialize(company, scope = {})
+  def self.serialize(company, _scope = {})
     new(company).process
   end
 

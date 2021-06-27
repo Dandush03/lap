@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Company Serializer
 class CompanySerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   attributes :id, :logo, :identification, :currency, :logo

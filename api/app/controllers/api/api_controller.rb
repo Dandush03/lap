@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Api
+  # Application Main Api Entry
   class ApiController < ApplicationController
     around_action :switch_locale
 

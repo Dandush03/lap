@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Uncomment the line below and point it to your private key
 # PGCrypto.keys[:private] = {:path => 'path/to/private/keyfile'}
 

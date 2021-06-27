@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 return if Currency.any?
+
 puts "Seeding Currency in #{Rails.env.capitalize}"
 
 Currency.create!(

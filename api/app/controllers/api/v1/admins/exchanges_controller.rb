@@ -17,9 +17,9 @@ module Api
           msg = exchange.errors.messages
           render json: { exchange: exchange, message: msg, csrf: form_authenticity_token }, status: :ok
         end
-  
+
         private
-  
+
         def strong_params
           permit_params = %i[value base_currency_id secondary_currency_id company_id]
           params.require(:exchange).permit(permit_params)
