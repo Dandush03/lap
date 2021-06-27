@@ -1,51 +1,37 @@
 name: Api CI
 
-on:
-  push:
-#    paths: 'api/**'
+on: [push, pull_request]
 
 jobs:
-  RSpec:
-    name: RSpec in Api
+  build:
     runs-on: ubuntu-latest
-    env:
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
-      api-dir: ./api 
+
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby
-
-    - name: Build Api
-      run: |
-        docker-compose -f docker-compose.linux.yml build api
-    - name: Create Database
-      run: |
-        docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} api rails db:setup
-    - name: Run Test
-      run: |
-        docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} -T api rspec
-
-  Rubocop:
-    name: Rubocop in Api
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['3.0']
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+    - name: Set up Ruby 3
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
-    
-    - name: Install Rubocop
+        ruby-version: 3.0.1
+    - name: Build and test with Rake
+      env:
+        PGHOST: 127.0.0.1
+        PGUSER: postgres
+        RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.TEST_MASTER_KEY }} 
       run: |
-          gem install rubocop
-
-    - name: Run Tests
-      working-directory: ${{env.api-dir}}
-      run: |
-        rubocop
+        sudo apt-get -yqq install libpq-dev
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        bundle exec rails test

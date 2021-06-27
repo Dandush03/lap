@@ -1,8 +1,6 @@
-name: Client CI
+name: Administration CI
 
-on:
-  push:
-#     paths: 'administration/**'
+on: [push, pull_request]
 
 jobs:
   Jest:
@@ -25,27 +23,3 @@ jobs:
         working-directory: ${{env.administration-dir}}
         run: |
           yarn test
-
-  ESLint:
-    env:
-      administration-dir: ./administration
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16.3'
-      - name: Install ESLint
-        run: |
-          npm i -g eslint
-      - name: Install yarn
-        run: |
-          npm install --global yarn
-      - name: Install Dependencies
-        working-directory: ${{env.administration-dir}}
-        run: |
-          yarn
-      - name: Run Eslint
-        working-directory: ${{env.administration-dir}}
-        run: |
-          eslint . --ext .js,.jsx,.ts,.tsx

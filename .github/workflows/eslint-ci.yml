@@ -1,17 +1,18 @@
-name: Client CI
+name: ESLint
 
 on: [push, pull_request]
 
 jobs:
-  Jest:
-    env:
-      client-dir: ./client
+  ESLint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '16.3'
+      - name: Install ESLint
+        run: |
+          npm i -g eslint
       - name: Install yarn
         run: |
           npm install --global yarn
@@ -19,7 +20,7 @@ jobs:
         working-directory: ${{env.client-dir}}
         run: |
           yarn
-      - name: Run Jest
+      - name: Run Eslint
         working-directory: ${{env.client-dir}}
         run: |
-          yarn test
+          eslint . --ext .js,.jsx,.ts,.tsx
