@@ -1,6 +1,11 @@
 name: Client CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+      - staging
 
 jobs:
   Jest:
