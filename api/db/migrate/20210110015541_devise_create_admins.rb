@@ -2,7 +2,7 @@
 
 class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
   def change
-    create_table :admins do |t|
+    create_table :admins, id: :uuid do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ''
       t.string :encrypted_password, null: false, default: ''
@@ -37,8 +37,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
-      t.references :company, index: true, foraign_key: true
-      t.references :role, index: true, foraign_key: true
+      t.references :company, index: true, foraign_key: true, type: :uuid
       t.timestamps null: false
     end
 

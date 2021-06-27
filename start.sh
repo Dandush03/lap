@@ -1,4 +1,5 @@
 #!/bin/bash
+docker stop $(docker ps -aq)
 
 if [[ $1 == 'dev' ]]; then
   docker-compose up

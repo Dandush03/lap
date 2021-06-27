@@ -4,7 +4,7 @@ module Api
   module V1
     module Admins
       # Admin Exchange Controller
-      class ExchangesController < ApplicationController
+      class ExchangesController < AdminsController
         def create
           exchange = current_api_auth_admin.exchanges.new(strong_params)
           if exchange.valid?

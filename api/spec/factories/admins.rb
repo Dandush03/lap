@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :admin do
     company
-    role
     sequence(:username) { |n| "user#{n}" }
     firstname { Faker::Name.unique.name }
     lastname { Faker::Name.unique.name }

@@ -4,7 +4,7 @@ module Api
   module V1
     module Admins
       # Admin Article Controller
-      class ArticlesController < AdminController
+      class ArticlesController < AdminsController
         def index
           render json: {}
         end
@@ -13,7 +13,8 @@ module Api
           article = current_company.articles.new(strong_params)
           if article.valid?
             article.save
-            return render json: create_response, status: :created
+            flash[:notice] = "Article successfully created"
+            return render json: { article: ArticleSerializer.new(article) }, status: :created
           end
           msg = article.errors.messages
           render json: { message: msg }, status: :ok
@@ -29,11 +30,6 @@ module Api
             inventory open_qty open_qty_value inv_account_id
           ]
           params.require(:article).permit(permited_values)
-        end
-  
-        def create_response
-          { article: article.json_response, message: 'created successfuly',
-            csrf: form_authenticity_token }
         end
       end
     end

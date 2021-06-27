@@ -4,7 +4,7 @@ module Api
   module V1
     module Admins
       # Taxes Admin Controller
-      class TaxesController < ApplicationController
+      class TaxesController < AdminsController
         def index
           render json: set_taxes, status: :ok
         end

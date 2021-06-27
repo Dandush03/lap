@@ -13,7 +13,7 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
-  config.action_dispatch.tld_length = 0
+  config.action_dispatch.tld_length = 1
 
   # Settings specified here will take precedence over those in config/application.rb.
 

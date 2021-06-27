@@ -26,12 +26,4 @@ class Article < ApplicationRecord
 
   validates :sell_price, presence: true, numericality: { greater_than: 0 }, if: :sell_item
   validates :sell_account, presence: true, if: :sell_item
-
-  def json_response
-    except_columns = %i[updated_at created_at picture]
-    response = as_json(except: except_columns)
-    return response unless picture.attached?
-
-    response.merge({ picture: rails_blob_path(picture, only_path: true) })
-  end
 end

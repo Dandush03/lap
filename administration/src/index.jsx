@@ -6,14 +6,12 @@ import {
 } from 'react-router-dom';
 import storeConfig from './store';
 
-import './stylesheets/index.css';
 import reportWebVitals from './reportWebVitals';
 
-import Home from './pages/home';
+import Layout from './pages/Layout';
 import SignIn from './pages/auth/SignIn';
 
 const store = storeConfig();
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -21,7 +19,7 @@ ReactDOM.render(
         <Route path="/auth">
           <Route path="/auth/sign_in" exact component={SignIn} />
         </Route>
-        <Route path="/" exact component={Home} />
+        <Route path="/" component={Layout} />
       </Switch>
     </BrowserRouter>
   </Provider>,

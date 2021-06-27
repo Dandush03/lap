@@ -2,7 +2,7 @@
 
 set -e
 set -x
-
+docker stop $(docker ps -aq)
 rm -f docker-compose.yml
   
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
@@ -14,10 +14,19 @@ fi
 docker-compose pull
 docker-compose build
 
-docker-compose up -d api
+docker-compose up -d
 
-docker-compose exec api rails db:create
-docker-compose exec api rails db:migrate
-docker-compose exec api rails db:seed
+run() {
+  docker-compose run --rm $1 "${@:2}"
+}
 
-./start.sh
+(
+  run administration yarn &
+  run client yarn 
+) &
+
+(
+  run api rails db:create
+  run api rails db:migrate
+  run api rails db:seed
+)

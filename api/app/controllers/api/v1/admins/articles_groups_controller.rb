@@ -4,7 +4,7 @@ module Api
   module V1
     module Admins
       # Admin Article Groups Controller
-      class ArticlesGroupsController < ApplicationController
+      class ArticlesGroupsController < AdminsController
         def index
           render json: set_groups, status: :ok
         end

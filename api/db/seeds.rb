@@ -9,6 +9,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Dir.glob(File.join(Rails.root, 'db', 'seeds', Rails.env.downcase, '*.rb')).each do |file|
-  puts "seeding file: #{file}"
   load(file)
 end
