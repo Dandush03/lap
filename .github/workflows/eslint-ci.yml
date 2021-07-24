@@ -29,7 +29,7 @@ jobs:
         run: |
           eslint . --ext .js,.jsx,.ts,.tsx
       - name: Install Dependencies for client
-        working-directory: ${{env.administration-dir}}
+        working-directory: ${{env.client-dir}}
         run: |
           yarn add eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
       - name: Run client Eslint
