@@ -6,7 +6,6 @@ on:
 jobs:
   ESLint:
     env:
-      api-dir: ./api
       administration-dir: ./administration
       client-dir: ./client
     runs-on: ubuntu-latest
@@ -24,10 +23,6 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn add eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
-      - name: Run Api Eslint
-        working-directory: ${{env.api-dir}}
-        run: |
-          eslint . --ext .js,.jsx,.ts,.tsx
       - name: Run Administration Eslint
         working-directory: ${{env.administration-dir}}
         run: |
