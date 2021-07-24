@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies for Administration
         working-directory: ${{env.administration-dir}}
         run: |
-          yarn eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+          yarn add eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
       - name: Run Administration Eslint
         working-directory: ${{env.administration-dir}}
         run: |
@@ -31,7 +31,7 @@ jobs:
       - name: Install Dependencies for client
         working-directory: ${{env.administration-dir}}
         run: |
-          yarn eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+          yarn add eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
       - name: Run client Eslint
         working-directory: ${{env.client-dir}}
         run: |
