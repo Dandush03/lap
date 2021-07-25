@@ -47,5 +47,16 @@ en:
         {name: Customers, path: clients, add: true}, 
         {name: Invoices, path: invoices, add: true}, 
       ]
-  exchange_warning: Exchange Rate is Outdated
+  exchange_warning: Exchange Rate is Outdated,
+  toast: {
+    fatal_error: {
+      type: 'error',
+      message: 'An error has occurred, please contact your administrator',
+    },
+    sign_out_user: {
+      type: 'dark',
+      message: 'The session has been closed successfully',
+    },
+  }
+
       

@@ -11,6 +11,9 @@ import { getSignedUser } from 'actions/user';
 import Loading from 'shared-components/Loading';
 import SignInForm from './components/SignInForm';
 
+// Containers
+import ToastMessages from '../shared-containers/ToastMessages';
+
 const SignIn = ({ history }) => {
   const user = useSelector((state) => state.user);
   const fetching = useSelector((state) => state.fetching);
@@ -41,6 +44,7 @@ const SignIn = ({ history }) => {
 
   return (
     <>
+      <ToastMessages />
       <SignInForm CSRF={CSRF} i18n={i18n?.sign_in} />
     </>
   );

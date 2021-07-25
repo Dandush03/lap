@@ -6,10 +6,11 @@ import reducers from '../reducers';
 import initState from './initState';
 
 export default function configureStore() {
+  const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 });
   const store = createStore(
     reducers,
     initState,
-    composeWithDevTools(
+    composeEnhancers(
       applyMiddleware(
         thunk,
       ),

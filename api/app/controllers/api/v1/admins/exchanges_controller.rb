@@ -6,7 +6,7 @@ module Api
       # Admin Exchange Controller
       class ExchangesController < AdminsController
         def create
-          exchange = current_api_auth_admin.exchanges.new(strong_params)
+          exchange = current_api_v1_auth_admin.exchanges.new(strong_params)
           if exchange.valid?
             exchange.save!
             return render json: { exchange: exchange.json_response,

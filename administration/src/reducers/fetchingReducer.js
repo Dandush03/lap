@@ -1,6 +1,10 @@
-import { FINISH_FETCHING, START_FETCHING } from 'actions/actionsType';
+import {
+  FINISH_FETCHING,
+  START_FETCHING,
+  SIGN_IN_USER_ERROR,
+} from 'actions/actionsType';
 
-export default (state = '', action) => {
+export default (state = 0, action) => {
   switch (action.type) {
     case START_FETCHING: {
       const newState = state + 1;
@@ -9,6 +13,9 @@ export default (state = '', action) => {
     case FINISH_FETCHING: {
       const newState = state > 0 ? state - 1 : 0;
       return newState;
+    }
+    case SIGN_IN_USER_ERROR: {
+      return 0;
     }
     default:
       return state;

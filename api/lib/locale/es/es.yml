@@ -47,4 +47,14 @@ es:
         {name: Clientes, path: clients, add: true}, 
         {name: Facturas, path: invoices, add: true}, 
       ]
-  exchange_warning: La tasa de cambio esta desactualizada
+  exchange_warning: La tasa de cambio esta desactualizada,
+  toast: {
+    fatal_error: {
+      type: 'error',
+      message: 'A ocurrido un problema, contacte su administrador',
+    },
+    sign_out_user: {
+      type: 'dark',
+      message: 'La session a sido cerrada satisfactoriamente',
+    },
+  }

@@ -11,4 +11,8 @@ export default {
   articles: [],
   flashMessages: { status: null, msg: null },
   exchanges: [],
+  toastMessage: {
+    message: '',
+    type: null,
+  },
 };

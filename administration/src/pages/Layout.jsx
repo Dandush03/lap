@@ -36,6 +36,7 @@ import AddExchangeRate from 'pages/exchanges/containers/AddExchangeRate';
 
 // Component
 import Menu from 'shared-containers/Menu';
+import ToastMessages from './shared-containers/ToastMessages';
 
 const Layout = ({ history, match }) => {
   const user = useSelector((state) => state.user);
@@ -104,6 +105,7 @@ const Layout = ({ history, match }) => {
   return (
     <StylesProvider jss={jss}>
       <ThemeProvider theme={theme}>
+        <ToastMessages />
         <div className={classes.root}>
           <Menu menu={i18n.side_menu} locale={match.params.locale} exchange={setNewExchange} />
           <main className={classes.main}>

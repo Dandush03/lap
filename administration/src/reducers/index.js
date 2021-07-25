@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SIGN_OUT_USER } from 'actions/actionsType';
+import { SIGN_OUT_USER, FORCE_RESET } from 'actions/actionsType';
 import initState from '../store/initState';
 import accountingAccountsReducer from './accountingAccountsReducer';
 import articleGroupsReducer from './articleGroupsReducer';
@@ -12,6 +12,7 @@ import taxesReducer from './taxesReducer';
 import companyReducer from './companyReducer';
 import UserReducer from './UserReducer';
 import exchangesReducer from './exchangesReducer';
+import toastMessageReducer from './toastMessageReducer';
 
 const appReducer = combineReducers({
   locale: LocaleReducer,
@@ -25,12 +26,30 @@ const appReducer = combineReducers({
   taxes: taxesReducer,
   company: companyReducer,
   exchanges: exchangesReducer,
+  toastMessage: toastMessageReducer,
 });
 
 const rootReducer = (rootState, action) => {
   let state = rootState;
   if (action.type === SIGN_OUT_USER) {
-    state = initState;
+    state = {
+      ...initState,
+      CSRF: rootState.CSRF,
+      i18n: rootState.i18n,
+      toastMessage: rootState.i18n?.toast?.sign_out_user || initState.toast,
+    };
+  }
+  if (action.type === FORCE_RESET) {
+    const fatalError = {
+      message: 'An error has occurred, please contact your administrator',
+      type: 'fatal',
+    };
+    state = {
+      ...initState,
+      CSRF: rootState.CSRF,
+      i18n: rootState.i18n,
+      toastMessage: rootState.i18n?.toast?.fatal_error || fatalError,
+    };
   }
   return appReducer(state, action);
 };

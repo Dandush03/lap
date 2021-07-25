@@ -1,9 +1,15 @@
+/* eslint-disable no-debugger */
 import axios from 'axios';
 import {
   FINISH_FETCHING,
-  GET_CSRF_PROTECTION, GET_CSRF_PROTECTION_LOGGED_IN,
+  FORCE_RESET,
+  GET_CSRF_PROTECTION,
+  GET_CSRF_PROTECTION_LOGGED_IN,
   GET_STORE_DATA,
-  SIGN_IN_USER_ERROR, SIGN_IN_USER_SUCCESSFULY, SIGN_OUT_USER, START_FETCHING,
+  SIGN_IN_USER_ERROR,
+  SIGN_IN_USER_SUCCESSFULY,
+  SIGN_OUT_USER,
+  START_FETCHING,
 } from './actionsType';
 
 const getCSRFProtection = (json) => ({
@@ -42,9 +48,11 @@ const getStoreData = () => {
     axios
       .get(url)
       .then(({ data, status }) => {
-        if (status === 200) dispatch(getStoreDataSuccessfuly(data));
+        if (status === 200) return dispatch(getStoreDataSuccessfuly(data));
+        return dispatch(dispatch(signOutUserSuccessfuly()));
       })
-      .then(() => dispatch({ type: FINISH_FETCHING }));
+      .then(() => dispatch({ type: FINISH_FETCHING }))
+      .catch(() => dispatch({ type: SIGN_OUT_USER }));
   });
 };
 
@@ -60,7 +68,14 @@ const logOutUser = (csrf) => {
       .then(() => {
         dispatch(signOutUserSuccessfuly());
       })
-      .then(() => dispatch({ type: FINISH_FETCHING }));
+      .catch((error) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        if (error?.response?.status === 302) {
+          return dispatch(signOutUserSuccessfuly(error.response.data));
+        }
+        return dispatch({ type: FORCE_RESET });
+      });
   });
 };
 
@@ -87,7 +102,8 @@ const getSignedUser = () => {
         if (status === 202) dispatch(getStoreData());
         return status;
       })
-      .then(() => dispatch({ type: FINISH_FETCHING }));
+      .then(() => dispatch({ type: FINISH_FETCHING }))
+      .catch(() => dispatch({ type: FORCE_RESET }));
   });
 };
 
@@ -109,7 +125,13 @@ const signInUser = (data) => {
         if (status === 201) dispatch(getStoreData());
         return status;
       })
-      .then(() => dispatch({ type: FINISH_FETCHING }));
+      .then(() => dispatch({ type: FINISH_FETCHING }))
+      .catch((error) => {
+        if (error.response.status === 401) {
+          return dispatch(signInUserUnsuccessfuly(error.response.data));
+        }
+        return dispatch({ type: FORCE_RESET });
+      });
   });
 };
 

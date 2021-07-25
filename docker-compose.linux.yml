@@ -35,6 +35,11 @@ services:
     tty: true
     stdin_open: true
   administration:
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        window: 120s
     build:
       context: ./administration
       dockerfile: ./Dockerfile
@@ -47,6 +52,11 @@ services:
     depends_on:
       - api
   client:
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        window: 120s
     build:
       context: ./client
       dockerfile: ./Dockerfile
