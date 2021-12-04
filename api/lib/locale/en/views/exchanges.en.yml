@@ -15,3 +15,6 @@ en:
       value_info: Insert New Rate Value
       save: Save
       cancel: Cancel
+    created:
+      created_successfully: Rate Created Successfully
+      created_unsuccessfully: There was an error on your submition

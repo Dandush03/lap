@@ -6,7 +6,7 @@ on:
 jobs:
   ESLint:
     env:
-      administration-dir: ./administration
+      corporate-dir: ./corporate
       client-dir: ./client
     runs-on: ubuntu-latest
     steps:
@@ -20,12 +20,12 @@ jobs:
       - name: Install yarn
         run: |
           npm install --global yarn
-      - name: Install Dependencies for Administration
-        working-directory: ${{env.administration-dir}}
+      - name: Install Dependencies for corporate
+        working-directory: ${{env.corporate-dir}}
         run: |
           yarn add eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
-      - name: Run Administration Eslint
-        working-directory: ${{env.administration-dir}}
+      - name: Run corporate Eslint
+        working-directory: ${{env.corporate-dir}}
         run: |
           eslint . --ext .js,.jsx,.ts,.tsx
       - name: Install Dependencies for client

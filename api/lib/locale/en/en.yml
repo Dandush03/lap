@@ -54,7 +54,7 @@ en:
       message: 'An error has occurred, please contact your administrator',
     },
     sign_out_user: {
-      type: 'dark',
+      type: 'info',
       message: 'The session has been closed successfully',
     },
   }

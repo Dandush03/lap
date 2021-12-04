@@ -15,3 +15,6 @@ es:
       value_info: Ingresa una nueva Tasa
       save: Guardar
       cancel: Cancelar
+    create:
+      created_successfully: La tasa se creo satisfactoriamente
+      created_unsuccessfully: Ocurrio una falla al create la tasa

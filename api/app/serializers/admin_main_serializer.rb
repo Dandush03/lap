@@ -28,7 +28,11 @@ class AdminMainSerializer
   private
 
   def exchange_serializer
-    ExchangeSerializer.serialize(company.exchanges)
+    {
+      exchanges_list: ExchangeSerializer.serialize(company.exchanges.order(created_at: :desc).limit(10)),
+      row_counter: Exchange.count
+    }
+    
   end
 
   def articles_serializer

@@ -21,7 +21,7 @@ run() {
 }
 
 (
-  run administration yarn &
+  run corporate yarn &
   run client yarn 
 ) &
 

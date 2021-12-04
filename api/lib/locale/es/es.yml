@@ -54,7 +54,7 @@ es:
       message: 'A ocurrido un problema, contacte su administrador',
     },
     sign_out_user: {
-      type: 'dark',
+      type: 'info',
       message: 'La session a sido cerrada satisfactoriamente',
     },
   }

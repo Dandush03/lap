@@ -10,9 +10,17 @@ services:
   database:
     image: postgres:latest
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - lap_postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+    healthcheck:
+      test: pg_isready -U postgres
+    ports:
+      - '5432:5432'
+    networks:
+      default:
+        aliases:
+          - postgres
   api:
     deploy:
       restart_policy:
@@ -34,19 +42,19 @@ services:
       - webserver
     tty: true
     stdin_open: true
-  administration:
+  corporate:
     deploy:
       restart_policy:
         condition: any
         delay: 5s
         window: 120s
     build:
-      context: ./administration
+      context: ./corporate
       dockerfile: ./Dockerfile
       args:
         RAILS_ENV: ${RAILS_ENV}
     volumes:
-      - ./administration:/usr/src/app
+      - ./corporate:/usr/src/app
     ports:
       - "3001:3001"
     depends_on:
@@ -68,4 +76,4 @@ services:
       - "3002:3002"
     depends_on:
       - api
-      - administration
+      - corporate
