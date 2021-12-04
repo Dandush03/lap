@@ -1,0 +1,21 @@
+en:
+  clients:
+    new:
+      title: Add New Clients
+      company_id: BN / ID
+      company_id_info: Business Number / Identity Document
+      name: Name
+      name_info: Name of the Company
+      display_name: Display Name
+      display_name_info: Display Name for Transactions
+      brand_name: Brand Name
+      brand_name_info: Trading Name
+      email: Email
+      email_info: Customer Email
+      phone: Phones
+      phone_info: Customer Phones
+      mobile: Mobil
+      phone_info: Mobil Phones
+      website: Website
+      submit: Save
+      cancel: Cancel

@@ -1,0 +1,9 @@
+es:
+  sign_in:
+    title: Iniciar session
+    login: Usuario
+    password: Contraseña
+    remember_me: Recuerdame
+    sign_in: Iniciar session
+    forgot_password: ¿Olvidasteste tu contraseña?
+    dont_have_account: ¿no tienes cuenta? Registrate

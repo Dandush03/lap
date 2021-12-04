@@ -1,0 +1,13 @@
+en:
+  accounting_accounts:
+    show:
+      title: 
+        sell: Create a new sell accounting account
+        buy: Create a new buy accounting account
+        inv: Create a new inventory accounting account
+      category: Category
+      subcategory: Subcategory
+      name: Name
+      save: Save
+      cancel: Cancel
+    

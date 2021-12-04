@@ -1,0 +1,26 @@
+name: Client CI
+
+on:
+  push:
+
+jobs:
+  Jest:
+    env:
+      client-dir: ./client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.3'
+      - name: Install yarn
+        run: |
+          npm install --global yarn
+      - name: Install Dependencies
+        working-directory: ${{env.client-dir}}
+        run: |
+          yarn
+      - name: Run Jest
+        working-directory: ${{env.client-dir}}
+        run: |
+          yarn test

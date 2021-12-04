@@ -1,0 +1,12 @@
+es:
+  accounting_accounts:
+    show:
+      title: 
+        sell: Crea una nueva cuenta de ventas
+        buy: Crea una nueva cuenta de compras
+        inv: Crea una nueva cuenta de inventorio
+      category: Categoria
+      subcategory: Subcategoria
+      name: Nombre
+      save: Guardar
+      cancel: Cancelar

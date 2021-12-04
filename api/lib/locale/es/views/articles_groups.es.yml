@@ -1,0 +1,7 @@
+es:
+  articles_groups:
+    show:
+      title: Crea un nuevo grupo de articulos
+      name: Nombre del Grupo
+      save: Guardar
+      cancel: Cancelar

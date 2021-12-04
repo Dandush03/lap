@@ -1,0 +1,25 @@
+name: Api CI
+
+on:
+  push:
+
+jobs:
+  RSpec:
+    name: RSpec in Api
+    runs-on: ubuntu-latest
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.TEST_MASTER_KEY }} 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get Docker Compose File
+        run: |
+          ln -s docker-compose.linux.yml docker-compose.yml
+      - name: Build Api
+        run: |
+          docker-compose build api
+      - name: Create Database
+        run: |
+          docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} api rails db:setup
+      - name: Run Test
+        run: |
+          docker-compose run -e RAILS_ENV=test -e RAILS_MASTER_KEY=${{env.RAILS_MASTER_KEY}} -T api rspec
